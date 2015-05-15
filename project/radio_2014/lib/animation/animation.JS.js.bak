@@ -1,0 +1,287 @@
+/**
+ * lib v1.0: Animation
+ * by aeddang
+ */
+/*
+interfaces
+
+
+*/
+
+if(typeof jarvis == "undefined") var jarvis = new Object();
+
+
+
+
+jarvis.Animation= function() 
+{
+	if(jarvis.lib.isAndroid()==true){
+	   this.fps=30;
+	}else{
+	   this.fps=30;
+	}
+	this.mdp=0.86;
+	this.loofTimer=null;
+	this.elementA=new Array();
+	this.animationA=new Array();
+
+}
+jarvis.AnimationObject= function() 
+{
+	this.id="";
+	this.duration=10;
+	this.t=0;
+	this.delay=0;
+	this.isPx=false;
+	this.ease="ease in";   //ease out ease in ease in out
+	this.prop=null;
+    
+	this.diff=0;
+	this.delegate=null;//update/complete
+
+}
+jarvis.Animation.prototype =
+{
+	startAnimation: function(element,prop,delegate) 
+	{
+       if(element==undefined){
+		   return;
+	   }
+	   if(prop==undefined){
+		   return;
+	   }
+	   if(delegate==undefined){
+		   delegate=null;
+	   }
+	   var aniObj=new jarvis.AnimationObject();
+       if(prop.isPx!=undefined){
+	      aniObj.isPx=prop.isPx;
+          delete prop.isPx;
+	   } 
+       aniObj.delegate=delegate;
+	  // var t=1000/this.fps;
+       
+       if(prop.relativeDuration!=undefined && prop.relativeKey!=undefined){
+	       if(element[prop.relativeKey]!=undefined){
+		       var v=0;
+			   if(aniObj.isPx==true){
+				  v	= jarvis.lib.getNumber(element[prop.relativeKey]);
+			   }else{
+				  v	= element[prop.relativeKey];
+			   }
+			    
+			   var diff=Math.abs(v - prop[prop.relativeKey]);
+               var spdA=String(prop.relativeDuration).split(";");
+			   var len=spdA.length;
+			   var d=Number(spdA[0]);
+			   var min=-1;
+			   var max=-1;
+			   if(len>=2){
+                  min=Number(spdA[1]);
+			      if(len>=3){
+			          max=Number(spdA[2]);
+			      }
+			   }
+			   prop.duration=d*Math.ceil(diff/100);
+			   if(min!=-1 && prop.duration<min){
+			       prop.duration=min;
+			   }
+			   if(max!=-1 && prop.duration>max){
+			       prop.duration=max;
+			   }
+		   }
+           delete prop.relativeKey;
+		   delete prop.relativeDuration;
+	   }
+       
+	   if(prop.duration!=undefined){
+	      aniObj.duration=Math.ceil(prop.duration*this.fps);
+          delete prop.duration;
+	   }
+       	
+
+     
+      
+	   if(prop.delay!=undefined){
+	      aniObj.delay=Math.ceil(prop.delay*this.fps);
+		  delete prop.delay;
+	   }
+	   if(prop.ease!=undefined){
+	      aniObj.ease=prop.ease;
+		  delete prop.ease;
+	   }
+       aniObj.prop=prop;
+	   var idx=this.elementA.indexOf(element);
+	   if(idx!=-1){
+          this.elementA[idx]=element;
+	      this.animationA[idx]=aniObj;
+	   }else{
+	      this.elementA.push(element);
+	      this.animationA.push(aniObj);
+	   }
+         
+
+	   if( this.loofTimer==null){
+	      this.addLoofTimer();
+	   }
+    }
+	
+	,
+	stopAllAnimation: function() 
+	{
+        this.animationA=new Array();
+	    this.elementA=new Array();
+		this.removeLoofTimer();
+    }
+	,
+    stopAnimation: function(id) 
+	{
+       var idx=this.elementA.indexOf(id);
+       if(idx!=-1){
+	      delete this.elementA[idx]; 
+	      delete this.animationA[idx];
+	   }
+    }
+	,
+    loof: function() 
+	{
+           
+			var remainA=new Array();
+			var remainEA=new Array();
+		    //jarvis.debuger.trace("ani"+Math.random());
+			var aniObj;
+			var element;
+			for(var i=0;i<this.animationA.length;++i){
+				aniObj=this.animationA[i];
+				element=this.elementA[i];
+				if(aniObj==null){
+					aniObj=this.animationA[i];   
+				}
+				aniObj.delay--;
+			    
+				if(aniObj.delay<=0){
+				 
+					var r=0;
+					var ev=0;
+					aniObj.t++;
+					
+					if(aniObj.t<=aniObj.duration){
+						for (var key in aniObj.prop)
+						{
+					 
+							if(element[key]!=undefined){
+								if(aniObj.diff==0){
+									if(aniObj.isPx==true){
+										ev=jarvis.lib.getNumber(element[key]);
+									}else{
+										ev=element[key]
+									}
+									aniObj.diff=(ev-aniObj.prop[key]);
+								}
+								var d;
+								var tg;
+								var lg;
+								if(aniObj.isPx==true){
+								    tg=jarvis.lib.getNumber(element[key]);
+									lg=jarvis.lib.getNumber(aniObj.prop[key]);
+								}else{
+								    tg=element[key]
+									lg=aniObj.prop[key];
+								}
+								switch(aniObj.ease){
+									case "linear": 
+										d=(aniObj.diff/aniObj.duration);
+										break;
+									case "ease out": 
+										d= (aniObj.diff/aniObj.duration*2)*Math.sin(aniObj.t/aniObj.duration*Math.PI/2)*this.mdp;
+										break;
+									case "ease in": 
+										d= (aniObj.diff/aniObj.duration*2)*Math.cos(aniObj.t/aniObj.duration*Math.PI/2)*this.mdp;
+										break;
+									case "ease in out": 
+										d= (aniObj.diff/aniObj.duration*2)*Math.sin(aniObj.t/aniObj.duration*Math.PI)*this.mdp;
+										break;
+							 
+								}
+								tg-=d;
+							    if(tg>lg && d<0){
+								   tg=lg;
+								}else if(tg<lg && d>0){
+								   tg=lg;
+								}
+								if(aniObj.t>=aniObj.duration){
+								 
+									if(aniObj.isPx==true){
+										element[key]=jarvis.lib.getPx(aniObj.prop[key]);
+									}else{
+										element[key]=aniObj.prop[key];
+									}
+									delete aniObj.prop[key];
+								 
+								}else{
+										if(aniObj.isPx==true){
+											element[key]=jarvis.lib.getPx(Math.floor(tg));
+										}else{
+											element[key]=tg;
+										}
+										r++;
+								
+								}
+							}else{
+								delete aniObj.prop[key];  
+							}
+						}
+				}
+				  
+					if(r>0){
+						jarvis.lib.excuteDelegate(aniObj.delegate,"update",[aniObj.id]);
+						remainA.push(aniObj);
+						remainEA.push(element)
+					}else{
+						jarvis.lib.excuteDelegate(aniObj.delegate,"complete",[aniObj.id]);
+					}
+				}else{
+					remainA.push(aniObj);
+					remainEA.push(element)
+				}
+            }
+			if(remainA.length>0){
+				this.animationA=remainA;
+				this.elementA=remainEA;
+				this.addLoofTimer();
+			}else{//remove all
+				this.stopAllAnimation();
+			}
+
+	}
+	,
+    addLoofTimer: function() 
+	{
+        this.removeLoofTimer();
+		var t=1000/this.fps;
+
+		 
+		this.loofTimer=setTimeout("jarvis.animation.loof()",t);
+		
+    }
+	,
+	removeLoofTimer: function() 
+	{
+        if( this.loofTimer!=null){
+		  
+		   clearTimeout( this.loofTimer );
+           this.loofTimer=null;
+		}
+    }
+	
+}
+
+jarvis.animation=new jarvis.Animation();
+
+
+
+
+
+/*
+
+*/

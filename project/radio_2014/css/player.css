@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+
+.jarvis-ui .audio-player{position:relative; height:235px; width:100%; overflow:hidden;}
+
+.jarvis-ui .audio-player .btn-stop { width:42px; height:42px;   background:url("../style/audioplayer/btn_stop.png") no-repeat}
+.jarvis-ui .audio-player .btn-play { width:42px; height:42px;   background:url("../style/audioplayer/btn_play.png") no-repeat}
+
+
+.jarvis-ui .audio-player .btn-snd-on { width:16px; height:12px;   background:url("../style/audioplayer/btn_snd_on.png") no-repeat}
+.jarvis-ui .audio-player .btn-snd-off { width:16px; height:12px;   background:url("../style/audioplayer/btn_snd_off.png") no-repeat}
+
+.jarvis-ui .audio-player .btn-snd-m { width:22px; height:22px;   background:url("../style/audioplayer/btn_snd_m.png") no-repeat}
+.jarvis-ui .audio-player .btn-snd-p { width:22px; height:22px;   background:url("../style/audioplayer/btn_snd_p.png") no-repeat}
+
+
+
+.jarvis-ui .audio-player .ui-box {position:relative; display:block; width:100%; height:62px; overflow:hidden;}
+.jarvis-ui .audio-player .ui-box .ui-left{margin-top:10px;}
+.jarvis-ui .audio-player .ui-box .ui-center{margin-top:13px;}
+.jarvis-ui .audio-player .ui-box .ui-center .icon-live{display:none; margin-left:10px; margin-top:3px; width:25px; height:11px;   background:url("../style/audioplayer/icon_live.png") no-repeat}
+.jarvis-ui .audio-player .ui-box .ui-center .title{ margin-left:10px; color:#b2cef4; text-align:left; }
+.jarvis-ui .audio-player .ui-box .ui-center .sub-title{ width:100%; margin-left:10px; margin-top:2px; width:100%; color:#b2cef4; text-align:left;}
+
+
+ 
+.jarvis-ui .audio-player .ui-box .ui-right{margin-top:10px; max-width:75px;}
+.jarvis-ui .audio-player .ui-box .ui-right .btn-snd{margin-top:5px; margin-left:10px;}
+.jarvis-ui .audio-player .ui-box .ui-right .btn-snd-m{margin-left:3px;}
+.jarvis-ui .audio-player .ui-box .ui-right .btn-snd-p{margin-left:5px;}
+.jarvis-ui .audio-player .ui-box .ui-right .option-btn{margin-left:5px; max-width:75px; margin-top:3px; text-align:right; color:#b2cef4}
+
+.jarvis-ui .audio-player .progress{position:relative;display:block; text-align:left;  width:100%; height:4px; background:url("../style/audioplayer/player_bar_trans.png") repeat}
+.jarvis-ui .audio-player .progress .progress-object{position:absolute; top:0px; height:100%; }
+.jarvis-ui .audio-player .progress .seek-head{margin-left:-15px; width:15px; background:url("../style/audioplayer/player_head.png") repeat}
+.jarvis-ui .audio-player .progress .seek-bar{width:0%; background:url("../style/audioplayer/player_bar.png") repeat }
+.jarvis-ui .audio-player .progress .seek-pre-bar{width:0%; background:url("../style/audioplayer/player_bar_trans.png") repeat}
+.jarvis-ui .audio-player .progress .progress-bar{width:0%;  background:url("../style/audioplayer/player_bar_trans.png") repeat}
+
+.jarvis-ui .audio-player .viewer {position:relative; display:block; overflow:hidden; width:100%; height:1px; text-align:center;}
+.jarvis-ui .audio-player .viewer .btn-bora{display:none;}
+
+
+
+
+.jarvis-ui .video-player{position:relative; height:235px; width:100%; overflow:hidden;}
+
+
+.jarvis-ui .video-player .ui-box {position:relative; display:block; width:100%; height:62px; overflow:hidden;}
+
+.jarvis-ui .video-player .ui-box .icon-live{display:none; margin-left:10px; margin-top:13px; width:25px; height:11px;   background:url("../style/audioplayer/icon_live.png") no-repeat}
+.jarvis-ui .video-player .ui-box .title{ margin-left:10px; margin-top:10px; color:#b2cef4; text-align:left; }
+.jarvis-ui .video-player .ui-box .sub-title{ width:100%; margin-left:10px; margin-top:2px; width:100%; color:#b2cef4; text-align:left;}
+
+.jarvis-ui .video-player .player-box(position:relative; width:100%; background:#000000);

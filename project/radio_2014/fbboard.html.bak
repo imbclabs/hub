@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    
+  
+    <link href="./css/base.css" rel="stylesheet" type="text/css">
+	<title>MBC RADIO</title>
+	
+</head>
+
+<body style="width:100%; overflow-x:hidden; ">
+    
+	<script>
+        
+         
+        var qurry=getUrlParam(window.location.href);
+        /*
+        if(document.body.getBoundingClientRect){
+           bounce=document.body.getBoundingClientRect();	
+		   w=bounce.right-bounce.left;
+		  
+		}else{
+		   bounce=document.getBoxObjectFor(document.body);
+           w=bounce.width;
+		   
+		}
+        w=w-20;
+        */
+
+        var path="http://imbctc022.cafe24.com/radio/index.html?page="+qurry.param.page+"&seq="+qurry.param.seq;
+       // alert(path);
+		document.body.innerHTML+=
+			'<div id="fb-root" class="fb-root"></div>'+
+			'<div id="fb-comment" class="fb-comments" data-width="'+"100%"+'" data-href="'+path+'" data-numposts="5" data-colorscheme="light"></div>';
+
+	
+		loadFBBoard(document, "script", "facebook-jssdk");
+
+		function loadFBBoard(d, s, id) 
+		{
+	  
+			var js, fjs = d.getElementsByTagName(s)[0]; 
+			//if (d.getElementById(id)) return; 
+			js = d.createElement(s); js.id = id; 
+			js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&appId=463667683732495&version=v2.0"; 
+			fjs.parentNode.insertBefore(js, fjs); 
+		}
+
+		function getUrlParam(urlStr)
+		{
+		
+			var urlObject=new Object;
+			var pA=urlStr.split("#");
+			urlStr=pA[0];
+			if(pA.length>1){
+				urlObject.hash=pA[1];
+			}else{
+				urlObject.hash=null;
+			}
+			
+			var uA=urlStr.split("?");
+			var paramStr;
+			if(uA.length<2){
+				urlObject.url=urlStr;
+				return urlObject;
+			}else{
+				urlObject.url=uA[0];
+				paramStr=uA[1];
+				for(var x=2;x<uA.length;++x){
+					paramStr+="?"+uA[x];
+				}
+				//alert(paramStr);
+			}
+			
+			var param=new Object;
+			var pA=paramStr.split("&");
+			var sA;
+			var value;
+			for(var i=0;i<pA.length;++i){
+				
+				sA=pA[i].split("=");
+				if(sA.length>=2){
+					value=sA[1];
+
+					for(var x=2;x<sA.length;++x){
+						value+="="+sA[x];
+					}
+					param[sA[0]]=value;
+				}
+				
+			}	
+			
+			urlObject.param=param;
+			return urlObject;
+		}
+	</script>
+</body>
+    
+</html>

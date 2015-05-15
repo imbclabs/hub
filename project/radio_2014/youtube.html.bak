@@ -1,0 +1,67 @@
+<!DOCTYPE HTML> 
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+		
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Title</title>
+		<meta name="author" content="Lee Gil Hwan(perinion@imbc.co.kr)">
+		
+    <script type='text/javascript' src="./lib/lib.js"></script>
+	<script type='text/javascript' src="./lib/animation/animation.js"></script>
+	
+	 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	
+ 
+    <style>
+
+	  
+
+    </style>
+    </head>
+
+    <body class='jarvis-ui' style='background:#ffffff'>
+	    <a href="#" id="login-link">authorize</a>
+		<button type="button" onClick="call()" >apicall</button>
+	    
+    
+		<script type="text/javascript">
+       
+		window.onload=init;
+		
+		
+		function init()
+        {
+		  	 
+            jarvis.debuger.used=true;
+			jarvis.debuger.init();
+			jarvis.debuger.view(true);
+            
+			
+			//addBox("box");;
+			
+		}
+        function handleAPILoaded() {
+			alert("gapi complete");
+		}
+        function call()
+        {
+			  var q = "심심타파";
+			  var request = gapi.client.youtube.search.list({
+				q: q,
+				part: 'snippet'
+			  });
+
+			  request.execute(function(response) {
+				var str = JSON.stringify(response.result);
+				alert(str);
+			  });
+		}
+	
+       
+        </script>
+		<script type='text/javascript' src="auth.js"></script>
+	   <script type='text/javascript' src=" https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+    </body>
+</html>
+

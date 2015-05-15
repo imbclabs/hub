@@ -1,0 +1,33 @@
+@charset "utf-8";
+.jarvis-ui .viewer-pop {background:#ffffff; overflow:hidden}
+
+
+
+
+
+.jarvis-ui .viewer-pop .btn-close{position:relative; margin-top:5px; margin-bottom:15px; margin-right:5px; width:21px; height:21px; background:url("../style/viewer/btn_close.png") no-repeat;}
+
+.jarvis-ui .viewer-pop .page-navi{position:absolute; top:5px; height:27px;}
+.jarvis-ui .viewer-pop .view-box{position:relative; clear:both; overflow:hidden}
+
+
+.jarvis-ui .viewer-pop .view-box .content-box{position:relative;  width:100%; height:100%; overflow:hidden;}
+
+
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board {position:relative;width:100%; height:100%; }
+
+
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board .share-box{position:absolute; right:5px;}
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board .share-box .btn-share{position:relative; margin-left:5px;}
+
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board .title{margin-left:10px;}
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board .date{margin-left:10px; height:20px;}
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board .content{ border:1px solid #eeeeee; box-sizing:border-box; width:100%; height:100%; -webkit-overflow-scrolling: touch;}
+
+
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board .banner{position:relative; width:100%; height:50px;}
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board .comment{ margin-top:5px; width:100%; height:220px; overflow-x:hidden; overflow-y:auto}
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board .comment .frame{border-bottom:1px solid #eeeeee; box-sizing:border-box; width:100%; height:100%; -webkit-overflow-scrolling: touch;}
+
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board .comment .fb-root{width:100%;}
+.jarvis-ui .viewer-pop .view-box .content-box .viewer-board .comment .fb-comments{width:100%;}

@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+   
+    <title>MBC RADIO</title>
+	
+	
+    <link href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
+    
+	
+	
+	<script type='text/javascript' src="./lib/lib.js"></script>
+	
+	<script type='text/javascript' src="./info/jarvisInfo.js"></script>	
+	<script type='text/javascript' src="./info/mini/miniInfo.js"></script>	
+	<script type='text/javascript' src="./ui/uiset.js"></script>
+    <script type='text/javascript' src="./ui/top.js"></script>
+    <script type='text/javascript' src="./ui/bottom.js"></script>
+	
+	<script type='text/javascript' src="./ui/mini/mini.js"></script>
+
+	
+	<script type='text/javascript' src="./ui/radio/radio.featured.js"></script>
+	<script type='text/javascript' src="./ui/radio/radio.aodapps.js"></script>
+	<script type='text/javascript' src="./ui/radio/radio.appsinfo.js"></script>
+	<script type='text/javascript' src="./ui/radio/radio.board.js"></script>
+	<script type='text/javascript' src="./ui/radio/radio.schedule.js"></script>
+	<script type='text/javascript' src="./ui/radio/radio.frameviewer.js"></script>
+
+	<script type='text/javascript' src="http://www.imbc.com/common/js/global_function.js"></script>
+</head>
+
+<body class='jarvis-ui'>
+  
+    <div id='page-top'></div>
+	<div id='page-body'></div>
+	<div id='page-bottom'></div>
+   
+	<script>
+        var page;
+        var topBar;
+        var uiset;
+        var bottom;
+		
+        var browserHeight=-1;
+		var browserWidth=-1;
+       
+		//window.onload =initPage; 
+		
+		function initPage(e){
+			//alert(jarvis);
+			//jarvis.lib.removeEventListener(window,"load",initPage);
+			//jarvis.debuger.used=true;
+			jarvis.debuger.init();
+			jarvis.debuger.view(true);
+			
+			var mgX;
+			var mgY;
+			var isMoblile=jarvis.lib.isMobile();
+			var isPhone=jarvis.lib.isPhone();
+
+			var dynamicSize;
+			var hasShadow;
+			var orgW=300;
+			var orgH=450;
+			var orgH_S=250;
+			var w;
+			var h;
+			
+            if(isMoblile==true){
+			    if(isPhone==true){
+					mgX=15;
+					mgY=30;
+					dynamicSize=true;
+					hasShadow=false;
+					w=jarvis.lib.getAbsoluteBounce(document.body).width-(mgX*2)
+					h=Math.floor(w*orgH/orgW);
+				}else{
+					mgX=30;
+					mgY=60;
+					dynamicSize=false;
+					hasShadow=true;
+					w=orgW;
+					h=orgH;
+				}
+				
+			}else{
+				mgX=50;
+				mgY=60;
+				dynamicSize=false;
+				hasShadow=true;
+				w=orgW;
+				h=orgH;
+			}
+            var delegate=function(){}; 
+			delegate.prototype = {
+				listBtnClick : function()
+				{
+					uiset.openList();
+				}
+			}
+			
+			topOption=new jarvis.TopOption();
+			topOption.marginX=mgX;
+			topBar=new jarvis.Top("page-top",topOption,new delegate());
+			topBar.init();
+
+
+			var setOption=new jarvis.UiSetOption();
+			setOption.marginX=mgX;
+			setOption.marginY=mgY;
+
+
+			var datas=new Array();
+
+
+			var data=new jarvis.UiObject("Mini",w,h);
+
+			data.dynamicSize=dynamicSize;
+			data.hasShadow=hasShadow;
+			datas.push(data);
+            
+
+			var data=new jarvis.UiObject("Board",w,h);
+
+			data.dynamicSize=dynamicSize;
+			data.hasShadow=hasShadow;
+			data.option=new jarvis.BoardOption();
+			data.option.apiPath=jarvis.config.API_RADIO_PHOTO;
+			data.option.title="사진방";
+			data.option.type="PHOTO";
+			data.option.reciveKey="PhotoList";  
+			datas.push(data);
+
+
+			var data=new jarvis.UiObject("Board",w,h);
+
+			data.dynamicSize=dynamicSize;
+			data.hasShadow=hasShadow;
+			data.option=new jarvis.BoardOption();
+			data.option.apiPath=jarvis.config.API_RADIO_VOD;
+			data.option.title="동영상";
+			data.option.type="VOD";
+			data.option.reciveKey="VideoList";   
+			datas.push(data);
+
+
+			var data=new jarvis.UiObject("Board",w,h);
+
+			data.dynamicSize=dynamicSize;
+			data.hasShadow=hasShadow;
+			data.option=new jarvis.BoardOption();
+			data.option.apiPath=jarvis.config.API_RADIO_VORA;
+			data.option.title="보이는라디오";
+			data.option.type="VOD";
+			data.option.reciveKey="BoraList";   
+			datas.push(data);
+
+
+			var data=new jarvis.UiObject("Schedule",w,h);
+
+			data.dynamicSize=dynamicSize;
+			data.hasShadow=hasShadow;
+			datas.push(data);
+  
+          
+			var data=new jarvis.UiObject("FrameViewer",w,h);
+
+			data.dynamicSize=dynamicSize;
+			data.hasShadow=hasShadow;
+			data.option=new jarvis.BoardOption();
+			data.option.apiPath=jarvis.config.FrameViewerOption;
+			data.option.title="@radiombc";
+			data.option.iframePath="twitter.html";
+			datas.push(data);
+
+
+			var data=new jarvis.UiObject("Featured",w,h);
+
+			data.dynamicSize=dynamicSize;
+			data.hasShadow=hasShadow;
+			data.option=new jarvis.FeaturedOption();
+			data.option.apiPath=jarvis.config.API_RADIO_RECOMMAND;
+			data.option.title="추천";
+			data.option.reciveKey="FeaturedList";   
+			datas.push(data);
+
+
+			var data=new jarvis.UiObject("AppsInfo",w,h);
+
+			data.dynamicSize=dynamicSize;
+			data.hasShadow=hasShadow;
+			datas.push(data);
+			
+
+			uiset = new jarvis.UiSet("page-body",datas,setOption);
+			uiset.init();
+
+			bottomOption=new jarvis.BottomOption();
+			bottomOption.marginX=mgX;
+			bottom=new jarvis.Bottom('page-bottom',bottomOption);
+
+			resizeFn(null,false);
+
+			var vs=jarvis.lib.getIEVersion();
+			
+			jarvis.lib.addEventListener(window,"resize",resizeFn);
+			jarvis.lib.addEventListener(window,"orientationchange",orientationChange);
+                     
+			resizeFn(null,false);
+			
+		}
+	   
+		function orientationChange(){
+		    
+			resizeFn();
+
+			if( uiset!=null){
+				uiset.orientationChange();
+			}
+		}
+
+		function resizeFn(e,isCheck){
+			if(isCheck===undefined){
+				isCheck=true;
+			}
+			
+			var h=Math.floor(jarvis.lib.getBrowserHeight());
+			var w=Math.floor(jarvis.lib.getAbsoluteBounce(document.body).width);
+
+			if(browserWidth==w && browserHeight==h && isCheck==true){
+				return;
+			}
+			
+			
+			browserWidth=w;
+			browserHeight=h;
+            
+           
+			if(uiset!=null){
+				bottom.resize(browserHeight);
+				topBar.resize(browserHeight);
+				uiset.resize(browserHeight);
+			}
+			
+		}
+
+		function  resizeIframe(height){
+			alert(height);
+		}
+
+		
+	</script>
+	
+	
+	
+	
+	
+</body>
+</html>

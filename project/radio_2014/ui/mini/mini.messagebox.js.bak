@@ -1,0 +1,384 @@
+/**
+ * miniInfo v1.0: AudioPlayer 
+ * by aeddang
+ */
+/*
+interfaces
+
+*/
+
+if(typeof jarvis == "undefined") var jarvis = new Object();
+
+
+
+
+jarvis.MiniMessageBox= function(body) 
+{
+	this.body=body;
+	jarvis.lib.addAttribute(this.body,"message-box bg-black30 uicomponent");
+    this.info=jarvis.miniInfo;
+    jarvis.miniMessageBox=this;
+
+    var that=this;
+    
+	
+	//make top
+	this.scrollID="jarvisMsgListBody";
+    this.textLimited=200;
+    this.program=null;
+    this.isMsgReflash=false;
+    this.finalMG=-1;
+    this.msgScroll=null;
+	
+
+	this.msgListBody=document.createElement("div");
+    this.msgWriteBody=document.createElement("div");
+    this.autoReflashBtn=document.createElement("button");
+    this.stopReflashBtn=document.createElement("button");
+    this.writeBtn=document.createElement("button");
+	this.input=document.createElement("input");
+    this.msgListBody.id=this.scrollID;
+    
+	jarvis.lib.addAttribute(this.msgListBody,"msg-list-body");
+	jarvis.lib.addAttribute(this.msgWriteBody,"msg-write-body");
+	jarvis.lib.addAttribute(this.input,"bg-input input align-left");
+	
+	jarvis.lib.addAttribute(this.writeBtn,"btn btn-image align-right btn-write");
+    jarvis.lib.addAttribute(this.autoReflashBtn,"btn btn-image align-right btn-reflash");
+	jarvis.lib.addAttribute(this.stopReflashBtn,"btn btn-image align-right btn-reflash-stop");
+    
+    
+
+
+    this.autoReflashBtn.innerHTML="자동갱신";
+	this.stopReflashBtn.innerHTML="정지";
+    
+	this.body.appendChild(this.msgListBody);
+	this.body.appendChild(this.msgWriteBody);
+	
+    
+	this.msgWriteBody.appendChild(this.stopReflashBtn);
+	this.msgWriteBody.appendChild(this.autoReflashBtn);
+	this.msgWriteBody.appendChild(this.writeBtn);
+	this.msgWriteBody.appendChild(this.input);
+   
+    
+	this.loadingBar= document.createElement("div");
+	jarvis.lib.addAttribute(this.loadingBar,"animated loading");
+    this.body.appendChild(this.loadingBar);
+
+	this.setReflash();
+
+}
+
+jarvis.MiniMessageBox.prototype = 
+{
+    
+	init : function()
+	{
+		var that=this;
+		var scrollDelegate=function(){}; 
+			scrollDelegate.prototype = {
+		                    
+							  stateChange : function(e)
+                              {
+								 
+								 switch(e){
+									case jarvis.UIScrollView.SCROLL_START:
+										jarvis.config.isAnimation=true;
+										break;
+									case jarvis.UIScrollView.SCROLL_STOP:
+										jarvis.config.isAnimation=false;
+										break;
+								    case jarvis.UIScrollView.SCROLL_BOTTOM:
+										jarvis.config.isAnimation=false;
+									    that.loadMsgList();
+									    break;
+									case jarvis.UIScrollView.SCROLL_TOP:
+									    break;
+									default:
+									    break;
+								 
+								 }
+							  },
+							 
+							  addCell : function(cellIdx,cell){},
+							  rmoveCell : function(cellIdx,cell){}
+							  
+			}
+        var scrollOption=new jarvis.UIScrollViewOption();
+        scrollOption.cssKey="uiscrollview";
+	    this.msgScroll=new jarvis.UIScrollView(this.scrollID,scrollOption,new scrollDelegate());
+        
+
+	    jarvis.lib.addEventListener(tthis.input,"keypress",function (e){ that.keyPress();})
+		jarvis.lib.addEventListener(this.writeBtn,"click",function (e){ that.writeClick();})
+		jarvis.lib.addEventListener(this.autoReflashBtn,"click",function (e){ 
+			                                                                   that.isMsgReflash=true;
+		                                                                       that.reflashMsgList();
+																			   that.setReflash();
+																			 })
+		jarvis.lib.addEventListener(this.stopReflashBtn,"click",function (e){ 
+																				that.isMsgReflash=false;
+																			    that.setReflash();
+																			 })
+
+    },
+	setReflash : function(){
+		if(this.isMsgReflash==true){
+	         jarvis.lib.removeAttribute(this.autoReflashBtn,"btn-reflash-off");
+			 jarvis.lib.addAttribute(this.stopReflashBtn,"btn-reflash-stop-off");
+		}else{
+	         jarvis.lib.addAttribute(this.autoReflashBtn,"btn-reflash-off");
+			 jarvis.lib.removeAttribute(this.stopReflashBtn,"btn-reflash-stop-off");
+		}
+
+	},
+	keyPress : function(){
+		if(this.info.loginCheck()==false){
+		   this.info.login();
+		  
+		}
+	}
+	,
+    writeClick : function(){
+     
+	   if(this.program==null){
+		    return;
+		}
+		if(this.info.getWriteAble()==false){
+		    alert( this.info.MSG_WRITE_ANABLE);
+			return;
+		}
+        if(this.info.loginCheck()==false){
+		   this.info.login();
+		   return;
+		}else{
+		    this.writeMsg();
+		}
+	},
+    writeMsg : function ()
+	{
+		
+		if(this.program==null){
+		    return;
+		}
+
+	
+		var msg=this.input.value;
+		if(msg==""){
+		   alert(this.info.MSG_WRITE_NOMSG);
+		   return;
+		}
+		if(this.input.value.length>this.textLimited){
+		   alert(this.info.MSG_WRITE_OVERLENGTH);
+		}
+		this.loading(true)
+		
+		this.info.writeMsg("jarvis.miniMessageBox.writeMsgComplete",this.program.broadCastID,this.program.programGroupID,msg);
+		
+	},
+	writeMsgComplete : function(FLUY){
+     
+	    //실패F/비로그인L/불량사용자U/성공Y
+			switch(FLUY){
+			   case "F":
+				   alert(this.info.MSG_WRITE_FAIL);
+				   break;
+			   case "L":
+				   alert(this.info.MSG_WRITE_LOGIN);
+				   break;
+			   case "U":
+				   alert(this.info.MSG_WRITE_TROUBLE_MAKER);
+				   break;
+			   case "Y":
+				   this.input.value="";
+			       this.reloadMsgList();
+				   break;
+		       default :
+				   alert(this.info.MSG_WRITE_ERROR);
+                   break;
+			
+			}
+			this.loading(false);
+	},
+	orientationChange : function(){
+     
+	   this.reloadMsgList();
+	},
+    resize : function(h)
+	{
+	    
+		if(h!==undefined){
+		    this.body.style.height=h+"px";
+		}
+		
+		var bounce=jarvis.lib.getAbsoluteBounce(this.body);
+	    if(bounce.width>=10000){
+		    return;
+		}
+        var bounceL=jarvis.lib.getAbsoluteBounce(this.msgListBody);
+        var bounceW=jarvis.lib.getAbsoluteBounce(this.msgWriteBody);
+        var bounceB=jarvis.lib.getAbsoluteBounce(this.writeBtn);
+		var bounceI=jarvis.lib.getAbsoluteBounce(this.input);
+
+       
+		if(this.finalMG==-1){
+		   this.finalMG=bounceI.x-bounceW.x;
+		}
+		var bh=bounce.height-bounceW.height-this.finalMG;
+		this.msgListBody.style.height=Math.floor(bh)+"px";
+    
+
+        var w=bounceB.x-bounceW.x-this.finalMG-5;
+        this.input.style.width=Math.floor(w)+"px";
+
+		if(this.msgScroll!=null){
+			this.msgScroll.resize();
+		}
+
+	},
+    setProgram : function(program)
+	{
+		if(program==null){
+		    return;
+		}
+		if(this.program!=null){
+		    if(this.program.seq!=program.seq){
+				this.program=program;
+				this.reloadMsgList(true);
+			}else{
+			    this.reflashMsgList();
+			}
+			
+		}else{
+			this.program=program;
+		    this.reloadMsgList(true);
+		}
+
+	},
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////MSG    
+	reflashMsgList : function()
+	{
+		if(this.program==null){
+		    return;
+		}
+		if(this.isAnimating==true){
+			return;
+		}
+		if(this.isMsgReflash==false){
+		    return;
+		}
+		jarvis.debuger.log("reflashMsgList");
+		this.info.reFlashMsgList("jarvis.miniMessageBox.reloadMsgListComplete",this.program.broadCastID,this.program.programGroupID);
+	},
+	reloadMsgList : function(isReset)
+	{
+		if(isReset==undefined){
+		   isReset=false;
+		}
+		if(this.program==null){
+		    return;
+		}
+		if(isReset==true){
+			this.info.resetMsgList(this.program.broadCastID,this.program.programGroupID);
+		}
+		jarvis.debuger.log("reloadMsgList");
+		this.info.reLoadMsgList("jarvis.miniMessageBox.reloadMsgListComplete",this.program.broadCastID,this.program.programGroupID);
+	},
+    loadMsgList : function()
+	{
+		if(this.program==null){
+		    return;
+		}
+		
+		this.loading(this.info.loadMsgList("jarvis.miniMessageBox.loadMsgListComplete",this.program.broadCastID,this.program.programGroupID));
+	},
+    reloadMsgListComplete : function(yn,broadCastID,programGroupID)
+	{
+		this.msgScroll.reset();
+		this.loadMsgListComplete(yn,broadCastID,programGroupID);
+	},
+
+    loadMsgListComplete : function(yn,broadCastID,programGroupID)
+	{
+		
+		
+		this.loading(false);
+		
+		var msgs=this.info.getMsgInfo(broadCastID,programGroupID);
+		var msg;
+		if(this.info.getWriteAble()==false){
+		    msg=this.info.MSG_WRITE_ANABLE;
+		}else if(this.info.getWriteOnly()==true){
+		    msg=this.info.MSG_WRITE_ONLY;
+		}else{
+		    msg=this.info.MSG_NO_DATA;
+		}
+        
+		this.msgScroll.resetDataView("<p class='info-text font-small'>"+msg+"</p>");
+		this.addCell(msgs.getDatas());
+
+		
+	},
+	loading:function(ac)
+	{
+       if(ac==true){
+		   jarvis.lib.addAttribute( this.loadingBar,"data-loading")
+	   }else{
+		   jarvis.lib.removeAttribute( this.loadingBar,"data-loading");
+	   }
+	},
+    addCell : function( msgs)
+    {
+		jarvis.debuger.log("addCell");
+		
+		var data=null;
+		var cell=null;
+		var html="";
+		var btn=null;
+		
+		var un;
+		var rg;
+		var cmt;
+		for(var i=0;i<msgs.length;++i){
+               data=msgs[i];
+			   cell=document.createElement("div");
+			   jarvis.lib.addAttribute(cell,"cell");
+			   if(String(data.rank)=="1"){
+			       jarvis.lib.addAttribute(cell,"on");
+			   }
+			   un=document.createElement("div");
+			   rg=document.createElement("div");
+			   cmt=document.createElement("div");
+
+               jarvis.lib.addAttribute(un,"align-left user-nm font-middle");
+			   jarvis.lib.addAttribute(rg,"align-right reg-date font-small");
+			   jarvis.lib.addAttribute(cmt,"align-left comment font-small");
+               
+			   un.innerHTML=data.userNm;
+               rg.innerHTML=data.regDate;
+			   cmt.innerHTML=data.comment;
+               
+			   cell.appendChild(un);
+			   cell.appendChild(rg);
+			   cell.appendChild(cmt);
+			  
+			   this.msgScroll.addCell(cell);
+               
+		}
+        this.msgScroll.addComplete();
+	},
+
+    listClick : function(e)
+	{
+        var tg=jarvis.lib.getEventTarget(e);
+        var i=tg.info;
+		this.info.deleteMsg("jarvis.miniMessageBox.reloadMsgList",i.seqID);
+	}   		
+	
+
+}
+
+
+

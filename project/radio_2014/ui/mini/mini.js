@@ -1,0 +1,993 @@
+/**
+ * miniInfo v1.0: AudioPlayer 
+ * by aeddang
+ */
+/*
+interfaces
+
+*/
+
+if(typeof jarvis == "undefined") var jarvis = new Object();
+
+
+if(jarvis.dirPath===undefined){
+	jarvis.dirPath="./";
+	if(window.location.href.indexOf("http")==-1 || window.location.href.indexOf("imbctc")!=-1){
+		jarvis.dirPath="./";
+	}else{
+    }
+	document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"css/global.css'>");
+	document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"css/base.css'>");
+	document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"css/ui.css'>");
+    document.write("<script type='text/javascript' src='"+jarvis.dirPath+"info/config.js'></script>");
+}
+
+
+
+document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"css/mini.css'>");
+document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"css/player.css'>");
+
+document.write("<script type='text/javascript' src='"+jarvis.dirPath+"lib/player/adaptplayer.js'></script>"); 
+document.write("<script type='text/javascript' src='"+jarvis.dirPath+"ui/mini/mini.topbox.js'></script>");
+document.write("<script type='text/javascript' src='"+jarvis.dirPath+"ui/mini/mini.popupbox.js'></script>");
+document.write("<script type='text/javascript' src='"+jarvis.dirPath+"ui/mini/mini.popuplist.js'></script>");
+document.write("<script type='text/javascript' src='"+jarvis.dirPath+"ui/mini/mini.messagebox.js'></script>");
+document.write("<script type='text/javascript' src='"+jarvis.dirPath+"ui/mini/audioplayer.js'></script>");
+document.write("<script type='text/javascript' src='"+jarvis.dirPath+"ui/mini/videoplayer.js'></script>");
+document.write("<script type='text/javascript' src='"+jarvis.dirPath+"ui/notice.js'></script>");
+
+jarvis.MiniOption=function(){
+   this.channel=-1;
+   this.programCode="";
+   this.service="";
+   this.isFullMode=false;
+   this.cssKey="mini";
+   this.marginFull=20;
+   this.colorA=new Array();
+   this.colorA[0]="#ffffff";
+   this.colorA[1]="#b2cef4";
+  
+   this.cssBgColor="#3761a0";
+}
+
+
+
+jarvis.Mini= function(pageID,option) 
+{
+	this.body;
+	if(pageID===undefined){
+		this.body=document.body;
+	}else{
+		if(typeof pageID=="string" || typeof pageID=="String"){
+			this.body=document.getElementById(pageID);
+		}else{
+			this.body=pageID;
+		}
+	   
+	}	
+    this.option=option;
+	if(this.option==undefined){
+	   this.option=new jarvis.MiniOption();
+	}
+    jarvis.mini=this;
+	this.body.id=jarvis.config.MINI_ID;
+	jarvis.lib.addAttribute(this.body,this.option.cssKey);
+    this.body.style.color=this.option.colorA[1];
+
+	this.info=jarvis.miniInfo;
+	this.info.init();
+    
+
+	var cookie=0;
+	if(this.option.channel!=-1){
+		cookie=this.option.channel;
+	}else{
+		try {
+			cookie=Number(jarvis.lib.getCookie(jarvis.config.MINI_CHANNEL_KEY));
+		}catch (e) {
+			cookie=0;                
+		}
+	}
+    
+    
+
+	this.currentChannel=cookie;
+
+
+
+    this.liveChannel=-1;
+	this.program=null;//ProgramObject
+    this.isOnAirCheckStart=false;
+	this.onAirCheckID="jarvis.onAirCheck";
+    this.noticeCheckID="jarvis.noticeCheck";
+    
+	this.SERVICE_BORA="bora";
+	this.SERVICE_ONAIR="onair";
+    this.SERVICE_POD_CAST="podcast";
+	this.SERVICE_POD_LIST="podList";
+ 
+    this.PAGE_REPLAY=3;
+    this.PAGE_BORA=4;
+
+	this.playerID="";
+	this.onAirTime=10*1;
+	this.noticeTime=60*10;
+    this.broadCastID="";
+	this.groupID="";
+	this.retryCount=0;
+    this.isVideoMode=false;
+
+    this.playerInit=false;
+   
+	this.service=this.option.service;
+	this.programCode=this.option.programCode;
+
+
+    var that=this;
+    
+
+    this.grid=document.createElement("div");
+	jarvis.lib.addAttribute(this.grid,"grid");
+    this.body.appendChild(this.grid);
+
+	var topDiv=document.createElement("div");
+    var playerDiv=document.createElement("div");
+    var messageDiv=document.createElement("div");
+    var noticeDiv=document.createElement("div");
+
+	var audioDiv=document.createElement("div");
+	var videoDiv=document.createElement("div");
+	
+   
+	jarvis.lib.addAttribute(playerDiv,"player-box");
+	jarvis.lib.addAttribute(audioDiv,"align-left");
+	jarvis.lib.addAttribute(videoDiv,"align-left");
+    playerDiv.appendChild(audioDiv);
+    playerDiv.appendChild(videoDiv);
+    
+	
+
+	this.grid.appendChild(topDiv);
+    this.grid.appendChild(playerDiv);
+	this.grid.appendChild(messageDiv);
+	this.grid.appendChild(noticeDiv);
+
+	this.videoBody=videoDiv;
+	this.playerBox=playerDiv;
+    
+	this.popup=null;
+    
+	var delegateTop=function(){}; 
+	delegateTop.prototype = {
+		                      changeChannel : function(idx)
+                              {
+								   that.changeChannel(idx);
+							  },
+							  changeChannelComplete : function(){
+							       that.changeChannelComplete();
+							  },
+                              goHome : function(idx)
+                              {
+								  if(jarvis.uiSet===undefined || jarvis.uiSet==null){
+									  alert("i love mini!")
+								  }else{
+								      jarvis.uiSet.changeHome();
+								  }
+							  }
+						 }
+	this.topBox=new jarvis.MiniTopBox(topDiv,new delegateTop(),this.option.colorA[0]);
+    this.messageBox=new jarvis.MiniMessageBox(messageDiv);
+   
+
+
+    var delegatePlayer=function(){}; 
+	delegatePlayer.prototype = {
+		                      optionBtnClick : function(idx)
+                              {
+								   that.addPopup(that.popup.SELECT_SONG);
+							  },
+						      boraBtnClick : function(idx)
+                              {
+								   that.changeVideoMode(true,true);
+							  },
+							  reloadLive: function()
+                              { 
+								  
+								   that.loadOnAir(false);
+							  },
+                              stateChange : function(state)
+                              {
+								   
+								   switch(state){
+                                       
+									   case jarvis.AdaptPlayer.INIT:
+										   
+											that.initPlayer();
+								            break;
+									   
+									   case jarvis.AdaptPlayer.PLAY:
+										    that.topBox.playMusic();
+									        break;
+									   case jarvis.AdaptPlayer.STOP:
+									        that.topBox.stopMusic();
+									        break;
+								  }
+							  }
+						 }
+	
+    var option=new jarvis.AudioPlayerOption();
+    option.optionBtnTitle="선곡표";
+	option.isMobile=this.info.isMobile;
+	option.isHtmlPlayer=this.info.isHtmlPlayer;
+
+	this.audioPlayer=new jarvis.AudioPlayer(audioDiv,option,new delegatePlayer());
+	
+	var delegateVideoPlayer=function(){}; 
+	delegateVideoPlayer.prototype = {
+		                     
+                              stateChange : function(state)
+                              {
+								   
+								   switch(state){
+                                       
+									   case jarvis.AdaptPlayer.INIT:
+										    if(that.isVideoMode==true){
+									            that.videoPlayer.body.style.display="block";
+									        }else{
+											    that.videoPlayer.body.style.display="none";
+											}
+											
+								            break;
+									   case jarvis.AdaptPlayer.PLAY:
+										    that.topBox.playMusic();
+									        break;
+									   case jarvis.AdaptPlayer.STOP:
+									        that.topBox.stopMusic();
+									        break;
+								  }
+							  }
+						 }
+	
+    var optionVideo=new jarvis.VideoPlayerOption();
+	optionVideo.isMobile=true; //this.info.isMobile;
+	optionVideo.isHtmlPlayer=this.info.isHtmlPlayer;  //this.info.isHtmlPlayer;
+
+	this.videoPlayer=new jarvis.VideoPlayer(videoDiv,optionVideo,new delegateVideoPlayer());
+   
+	
+	var delegateNotice=function(){}; 
+	delegateNotice.prototype = {
+		                      close : function(){
+							      that.noticeClose();
+							  },   
+							  select : function(){
+							      that.goNoticePage();
+							  } 
+						 }
+    this.notice=new jarvis.Notice(noticeDiv,null,new delegateNotice());
+    
+
+	var pop=document.createElement("div");
+	this.grid.appendChild(pop);
+		
+	var that=this;
+	var delegate=function(){};
+            delegate.prototype = {
+                              closePopup : function(type){
+									that.closePopup(type); 
+							  }
+		    }
+	this.popup=new jarvis.MiniPopupBox(pop,new delegate());
+    this.popup.header.style.background=this.option.cssBgColor;
+		
+}
+
+jarvis.Mini.prototype = 
+{
+    addParam : function(param)
+	{
+		
+		if(param!=null && param!=undefined){
+		     
+		    this.init(param.channel,param.service,param.program);
+
+		}else{
+		    this.init();
+		}
+	},
+	init : function(channel,service,programCode)
+	{
+		//channel=2;
+		//service=this.SERVICE_POD_CAST;
+		//programCode="1002840100000100000";
+		//jarvis.debuger.log("INIT");
+		
+		if(channel!==undefined){
+           this.currentChannel=channel;  
+           if(this.currentChannel=="mfm"){
+		       this.currentChannel=1;
+		   }else if(this.currentChannel=="sfm"){
+		       this.currentChannel=0;
+		   }else if(this.currentChannel=="chm"){
+		       this.currentChannel=2;
+		   }
+
+
+		}
+		if(service!==undefined){
+		   this.service=service;  
+		}
+		if(programCode!==undefined){
+		   this.programCode=programCode;   
+		}
+
+		switch(this.currentChannel){
+			case  this.PAGE_REPLAY:
+				  this.currentChannel0;
+				  this.service=this.SERVICE_POD_LIST;
+                  break;
+			case  this.PAGE_BORA:
+				  this.currentChannel=0;
+				  this.service=this.SERVICE_BORA;
+				  break;
+
+	    }
+        if(this.programCode!=""){
+		    this.service= this.SERVICE_POD_CAST;
+		}
+  
+		this.audioPlayer.init();
+		this.videoPlayer.init();
+		this.topBox.init();
+		this.notice.init();
+		this.messageBox.init();
+		this.popup.init();
+	    this.audioPlayer.loading(true,false);
+		
+		this.popup.header.style.background=this.option.cssBgColor;
+		this.changeColor(this.option.colorA);
+       
+
+
+    },
+	reset : function(option)
+	{
+		this.option=option;
+		this.popup.header.style.background=this.option.cssBgColor;
+		this.changeColor(option.colorA);
+	
+		
+		var issetting=false;
+		
+        if(this.option.service!=""){
+			this.service=this.option.service;  
+			issetting=true;
+		}
+
+		if(this.option.channel!=-1){
+			this.currentChannel=this.option.channel;  
+			issetting=true;
+		}else if(this.option.service==this.SERVICE_ONAIR){
+			this.currentChannel=this.liveChannel;  
+			issetting=true;
+		}
+		
+		if(this.option.programCode!=""){
+			this.programCode=this.option.programCode;   
+			issetting=true;
+		}
+		
+		if(issetting==true){
+			
+			this.initSetting();
+		}
+
+		
+        
+		
+		
+	},
+	openVod :function (data,channel){
+	     this.service=this.SERVICE_BORA;
+		 this.changeChannel(channel);
+	     
+	},
+
+	openAod :function (id){
+	    
+		this.programCode=id;   
+		this.service=this.SERVICE_POD_CAST;
+	    this.initSetting();
+	},
+	closeAod :function (){
+        if(this.currentChannel==this.PAGE_REPLAY){
+			this.changeChannel(this.liveChannel);
+	    }
+	},
+	changeColor :function(colorA)
+	{
+		
+		this.body.style.color=colorA[1];
+        this.topBox.changeColor(colorA[0]);
+		this.audioPlayer.changeColor(colorA[1]);
+		this.videoPlayer.changeColor(colorA[1]);
+	},
+	initPlayer : function()
+	{
+		//jarvis.debuger.log("INIT-Player");
+		this.resize();
+		this.playerInit=true;
+		this.noticeStart();
+		this.changeChannel(this.currentChannel,false);
+       
+    },
+
+    initSetting : function()
+	{
+		
+		if(this.program==null){
+		    return;
+		}
+		
+		switch(this.service){
+				
+				case  this.SERVICE_ONAIR:
+					
+				    this.changeChannel(this.currentChannel,false);
+				    break;
+
+				case  this.SERVICE_BORA:
+				    this.changeChannel(this.currentChannel,false);
+					this.changeVideoMode(true,true);
+					break;
+
+			    case  this.SERVICE_POD_CAST:
+					
+				    this.popup.setProgramCode(this.programCode);
+				case  this.SERVICE_POD_LIST:
+					
+				    this.changeChannel(this.PAGE_REPLAY,false);
+				    break;
+
+		}
+		
+	    this.service="";
+	    this.programCode="";
+	},
+
+
+	changeChannel : function(idx,isAni)
+	{
+	    
+		//jarvis.debuger.log("INIT-changeChannel");
+		if(idx===undefined){
+		     return;
+		}
+		if(isAni===undefined){
+		     isAni=true;
+		}
+		if(idx!=this.PAGE_REPLAY)
+		{
+			this.popup.closePopup(true);
+		}
+		if(this.playerInit==false){
+			this.currentChannel=idx;
+			this.topBox.setChannelPosition(idx,false);
+		    return;
+		}
+		this.videoPlayer.stopVod();
+		
+        this.currentChannel=idx;
+		if(this.currentChannel!=this.PAGE_REPLAY){
+			jarvis.lib.setCookie(jarvis.config.MINI_CHANNEL_KEY,this.currentChannel);
+		}
+		this.topBox.setChannelPosition(idx,isAni);
+		
+         
+    },
+    changeChannelComplete : function()
+	{
+		//alert("changeChannelComplete");
+		
+		//jarvis.debuger.log("INIT-changeChannelComplete");
+		var channelNum=this.info.CHANNEL_TYPE_VIEW.length;
+		if(this.currentChannel<channelNum){
+			//alert("changeVideoMode");
+			if(this.changeVideoMode(false,true)==false){
+			    
+				//alert("loadOnAir");
+				this.loadOnAir();
+			}
+		}else{
+		    
+			switch(this.currentChannel){
+				case this.PAGE_REPLAY:
+					
+				    if(this.changeVideoMode(false,false,true)==false){
+						this.addPopup(this.popup.REPLAY_SONG);
+				    }
+					
+					break;
+				case this.PAGE_BORA:
+                    this.changeVideoMode(true,false);
+					break;
+			   
+			}
+			
+
+		}
+       
+		
+
+	},
+	orientationChange : function(){
+		this.messageBox.orientationChange();
+		this.resize();
+	},
+
+    changeVideoMode : function(isVideoMode,isOnAir,isPop){
+		if(this.isVideoMode==isVideoMode){
+		    return false;
+		}
+        if(isOnAir===undefined){
+		    isOnAir=false;
+		}
+		if(isPop===undefined){
+		    isPop=false;
+		}
+
+		this.isVideoMode=isVideoMode;
+		var that=this;
+        var pos;
+		var bounce=jarvis.lib.getAbsoluteBounce(this.body);
+		if(isVideoMode==true){
+		    pos=-bounce.width;
+			that.videoPlayer.body.style.display="block";
+			that.videoPlayer.resize();
+		}else{
+		    pos=0;
+		}
+
+		
+		jarvis.config.isAnimation=true;
+		var aniDelegate=function(){};
+		aniDelegate.prototype = {
+				complete : function(e)
+				{
+					jarvis.config.isAnimation=false;
+					if(isVideoMode==false){
+						if(isOnAir==true){
+							that.loadOnAir(false);
+						}else if(isPop==true){
+							that.addPopup(that.popup.REPLAY_SONG);
+						}
+						that.videoPlayer.body.style.display="none";
+					}
+					if(isVideoMode==true){
+						if(isOnAir==true){
+							that.changeVideoModeComplete();
+						}else{
+						    that.videoPlayer.player.viewMessage(that.info.MSG_BORA_SELECT);
+						}
+						
+					    
+					}
+				}
+		}
+		var easev="ease in";
+		jarvis.animation.startAnimation(this.playerBox.style, {duration:0.3, left:pos, ease:easev ,isPx:true},new aniDelegate());
+        return true;
+         
+	},
+	changeVideoModeComplete : function(){
+		if(this.info.isVodOnAir(this.program)==true){
+		    this.loadOnAirVod()
+		}else{
+	
+		    this.videoPlayer.player.viewMessage(this.info.MSG_BORA_NO);
+		}
+	},
+    
+	resize : function(browserHeight){
+		
+        if(browserHeight!==undefined){
+		   this.body.style.height=browserHeight+"px";
+		}
+		var bounce=jarvis.lib.getAbsoluteBounce(this.body);
+		if(bounce.width>=10000){
+		    return;
+		}
+
+
+        if(this.option.isFullMode==true){
+		   
+		   var parent = this.body.parentNode;
+		   var tx=0;
+
+		   if(parent!=null){
+		       tx=jarvis.lib.getAbsoluteBounce(parent).x;
+		   }
+		   jarvis.debuger.trace(tx);
+		   this.grid.style.width=(bounce.width-((jarvis.uiSet.uiStartPosX+tx)*2))+"px";
+		   this.grid.style.marginLeft=(jarvis.uiSet.uiStartPosX+tx)+"px";
+           this.grid.style.marginTop=this.option.marginFull+"px";
+		   this.grid.style.height=(bounce.height-(this.option.marginFull*2))+"px";
+
+		}else{
+		   this.grid.style.width=bounce.width+"px";
+		   this.grid.style.marginLeft="0px";
+		   this.grid.style.marginTop="0px";
+		   this.grid.style.height=bounce.height+"px";
+		   
+		}
+       
+
+        bounce=jarvis.lib.getAbsoluteBounce(this.grid);
+
+		this.audioPlayer.body.style.width=bounce.width+"px";
+		
+		this.audioPlayer.resize(false);
+		this.topBox.resize();
+		this.notice.resize();	
+        
+        var audioBounce=jarvis.lib.getAbsoluteBounce(this.audioPlayer.body);
+
+        this.videoBody.style.height=audioBounce.height+"px";
+        this.videoBody.style.width=audioBounce.width+"px";
+        this.videoPlayer.resize();
+
+		
+		this.playerBox.style.width=(audioBounce.width*2)+"px";
+        if(this.isVideoMode==true){
+		    this.playerBox.style.left=-audioBounce.width+"px";
+		}else{
+		    this.playerBox.style.left="0px"
+		}
+
+        
+        var h=Math.floor(bounce.height-this.audioPlayer.getAudioPlayerSize());
+		if(h<150 || this.option.isFullMode==true){
+			this.audioPlayer.setCompactMode(true);
+		    
+		}else{
+		    this.audioPlayer.setCompactMode(false);
+		    
+		}
+		audioBounce=jarvis.lib.getAbsoluteBounce(this.audioPlayer.body);
+		this.playerBox.style.height=audioBounce.height+"px";
+        var msgBounce=jarvis.lib.getAbsoluteBounce(this.messageBox.body);
+        h=Math.floor(bounce.height-(msgBounce.y-bounce.y)); 
+		this.messageBox.resize(h);
+		
+		this.topBox.setChannelPosition();
+        this.setPopupSize();
+
+
+	},
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////ONAIR
+	onAirStart : function(){
+		
+		this.isOnAirCheckStart=true;
+		jarvis.timer.removeTimer(this.onAirCheckID);
+		var that=this;
+		var tObj=new jarvis.TimerObject();
+        tObj.id=this.onAirCheckID;
+	    tObj.t=this.onAirTime;//sec
+	    tObj.repeatCount=0;
+	    var timerDelegate=function(){}; 
+            timerDelegate.prototype = {
+                              excute : function(id){ that.onAirCheck();}
+		    }
+			
+		jarvis.timer.addTimer(new timerDelegate(),tObj);
+
+		this.onAirCheck();
+		
+	},
+    boraCheck : function(){
+		if(this.info.isVodOnAir(this.program)==true){
+		     
+			 var date = new Date;
+             var minutes = jarvis.lib.intToText(date.getMinutes(),2);
+			 var hour = jarvis.lib.intToText(date.getHours(),2);
+             var tCode=Number(hour+minutes);
+             jarvis.debuger.log(tCode+"-"+this.program.boraStartTime+"-"+this.program.boraEndTime);
+			  
+			 if(tCode>=this.program.boraStartTime && tCode<this.program.boraEndTime){
+			     this.audioPlayer.setBora(true);
+			 }else{
+			     this.audioPlayer.setBora(false);
+			 }
+			 
+			 
+			 
+			 
+		}else{
+		     this.audioPlayer.setBora(false);
+		}
+	},
+	
+    onAirCheck : function()
+	{
+        //alert("onAirCheck");
+		jarvis.timer.resetTimer (this.onAirCheckID);
+		this.program=this.info.getCurrentOnAir(this.info.CHANNEL_TYPE_READ[this.liveChannel]);
+		if(this.program==null){
+			
+			
+			if(this.retryCount<2){
+				this.retryCount++;
+                this.info.loadOnAirSchedule("jarvis.mini.loadOnAirScheduleComplete");
+			}else{
+			    
+			}
+			//
+		}else{
+			
+			this.retryCount=0;
+            if(this.currentChannel!= this.PAGE_REPLAY){
+				this.audioPlayer.changeInfo(this.program.programTitle,null,this.program.picture);
+				this.videoPlayer.changeInfo(this.program.programTitle,null);
+				this.audioPlayer.setPctTime(this.program.progress);
+				this.loadCurrentSong();
+				this.messageBox.setProgram(this.program);
+			}
+           
+			
+			this.noticeCheck();
+			this.boraCheck();
+	    }
+		this.initSetting();
+	},
+    loadOnAir : function(isCheck)
+	{
+		
+		if(isCheck===undefined){
+		    isCheck=true;
+		}
+		if(this.currentChannel==this.liveChannel && this.audioPlayer.info.isLive==true && isCheck==true){
+		    return;
+		}
+		this.audioPlayer.stopVod();
+		this.liveChannel=this.currentChannel;
+		this.audioPlayer.loading(true);
+		this.info.loadOnAir(this.info.CHANNEL_TYPE_CALL[this.liveChannel],"jarvis.mini.loadOnAirComplete");
+		
+	},
+    
+    loadOnAirComplete :  function(url)
+	{
+		
+		this.audioPlayer.loading(false);
+		this.audioPlayer.changeVod(url,true,true);
+		if(this.isInitBora==true){
+			this.isInitBora=false;
+		    this.boraClick();
+		}
+        if( this.isOnAirCheckStart==false){
+		     this.onAirStart();
+		}else{
+		     this.onAirCheck();
+			
+		}
+		
+		
+	},
+
+    loadOnAirVod : function()
+	{
+		this.info.loadOnAirVod("jarvis.mini.loadOnAirVodComplete");
+	},
+    loadOnAirVodComplete :  function(url)
+	{
+		this.audioPlayer.stopVod();
+		this.videoPlayer.changeVod(url,true,true,true,this.program.picture);
+	},
+    loadOnAirSchedule : function()
+	{
+		
+		this.info.loadOnAirSchedule("jarvis.mini.loadOnAirScheduleComplete");
+	},
+	loadOnAirVodSchedule : function()
+	{
+		
+		this.info.loadOnAirVodSchedule("jarvis.mini.loadOnAirVodScheduleComplete");
+	},
+    loadOnAirScheduleComplete: function(yn)
+	{
+		
+		this.loadOnAirVodSchedule();
+		
+	    
+	},
+    loadOnAirVodScheduleComplete : function(yn)
+	{
+		/*
+		var program=this.info.getCurrentOnAir(this.info.CHANNEL_TYPE_READ[this.currentChannel])
+		if(program!=null){
+		   jarvis.debuger.log(program.programTitle,"program");
+		}else{
+		   jarvis.debuger.log("null","program");
+		}
+		*/
+		this.onAirCheck();
+		
+		
+	},
+    loadCurrentSong : function()
+	{
+		//if(jarvis.config.isAnimation==true){
+		   // return;
+		//}
+		
+		this.info.loadCurrentSong("jarvis.mini.loadCurrentSongComplete");
+	},
+    
+    loadCurrentSongComplete : function(yn)
+	{
+		var songs=this.info.getCurrentSong(this.info.CHANNEL_TYPE_READ[this.liveChannel])
+		var str="";
+		var song;
+		
+        for(var i=0;i<songs.length;++i){
+		    song=songs[i];
+			str=str+song.somItem+" ";
+		}
+     
+        if(this.program!=null && song!=null){
+			if(this.program.programGroupID==song.programGroupID){
+				if(song.programGroupID=="0"){
+					if(song.broadcastID!=this.program.broadCastID){
+						str="";
+					}     
+				}
+			}else{
+				str="";
+			}
+		}
+
+		if(str==""){
+		   str=this.info.CHANNEL_TYPE_VIEW[this.liveChannel];
+		}
+		
+		this.videoPlayer.changeInfo(null,str);
+	    this.audioPlayer.changeInfo(null,str);
+		
+
+	},
+/////////////////////////////////////////////////////////////////////////////////////////POPUP
+
+    addPopup : function(type,ani){
+		
+		if(this.program==null && type==this.popup.SELECT_SONG){
+		   return;
+		}
+		
+		if(ani===undefined){
+		    ani=true;
+		}
+		var bounce=jarvis.lib.getAbsoluteBounce(this.grid);
+		var bounceT=jarvis.lib.getAbsoluteBounce(this.audioPlayer.body);
+	    
+		
+		var ty=Math.floor(bounceT.y-bounce.y+this.audioPlayer.getPlayerSize(this.option.isFullMode));
+		
+		this.popup.resize(bounce.height-ty);
+	    this.popup.openPopup(this.program,type,ani,ty);
+		
+		
+	},
+	closePopup : function(type){
+		
+		switch(type){
+		   case this.popup.SELECT_SONG:
+			   break;
+		   case this.popup.REPLAY_SONG:
+			   if(this.currentChannel==this.PAGE_REPLAY){
+					this.changeChannel(this.liveChannel);
+			   }
+			   break;
+		 
+           default:
+			   break;
+		   
+		}
+		
+		
+	},
+	setPopupSize : function(){
+		var bounce=jarvis.lib.getAbsoluteBounce(this.grid);
+		
+		if(this.popup.isActive==true){
+		    var bounceA=jarvis.lib.getAbsoluteBounce(this.audioPlayer.body);
+			
+			var playerSize=this.audioPlayer.getPlayerSize(this.option.isFullMode);
+			
+			var hei=bounce.height-(bounceA.y-bounce.y)-playerSize;
+			this.popup.resize( hei);
+			
+			this.activePopup(this.popup.isAcOver);
+			
+		}else{
+			this.popup.body.style.top=bounce.height+"px";
+		}
+		
+		
+        
+	},
+	activePopup : function(ac){
+		
+        var pos;
+		var bounce=jarvis.lib.getAbsoluteBounce(this.grid);
+		var bounceT;
+		if(ac==false || this.option.isFullMode==true ){
+			
+			bounceT=jarvis.lib.getAbsoluteBounce(this.messageBox.body);
+		    pos=Math.floor(bounceT.y-bounce.y);   
+			
+	    }else{
+			
+			bounceT=jarvis.lib.getAbsoluteBounce(this.audioPlayer.body);
+		    pos=Math.floor(bounceT.y-bounce.y+this.audioPlayer.getPlayerSize());
+		}
+        this.popup.movePopup(pos);
+		
+	},
+
+
+/////////////////////////////////////////////////////////////////////////////////////////NOTICE
+
+	noticeStart : function(){
+		var that=this;
+		var tObj=new jarvis.TimerObject();
+        tObj.id=this.noticeCheckID;
+	    tObj.t=this.noticeTime;
+	    tObj.repeatCount=0;
+	    var timerDelegate=function(){}; 
+            timerDelegate.prototype = {
+                              excute : function(id){
+														if(jarvis.config.isAnimation==true){return;}
+														that.info.loadNotice();
+												   }
+		    }
+			
+		jarvis.timer.addTimer(new timerDelegate(),tObj);
+        that.info.loadNotice();
+	},
+
+    noticeClose: function(){
+		
+		this.notice.body.style.display="none";
+		this.info.setNotice(false);
+    },
+    noticeCheck: function(){
+		
+		
+		var data=this.info.getNotice();
+	    if(data==null){
+		   this.notice.body.style.display="none";
+		}else{
+		   this.notice.body.style.display="block";
+		   this.notice.setText(data.notice);
+        }
+		
+    },
+	goNoticePage: function(){
+		
+		var data=this.info.getNotice();
+		if(data!=null){
+		   if(data.noticeURL!=null && data.noticeURL!=""){
+			    window.open(data.noticeURL);
+		      
+		   }
+		}
+    }
+    
+    
+
+}
+
+
+

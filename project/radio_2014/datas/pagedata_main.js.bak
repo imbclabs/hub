@@ -1,0 +1,168 @@
+
+
+/*
+jarvis.IronMan= function() 
+{
+    this.seq="";
+	this.group="";
+    this.title="title";
+    this.text="text";
+	this.date="date";
+    this.imgPath="imgPath";
+	this.subImgPath="subImgPath";
+    this.vodPath="vodPath";
+
+	this.link="link";
+    this.target="_top";
+    this.iFramePath="";
+
+}
+*/
+
+
+jarvis.uiSet.jarvisPageDataLoadComplete
+	(
+		  {
+			 
+			  backGround:"#b2957b",
+			  bgSetA : ["./style/uiset/bg_brown.png",
+						"./style/uiset/bg_white.png"],
+
+			  colorSetA : ["#ffffff","#dddbd7","bg-black30",false],
+			  colorSetB : ["#636363","#636363","bg-white-border",true],
+			  colorSetC : ["#636363","#636363","bg-white-border",true],
+			  
+			  datas:
+			  [  
+				 {
+				  className:"PageTopNavi",
+				  dynamicSize:null,
+				  hasShadow:null,
+				  backGround:"#402d1c",
+				  option:{
+							naviHei:45,
+						   
+							pageTopOption:{
+											infoTime:"방송 : FM4U 밤 12시",
+											infoText:"연출: 김철영, 작가: 박찬은, 김가영",
+											title:"정준영의<em>심심타파</em>",
+											isFullMode:false,
+											boxPosX:0,
+											boxPosY:125,
+											bgA:["radio-head.jpg","radio-head1.jpg"],
+											bgMA:["radio-head.jpg","radio-head1.jpg"],
+											
+											cssTitleColor:"#ffffff",
+											cssTxtColor:"#ffffff"
+										},
+						    pageNaviOption:{
+									cssTitleColor:"#ffffff",
+									apiPath:"./datas/pagenavilist.js",
+									reciveKey:"PageNavi",
+									isFullMode:false
+								  }
+							
+						 }
+				 },
+				 
+				 {
+				  className:"Mini",
+				  dynamicSize:null,
+				  hasShadow:null,
+				  option:{
+							cssBgColor:"#836f5c",
+							service:"onair",
+							//channel:2,
+							programCode:""
+						    
+						 }
+				 },
+				 {
+				  className:"PageMenu",
+				  dynamicSize:"null",
+				  backGround:null,
+				  hasShadow:null,
+				  hei:320,
+				  option:{
+						   apiPath:"./datas/pagemenulist.js",
+						   title:"즐겨찾기",
+						   reciveKey:"PageMenu"
+						}
+				 },
+				 {
+				  className:"Board",
+				  dynamicSize:true,
+				  hasShadow:null,
+				  fixSize:"auto",
+				  option:{
+						   title:"심심타파 사진방",
+						   apiPath:"http://mini.imbc.com/v2/js/jarvis.IronMan.photolist.js",
+						   type:"PHOTO",
+						   reciveKey:"PhotoList"
+						 }
+				 },
+				 {
+				  className:"Board",
+				  dynamicSize:true,
+				  hasShadow:null,
+				  option:{
+						   apiPath:"http://vodmall.imbc.com/api/RadioBoraList.aspx?page=1&pagesize=20&groupid=8&programcd=1000664100000100000",
+						   title:"심심타파 동영상",
+						   type:"VOD",
+						   reciveKey:"VideoList"
+						 }
+				 },
+				 
+				 {
+				  className:"Schedule",
+				  dynamicSize:null,
+				  hasShadow:null,
+				  option:{
+							cssTitleColor:"#ffffff",
+							cssBgColor:"#836f5c"
+						 }
+				 },
+				 {
+				  className:"FrameViewer",
+				  dynamicSize:null,
+				  hasShadow:null,
+				  option:{
+						   title:"@radiombc",
+						   iframePath:"twitter.html"
+						 }
+				 },
+				 {
+				  className:"Featured",
+				  dynamicSize:null,
+				  hasShadow:null,
+				  option:{
+						   apiPath:"http://mini.imbc.com/v2/js/jarvis.IronMan.featuredlist.js",
+						   title:"추천",
+						   reciveKey:"FeaturedList"
+						 }
+				 },
+				 {
+					className:"PageFooter",
+					dynamicSize:"full",
+					hasShadow:null,
+					backGround:"#999",
+					fixSize:"auto",
+					hei:50,
+					option:{
+						cssTxtColor:"#ffffff",
+						isFullMode:true,
+					    sms:"SMS 문자 참여 #8000  정보이용료 SMS: 50원,  MMS: 100원 (통화료 별도)",
+						addr:"우편번호 : (150-604) 서울 여의도 우체국 사서함 819호 <심심타파> 담당자앞",
+						tunein:"14585"
+					
+					
+					}
+				 }
+				 
+			  ]
+
+		  }
+	  
+	)
+
+

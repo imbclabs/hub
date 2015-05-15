@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+@font-face {
+font-family:ng;
+src:url(../font/NanumGothic.eot); /* IE9 Compat Modes */
+src:url(../font/NanumGothic.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
+	url(../font/NanumGothic.woff) format('woff'), /* Modern Browsers */
+	url(../font/NanumGothic.ttf)  format('truetype'); /* Safari, Android, iOS */
+}
+
+html,body,div,span,object,iframe,
+h1,h2,h3,h4,h5,h6,p,blockquote,
+pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,
+img,ins,kbd,q,samp,small,strike,strong,sub,sup,tt,
+var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table
+,caption,tbody,tfoot,thead,tr,th,td,input,textarea
+,button,select{font-family:'나눔고딕',NanumGothic,ng,'돋움',dotum,Helvetica,sans-serif}
+
+
+
+
+
+

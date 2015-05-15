@@ -1,0 +1,411 @@
+/**
+ * miniInfo v1.0: AudioPlayer 
+ * by aeddang
+ */
+/*
+interfaces
+
+*/
+
+if(typeof jarvis == "undefined") var jarvis = new Object();
+
+
+if(jarvis.dirPath===undefined){
+	jarvis.dirPath="./";
+	if(window.location.href.indexOf("http")==-1 || window.location.href.indexOf("imbctc")!=-1){
+		jarvis.dirPath="./";
+	}else{
+    }
+	document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"/css/global.css'>");
+	document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"/css/base.css'>");
+	document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"/css/ui.css'>");
+	document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"/css/radio.css'>");
+
+}
+
+
+
+
+
+jarvis.PageNaviOption=function(){
+   
+   this.cssKey="page-navi";
+   
+   this.reciveKey="PageNavi";   
+   this.apiPath="";  //./datas/pagenavilist.js
+   this.title="프로그램 메뉴";
+   this.isFullMode=true;
+   this.cssTitleColor="#ffffff";
+ 
+  
+  
+}
+
+jarvis.PageNavi= function(pageID,option) 
+{
+	
+	
+	this.body;
+	if(pageID===undefined){
+		this.body=document.body;
+	}else{
+		if(typeof pageID=="String"){
+			this.body=document.getElementById(pageID);
+		}else{
+			this.body=pageID;
+		}
+	   
+	}	
+    this.isInit=false;
+    this.posA=null;
+	this.posX=0;
+	this.posEndX=0;
+	this.moveValue=0;
+    this.option=option;
+	if(this.option===undefined){
+	   this.option=new jarvis.PageNaviOption();
+	}
+	this.dataA=null;
+	this.reciveKey=this.option.reciveKey;
+	this.info=jarvis.jarvisInfo;
+	jarvis[this.reciveKey+jarvis.config.RECIVE_KEY]=this;
+
+	jarvis.lib.addAttribute(this.body,this.option.cssKey);
+    
+    this.navi = document.createElement('div');
+	this.listA=new Array();
+    jarvis.lib.addAttribute(this.navi,'navi');
+    this.body.appendChild(this.navi);
+
+    this.listBox = document.createElement('ul');
+	this.navi.appendChild(this.listBox);
+   
+	this.allBtn = document.createElement('button');
+	jarvis.lib.addAttribute(this.allBtn,'btn allBtn');
+	var allBtnInfo = document.createElement('i');
+	allBtnInfo.innerHTML="전체메뉴 보기";
+	jarvis.lib.addAttribute(allBtnInfo,'screen-out');
+    this.allBtn.appendChild(allBtnInfo);
+    this.navi.appendChild(this.allBtn);
+
+	this.loadingBar= document.createElement("div");
+	jarvis.lib.addAttribute(this.loadingBar,"animated loading");
+    this.navi.appendChild(this.loadingBar);		
+
+	
+}
+
+jarvis.PageNavi.prototype = 
+{
+    
+	init : function()
+	{
+		var that=this;
+		jarvis.lib.addEventListener(this.allBtn,"click",function (e){that.menuClick(e);});
+		
+        var gestureDelegate=function(){}; 
+        gestureDelegate.prototype = {
+									stateChange: function(e,changeValue)
+									{
+									    
+                                        
+										if(e==jarvis.GestureElement.START){
+											that.posEndX=0;
+											
+										}else if(e==jarvis.GestureElement.MOVE_H)
+										{
+											that.movingNavi(changeValue.x);
+										}else if(e==jarvis.GestureElement.END)
+										{
+											that.movingEndNavi(changeValue.x);
+										}
+									
+									},
+									gestureComplete: function(e,value)
+									{
+										if(e==jarvis.GestureElement.PAN_RIGHT){
+											that.posEndX+=70;
+										}else if(e==jarvis.GestureElement.PAN_LEFT){
+											that.posEndX-=70;
+										}
+									}
+							    }
+							  
+    
+	
+		var gestureElement=new  jarvis.GestureElement( this.navi ,new gestureDelegate(),false,true);
+
+		this.reset(this.option);
+
+    },
+	movingNavi:function(d)
+	{
+        var tx=this.getNaviPos()+d;
+        this.navi.style.left=tx+"px";
+
+	},
+	movingEndNavi:function(d)
+	{
+        var dx=this.posX+d+this.posEndX;
+		var idx=this.getIdxByPos(dx);
+		this.moveNavi(idx);
+		
+
+	},
+	moveNavi:function(idx)
+	{
+        if(this.posA==null){
+		    return;
+		}
+		if(idx<0){
+		   idx=0;
+		}
+		if(idx>=this.posA.length){
+		   idx=this.posA.length-1;
+		}
+		
+		this.posX=-this.posA[idx];
+        
+        var bounceN=jarvis.lib.getAbsoluteBounce(this.navi);
+        var bounce=jarvis.lib.getAbsoluteBounce(this.body);
+        var minX=Math.floor(bounce.width-bounceN.width)-jarvis.uiSet.uiStartPosX;
+        if(this.posX<minX){
+		   this.posX=minX;
+		}
+		//alert(idx+" "+this.posX);
+        this.moveUI(null,true);
+	},
+	
+    getIdxByPos:function(pos)
+	{
+        if(this.posA==null){
+		    return 0;
+		}
+        var p0;
+		var p1;
+		var d0;
+		var d1;
+		pos=-pos;
+		var len=this.posA.length;
+		for(var i=0;i<len;++i){
+		    p0=this.posA[i];
+			if(i<len-1){
+			   p1=this.posA[i+1];
+			}else{
+			   return i;
+			}
+			if(pos<p0){
+			   return 0;
+			}else if(p0<=pos && p1>pos){
+			     d0=pos-p0;
+                 d1=p1-pos;
+				 if(d0<=d1){
+				     return i;
+				 }else{
+				     return i+1;
+				 }
+			
+			}
+         }
+		 return 0;
+
+	},
+
+	remove : function()
+	{
+	},
+	reset : function(option)
+	{
+		if(option.reciveKey==this.option.reciveKey && option.apiPath==this.option.apiPath && this.isInit==true){
+		   return;
+		}
+		
+		this.posX=0;
+		this.listBox.innerHTML="";
+		
+		jarvis[this.reciveKey+jarvis.config.RECIVE_KEY]=null;
+		
+		this.option=option;
+		this.reciveKey=this.option.reciveKey;
+		jarvis[this.reciveKey+jarvis.config.RECIVE_KEY]=this;
+        this.loadData();
+		
+		
+	},
+	loadData:function()
+	{
+        
+		this.listBox.innerHTML="";
+		this.dataA=null;
+		this.posA=null;
+		this.loading(true);
+		this.dataA=new Array();
+		this.info.loadIronMans(this.option.apiPath,"jarvis."+this.reciveKey+jarvis.config.RECIVE_KEY+".dataComplete",this.reciveKey);
+		
+	},
+	dataComplete :function(yn)
+	{
+	   	this.loading(false);
+		var datas=this.info.getIronMans(this.reciveKey,false);
+		this.dataA=datas;
+		var that=this;
+		var data;
+		var cell;
+		var bounceP=jarvis.lib.getAbsoluteBounce(this.navi);
+		var bounce;
+		this.posA=new Array();
+		this.posA.push(0);
+		this.listA=new Array();
+		for(var i=0;i<datas.length;++i){
+			data=datas[i];
+			
+			if(data.seq=="1"){
+			    cell=document.createElement("li");
+			    cell.style.color=this.option.cssTitleColor;
+				jarvis.lib.addAttribute(cell,"cell btn font-big");
+				cell.innerHTML=data.title;
+				cell.info=data;
+				jarvis.lib.addEventListener(cell,"click",function (e){that.listClick(e);});
+				this.listA.push(cell);
+				this.listBox.appendChild(cell);
+                bounce=jarvis.lib.getAbsoluteBounce(cell);
+				this.posA.push(Math.floor(bounce.x-bounceP.x));
+			}
+			
+		}
+
+		this.navi.style.width=(bounce.x-bounceP.x+bounce.width)+"px";
+		if(cell!=null){
+		   jarvis.lib.addAttribute(cell,"last-child");
+		}
+		this.isInit=true;
+		this.resize();
+
+	},	
+	
+    menuClick:function(e)
+	{
+		if(this.dataA==null){
+		    return;
+		}
+		
+		if(jarvis.uiSet!=null && jarvis.uiSet!=undefined){
+			jarvis.uiSet.openList(this.dataA,this.option.title);
+		}
+	},
+	
+    listClick:function(e)
+	{
+		var tg=jarvis.lib.getEventTarget(e);
+	    var data=tg.info;
+		
+		if(data!=null){
+			if(data.target=="_app"){
+				if(jarvis.uiSet!=null && jarvis.uiSet!=undefined){
+				    jarvis.uiSet.changePage(data.link);
+				}
+
+			}else if(data.target=="_self"){
+				top.location.href=data.link;
+			}else{
+				window.open(data.link);
+			}
+		}
+
+
+	},
+
+	
+	changeColor :function(colorA)
+	{
+	   
+		
+		
+	},
+	
+    orientationChange : function(){
+	},
+    loading:function(ac)
+	{
+       if(ac==true){
+		   jarvis.lib.addAttribute( this.loadingBar,"data-loading")
+	   }else{
+		   jarvis.lib.removeAttribute( this.loadingBar,"data-loading");
+	   }
+	},
+    moveUI:function(value,isAni){
+	    if(value!=null){
+		    this.moveValue=value;
+		}
+		
+		
+		
+		if(isAni==true){
+		    var tx=this.getNaviPos();
+
+            
+           
+
+            var aniDelegate=function(){};
+		    aniDelegate.prototype = {
+				 complete : function(e)
+				 {
+					jarvis.config.isAnimation=false;
+					
+				 }
+		     }
+			 var easev="ease out";
+			 jarvis.animation.startAnimation(this.navi.style, {listener:this.navi, duration:0.3, left:tx, ease:easev ,isPx:true},new aniDelegate());
+			
+
+
+		}else{
+		    this.setNaviPos();
+	    }
+	
+	},
+	getNaviPos :function()
+	{
+		var tx=0;
+	
+		if(this.option.isFullMode==true){
+			var parent = this.body.parentNode;
+			if(parent!=null){
+		       
+			   tx=jarvis.lib.getAbsoluteBounce(parent).x;
+			}
+            tx=tx+jarvis.uiSet.uiStartPosX;
+		}
+		return tx+this.posX+this.moveValue;
+	},
+	setNaviPos :function()
+	{
+		
+		var bounce=jarvis.lib.getAbsoluteBounce(this.body);
+		if(bounce.width>=10000){
+		    return;
+	    }
+		var tx=this.getNaviPos();
+		this.navi.style.left=tx+"px";
+		
+		/*
+		var w=bounce.width-(tx*2);
+		if(w>0){
+		   //this.navi.style.width=(bounce.width-(tx*2))+"px";
+		}
+		*/
+		
+	},
+	resize : function(browserHeight)
+	{
+	   
+	   var bounce=jarvis.lib.getAbsoluteBounce(this.body);
+	   if(bounce.width>=10000){
+		    return;
+	   }
+	   
+	   this.setNaviPos();
+       
+	   
+	}
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML> 
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+		
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Title</title>
+		<meta name="author" content="Lee Gil Hwan(perinion@imbc.co.kr)">
+		
+    <script type='text/javascript' src="./lib/lib.js"></script>
+	
+	<script type='text/javascript' src="./info/mini/miniInfo.js"></script>	
+	<script type='text/javascript' src="./ui/uiset.js"></script>
+    <script type='text/javascript' src="./ui/top.js"></script>
+    <script type='text/javascript' src="./ui/bottom.js"></script>
+    <script id="facebook-jssdk" src="//connect.facebook.net/ko_KR/all.js#xfbml=1&amp;amp;appId=463667683732495"></script>
+
+	<script type='text/javascript' src="./lib/animation/animation.js"></script>
+    <script type='text/javascript' src="./ui/mini/mini.js"></script>
+    <style>
+
+	  
+
+    </style>
+    </head>
+    <body class='jarvis-ui' style='background:#ffffff'>
+	    
+	    <div id='box' style='position: relative; width:1024px; height:768px;'> 
+		    <div id="fb-root"></div>
+		    
+			<script>(function(d, s, id) {
+			   
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/ko_KR/all.js#xfbml=1&amp;appId=463667683732495";
+				fjs.parentNode.insertBefore(js, fjs);
+				}(document, "script", "facebook-jssdk"));
+			</script>
+			<div class="fb-comments" data-width="668" data-href="http://mbcidol.imbc.com/videos/2387002_57392.html"></div>;
+		</div>
+		<button type="button" onClick="play()" >play</button>
+	    <button type="button" onClick="stop()" >stop</button>	
+        
+        
+    
+		<script type="text/javascript">
+        var box=null;
+		window.onload=init;
+		
+		
+		function init()
+        {
+		  	 
+            jarvis.debuger.used=true;
+			jarvis.debuger.init();
+			jarvis.debuger.view(true);
+            
+			
+			//addBox("box");
+			
+		}
+
+        function play()
+        {
+			box.play(1,jarvis.SequenceAnimation.LOOF_TYPE_LOOF);
+		}
+		function stop()
+        {
+			box.stop();
+		}
+        function addBox(div)
+        {
+             var aniBox=document.getElementById(div);
+             /*
+			 var delegate=function(){};
+             delegate.prototype = {
+                              initBox : function(div){
+							       //alert("initBox : "+div);
+							  },   
+							  moveStart : function(divL,divR){
+							      //alert("moveStart : "+divL);
+							  },   
+							  moveEnd : function(div,dr){
+							      // alert(dr);
+							  }
+		     }
+			 */
+			 var path="./style/tshop/ani/";
+			 var sequenceA=new Array();
+			 var num="";
+			 for(var i=0;i<70;++i){
+			     num=jarvis.lib.intToText((i+1),2);
+				 sequenceA[i]=path+"test00"+num+".jpg";
+			 
+			 
+			 }
+			 box=new jarvis.SequenceAnimation(aniBox,sequenceA);
+             box.init();
+            
+		     
+		}
+       
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,171 @@
+@charset "utf-8";
+.jarvis-ui .radio-title {font:bold; padding:0 0 5px 2px;}
+
+
+
+.jarvis-ui .page-top .content {position: relative; overflow: hidden; text-align: center; height:100%; width:100%;}
+.jarvis-ui .page-top .content .logo{overflow: hidden; position: absolute; left: 0; width: auto;
+									padding: 11px 18px 10px 18px; background: url("../style/radio/bg-logo.png"); background: rgba(0, 0, 0, 0.3); 
+									 text-align: left;}
+.jarvis-ui .page-top .content .logo .info{}
+.jarvis-ui .page-top .content .logo .info .time{display: inline-block; min-width: 117px;  width: auto !important; height: 23px;
+												margin: 0 12px 0 0; padding: 0 7px; color: #636363; line-height: 23px; background-color: #fff;
+								                -webkit-border-radius: 2px; border-radius: 2px;}
+.jarvis-ui .page-top .content .logo .info .text{ margin-top:8px}
+.jarvis-ui .page-top .content .logo .title{ font-size: 38px;}
+.jarvis-ui .page-top .content .logo .title em { font-weight: bold;}
+
+
+.jarvis-ui .page-footer {position: relative; overflow: hidden;}
+.jarvis-ui .page-footer .grid {overflow:hidden; display: block;  position:relative; height: 100%; width:100%}
+.jarvis-ui .page-footer .grid .text-box{clear: both; margin-bottom: 16px; padding: 16px 50px 15px 0;}
+.jarvis-ui .page-footer .grid .text-box .sms {margin-right: 17px;}
+.jarvis-ui .page-footer .grid .text-box .tunein {position: absolute; width: 35px;height:35px;  right: 0; top: 7px;}
+.jarvis-ui .page-footer .grid .text-box .tunein-icon {background:url("../style/radio/tunein.png") no-repeat; background-size:35px 35px}
+
+
+@media screen and (-webkit-min-device-pixel-ratio:2) { 
+   .jarvis-ui .page-footer .grid .text-box .tunein-icon {background:url("../style/radio/tunein_r.png") no-repeat; background-size:35px 35px;}
+}
+
+.jarvis-ui .page-navi {position: relative;}
+.jarvis-ui .page-navi .navi {display: block;height: 45px; padding-left: 29px; line-height: 45px; position: absolute; left: 0px; top: 0px; overflow: hidden;}
+.jarvis-ui .page-navi .navi ul { overflow: hidden; height: 45px; width:100%; white-space:nowrap;}
+.jarvis-ui .page-navi .navi li { display:inline; padding: 0 13px; line-height: 45px; background-image: url("../style/radio/bg-nav-bar.png"); background-repeat: no-repeat; background-position: right center;}
+
+
+
+
+.jarvis-ui .page-navi .navi .last-child { padding: 0 0 0 13px; background-image: none;}
+.jarvis-ui .page-navi .navi .allBtn { position: absolute; left: 7px; top: 15px; width: 20px; height: 16px;
+                                      background-image: url("../style/radio/btn-nav.png"); background-repeat: no-repeat;}
+
+@media screen and (-webkit-min-device-pixel-ratio:2) { 
+   .jarvis-ui .page-navi .navi .allBtn {background-image: url("../style/radio/btn-nav-r.png"); background-repeat: no-repeat; background-size:20px 16px;}
+}
+
+
+.jarvis-ui .page-menu .grid {overflow:hidden; display: block;  position:relative; height: 100%; width:100%}
+.jarvis-ui .page-menu .grid .list-box {height: 100%; width:100%}
+.jarvis-ui .page-menu .grid .list-box .cell{height: 24px; display:block; overflow:hidden; width:100%; text-align:left;}
+.jarvis-ui .page-menu .grid .list-box .a{background:url("../style/trensparent10.png") repeat }
+.jarvis-ui .page-menu .grid .list-box .b{background:url("../style/trensparent15.png") repeat }
+.jarvis-ui .page-menu .grid .list-box .new-group{height: 29px; padding-top:5px;}
+.jarvis-ui .page-menu .grid .list-box .cell .img{text-align:center; margin:3px 0px 0 10px; width:17px; height:17px; line-height:1.6}
+.jarvis-ui .page-menu .grid .list-box .cell .txt{ margin:5px;}
+
+.jarvis-ui .board .grid {overflow:hidden;}
+.jarvis-ui .board .grid ul li span {display:block;}
+.jarvis-ui .board .grid ul .first {width:100%;margin-bottom:5%;}
+.jarvis-ui .board .grid ul .list {overflow:hidden; float:left; width:47%; margin:0 0 0 2%;}
+.jarvis-ui .board .grid ul .thmb {overflow:hidden; position:relative; width:100%; margin-bottom:5px; padding:1px; box-sizing:border-box;}
+.jarvis-ui .board .grid ul .thmb img {width:100%;}
+.jarvis-ui .board .grid ul .cell {width:100%; text-align:left}
+.jarvis-ui .board .grid ul .tit {line-height:1.4;font-weight:bold;}
+.jarvis-ui .board .grid ul .tit {overflow:hidden; width:92%; margin:0 auto; max-height:34px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; text-overflow:ellipsis;}
+.jarvis-ui .board .grid ul .first .tit {}
+.jarvis-ui .board .grid ul .txt {overflow:hidden; width:92%; margin:0 auto; margin-top:5px; white-space:nowrap; text-overflow:ellipsis;} 
+
+.jarvis-ui .board .grid ul .banner {overflow:hidden; width:100%; margin-bottom:2.5%; text-align:center}
+.jarvis-ui .board .grid ul .banner .cell {display:block; width:100%; text-align:left}
+.jarvis-ui .board .grid ul .banner img {width:100%; vertical-align:top;}
+
+
+.jarvis-ui .inform .grid {overflow:hidden;}
+.jarvis-ui .inform .grid .inform-banner {display:block}
+.jarvis-ui .inform .grid .inform-banner img {width:100%; height:100%; vertical-align:top;}
+.jarvis-ui .inform .grid .inform-box {padding-top:15px;}
+.jarvis-ui .inform .grid .inform-box .inform-list {position: relative;}
+.jarvis-ui .inform .grid .inform-box .inform-list li {padding-left:25px; background:url(../style/radio/dot.gif) no-repeat 15px 6px;}
+.jarvis-ui .inform .grid .inform-box .inform-list li .cell {text-align:left; overflow:hidden; display:block; width:95%; white-space:nowrap; text-overflow:ellipsis;}
+
+
+.jarvis-ui .aod-apps {}
+.jarvis-ui .aod-apps .apps {}
+.jarvis-ui .aod-apps .aod {margin-top:20px}
+
+.jarvis-ui .apps-info {}
+.jarvis-ui .apps-info .apps {}
+.jarvis-ui .apps-info .inform {margin-top:20px}
+
+
+.jarvis-ui .frame-viewer {}
+.jarvis-ui .frame-viewer .grid {overflow:hidden;}
+
+
+.jarvis-ui .apps .grid {overflow:hidden; padding:15px; background:#fafafa; border:1px solid #cdcdcd;}
+.jarvis-ui .apps .grid .logo {float:left; width:74px;}
+.jarvis-ui .apps .grid .list-apps {float:right; width:65%;}
+.jarvis-ui .apps .grid .list-apps li {float:left; width:24.8%; text-align:center;}
+.jarvis-ui .apps .grid .list-apps li a {display:block; padding-top:41px; color:#707070; letter-spacing:-1px;}
+.jarvis-ui .apps .grid .list-apps .icon-pc {background:url(../style/radio/icon_pc.png) no-repeat center 1px;}
+.jarvis-ui .apps .grid .list-apps .icon-ios {background:url(../style/radio/icon_ios.png) no-repeat center 0;}
+.jarvis-ui .apps .grid .list-apps .icon-android {background:url(../style/radio/icon_android.png) no-repeat center 0;}
+
+
+.jarvis-ui .aod .grid{overflow:hidden; background:#fafafa; border:1px solid #cdcdcd; box-sizing:border-box;}
+.jarvis-ui .aod .grid ul {padding:15px; margin-bottom:-2px;}
+.jarvis-ui .aod .grid ul li {display:inline; text-align:center;}
+.jarvis-ui .aod .grid ul li a {display:inline-block; padding:6px 10px; background:url(../style/radio/line.gif) no-repeat right 10px; color:#636363;}
+.jarvis-ui .aod .bg-none a {background:none !important;}
+
+
+.jarvis-ui .schedule .grid {overflow:hidden; width:100%}
+.jarvis-ui .schedule .grid .date-box {position:relative; width:84%; height:19px; margin:9px auto 0 auto; text-align:center;}
+.jarvis-ui .schedule .grid .date-box  button {overflow:hidden; cursor:pointer; border:none; font-size:0; line-height:40px;}
+.jarvis-ui .schedule .grid .date-box .btn-prev {position:absolute; top:0; left:0; width:20px; height:19px; background:url(../style/btn_left.png) no-repeat;}
+.jarvis-ui .schedule .grid .date-box .btn-next {position:absolute; top:0; right:0; width:20px; height:19px; background:url(../style/btn_right.png) no-repeat;}
+.jarvis-ui .schedule .grid .date-box .date {}
+.jarvis-ui .schedule .grid .radio-channel {width:84%; height:26px; margin:8px auto 0 auto; text-align:center;}
+.jarvis-ui .schedule .grid .radio-channel button {float:left; width:33%; height:26px; padding-right:1px; background:#ececec; 
+                                                  border:1px solid #c4c4c4;
+												  color:#636363; font-weight:bold; line-height:24px; cursor:pointer; box-sizing:border-box;}
+*:first-child+html .jarvis-ui .schedule .grid .radio-channel button {width:31.9%;}
+.jarvis-ui .schedule .grid .radio-channel button.mr5 {margin-right:0.5%;}
+.jarvis-ui .schedule .grid .radio-channel button.on { background:#fff;  border-bottom:none; }
+
+.jarvis-ui .schedule .grid .list-body {width:100%; background:#fafafa; overflow:hidden}
+
+.jarvis-ui .schedule .grid .list-body .cell {width:100%; height:33px; border-bottom:1px solid #e3e3e3; color:#636363; position: relative; overflow-x: hidden; overflow-y: auto;}
+.jarvis-ui .schedule .grid .list-body .cell-on-air {background:#e0eaf9;}
+
+.jarvis-ui .schedule .grid .list-body .cell .text {margin-top:10px;}
+.jarvis-ui .schedule .grid .list-body .cell .time { text-align:center; width:50px}
+.jarvis-ui .schedule .grid .list-body .cell .program {width:150px}
+
+
+.jarvis-ui .schedule .grid .list-body .cell .btn {margin-top:5px;margin-right:2px;}
+.jarvis-ui .schedule .grid .list-body .cell .btn-first {margin-right:10px;}
+.jarvis-ui .schedule .grid .list-body .cell .btn-gohome{width:22px; height:22px; background:url(../style/radio/btn_gohome.gif) no-repeat; background-size:22px 22px;}
+.jarvis-ui .schedule .grid .list-body .cell .btn-aod {width:22px; height:22px; background:url(../style/radio/btn_aod.gif) no-repeat; background-size:22px 22px;}
+.jarvis-ui .schedule .grid .list-body .cell .btn-vod {width:22px; height:22px; background:url(../style/radio/btn_vod.gif) no-repeat; background-size:22px 22px;}
+.jarvis-ui .schedule .grid .list-body .cell .btn-vod-on {}
+
+
+
+.jarvis-ui .select-song .grid {overflow:hidden; width:100%}
+.jarvis-ui .select-song .grid .date-box {position:relative; width:260px; height:30px; margin:9px auto 0 auto; text-align:center;}
+.jarvis-ui .select-song .grid .date-box  button {overflow:hidden; cursor:pointer; border:none; font-size:0; line-height:40px;}
+.jarvis-ui .select-song .grid .date-box .btn-prev {position:absolute; top:0; left:0; width:20px; height:19px; background:url(../style/btn_left.png) no-repeat;}
+.jarvis-ui .select-song .grid .date-box .btn-next {position:absolute; top:0; right:0; width:20px; height:19px; background:url(../style/btn_right.png) no-repeat;}
+.jarvis-ui .select-song .grid .date-box .date {}
+
+
+.jarvis-ui .select-song .grid .list-body {width:100%; background:#fafafa; overflow:hidden}
+.jarvis-ui .select-song .grid .list-body .info-text{margin:10px}
+.jarvis-ui .select-song .grid .list-body .select-song{width:100%;}
+.jarvis-ui .select-song .grid .list-body .line{border-bottom:1px solid #c4c4c4}
+.jarvis-ui .select-song .grid .list-body .select-song .border {border:1px solid #c4c4c4;}
+.jarvis-ui .select-song .grid .list-body .select-song .img {position:absolute; left:8px; top:8px; width:34px; height:34px; pointer-events:none}
+.jarvis-ui .select-song .grid .list-body .select-song .title {margin-left:42px; margin-right:30px; color:#636363; padding:10px}
+.jarvis-ui .select-song .grid .list-body .select-song .btn-aod {position:absolute; right:8px; top:8px; width:22px; height:22px; background:url(../style/radio/btn_aod.gif) no-repeat; background-size:22px 22px;}
+
+
+
+@media screen and (-webkit-min-device-pixel-ratio:2) { 
+   .jarvis-ui .schedule .grid .list-body .cell .btn-gohome{background:url(../style/radio/btn_gohome_r.gif) no-repeat; background-size:22px 22px;}
+   .jarvis-ui .schedule .grid .list-body .cell .btn-aod { background:url(../style/radio/btn_aod_r.gif) no-repeat; background-size:22px 22px;}
+   .jarvis-ui .schedule .grid .list-body .cell .btn-vod { background:url(../style/radio/btn_vod_r.gif) no-repeat; background-size:22px 22px;}
+   .jarvis-ui .schedule .grid .list-body .cell .btn-vod-on {}
+   .jarvis-ui .select-song .grid .list-body .select-song .btn-aod {background:url(../style/radio/btn_aod_r.gif) no-repeat; background-size:22px 22px;}
+}

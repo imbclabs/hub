@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+   
+    <title>MBC RADIO</title>
+	
+	
+    <link href="http://fonts.googleapis.com/earlyaccess/nanumgothic.css" rel="stylesheet" type="text/css">
+    
+	<link rel="shortcut icon" href="./style/home_icon.png" />	 
+	<link rel="apple-touch-icon" href="./style/home_icon.png" />   
+	
+	<script type='text/javascript' src="./lib/lib.js" charset="utf-8"></script>
+	
+	<script type='text/javascript' src="./info/jarvisInfo.js"></script>	
+	<script type='text/javascript' src="./info/mini/miniInfo.js"></script>	
+	<script type='text/javascript' src="./ui/uiset.js"></script>
+    <script type='text/javascript' src="./ui/top.js"></script>
+    <script type='text/javascript' src="./ui/bottom.js"></script>
+	
+	
+    
+    <script type='text/javascript' src="http://www.imbc.com/common/js/global_function.js"></script>
+</head>
+
+<body class='jarvis-ui jarvis-ui-scroll'>
+    
+
+	
+    <div id='top-banner'></div>
+    <div id='page-top'></div>
+	<div id='page-body'></div>
+	<div id='page-bottom'></div>
+   
+	<script>
+        var banner=document.getElementById("top-banner");
+		var page;
+        var topBar;
+        var uiset;
+        var bottom;
+		
+        var browserHeight=-1;
+		var browserWidth=-1;
+       
+		window.onload =initPage; 
+		
+		function addBanner()
+	    {
+            
+			var checkNode=document.body.childNodes[0];
+			if(checkNode!=banner){
+			    document.body.removeChild(checkNode);
+			}
+			
+			banner.innerHTML="";
+            var js=document.createElement("script");
+            js.type='text/javascript';
+			js.innerHTML="var daum_adam_vars = {"+
+												"client : '9227Z3JT1464145f037',"+
+												"position : 'TOP', "+ 
+												"test : false"+         
+											    "};";
+			var loadJs=document.createElement("script");
+            loadJs.type='text/javascript';
+			
+			
+			banner.appendChild(js);
+            banner.appendChild(loadJs);
+            loadJs.src='http://m1.daumcdn.net/adtc/js/mobilead.js';
+		}
+		function initPage(e){
+			
+			
+			
+
+			jarvis.lib.removeEventListener(window,"load",initPage);
+			//jarvis.debuger.used=true;
+			jarvis.debuger.init();
+			jarvis.debuger.view(true);
+			
+			
+			
+			var mgX;
+			var mgY;
+			var isMoblile=jarvis.lib.isMobile();
+			var isPhone=jarvis.lib.isPhone();
+
+			if(isMoblile==true){
+			    //addBanner();
+				
+				if(isPhone==true){
+					mgX=15;
+					mgY=30;
+					
+				}else{
+					mgX=30;
+					mgY=60;
+				}
+			}else{
+                jarvis.lib.addAttribute(banner,"screen-out");
+                
+				mgX=50;
+				mgY=60;
+			}
+            var delegate=function(){}; 
+			delegate.prototype = {
+				listBtnClick : function()
+				{
+					uiset.openList();
+				}
+			}
+			
+			topOption=new jarvis.TopOption();
+			topOption.marginX=mgX;
+			topBar=new jarvis.Top("page-top",topOption,new delegate());
+			topBar.init();
+
+
+			var setOption=new jarvis.UiSetOption();
+			setOption.marginX=mgX;
+			setOption.marginY=mgY;
+            uiset = new jarvis.UiSet("page-body",null,setOption);
+			uiset.init();
+
+			bottomOption=new jarvis.BottomOption();
+			bottomOption.marginX=mgX;
+			bottom=new jarvis.Bottom('page-bottom',bottomOption);
+
+			//resizeFn(null,false);
+
+			var vs=jarvis.lib.getIEVersion();
+			
+			jarvis.lib.addEventListener(window,"resize",resizeFn);
+			jarvis.lib.addEventListener(window,"orientationchange",orientationChange);
+                     
+			resizeFn(null,false);
+            
+            var page="";
+			var seq="";
+		    var qurry=jarvis.lib.getUrlParam(window.location.href);
+            if(qurry.param!=null){
+			    if(qurry.param.page!=null){
+				   page=qurry.param.page;
+				}
+                if(qurry.param.seq!=null){
+				   seq=qurry.param.seq;
+				}
+				
+				
+			}
+			
+            if(qurry.hash!=null){
+			    if(qurry.hash!=""){
+				   page=qurry.hash;
+				}
+			}
+          // alert(page);
+           
+            
+			uiset.openPopupSeq=seq;
+           
+            if(qurry.hash==page && qurry.hash!=null && qurry.hash!=""){
+			    uiset.changePageStart(page,qurry.param);
+			}else if(page==""){
+				uiset.changeHome(qurry.param);
+			}else{
+			    uiset.changePage(page,qurry.param);
+			}
+
+			
+		}
+	   
+		function orientationChange(){
+		    
+			resizeFn();
+
+			if( uiset!=null){
+				uiset.orientationChange();
+			}
+		}
+
+		function resizeFn(e,isCheck){
+			if(isCheck===undefined){
+				isCheck=true;
+			}
+			
+			var h=Math.floor(jarvis.lib.getBrowserHeight());
+			var w=Math.floor(jarvis.lib.getAbsoluteBounce(document.body).width);
+
+			if(browserWidth==w && browserHeight==h && isCheck==true){
+				return;
+			}
+			
+			
+			browserWidth=w;
+			browserHeight=h;
+            
+           
+			if(uiset!=null){
+				bottom.resize(browserHeight);
+				topBar.resize(browserHeight);
+				uiset.resize(browserHeight);
+			}
+			
+		}
+
+		function  resizeIframe(height){
+			alert(height);
+		}
+
+		
+	</script>
+	
+	<script>
+		/*
+		setTimeout(function(){var a=document.createElement("script");
+		var b=document.getElementsByTagName("script")[0];
+		a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0014/3158.js?"+Math.floor(new Date().getTime()/3600000);
+		a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+		*/
+	</script>
+	
+	
+	
+</body>
+</html>

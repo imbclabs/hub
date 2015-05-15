@@ -1,0 +1,98 @@
+/**
+ * miniInfo v1.0: MiniInfo (InterFace class)
+ * by aeddang
+ */
+
+
+
+if(typeof jarvis == "undefined") var jarvis = new Object();
+
+if(jarvis.dirPath===undefined){
+	jarvis.dirPath="./";
+	if(window.location.href.indexOf("http")==-1 || window.location.href.indexOf("imbctc")!=-1){
+		jarvis.dirPath="./";
+	}else{
+    }
+}
+
+//document.write("<script type='text/javascript' src='"+jarvis.dirPath+"info/radio/miniInfo.UserInfo.js'></script>"); 
+
+
+
+jarvis.RadioInfo= function() 
+{
+    
+	//this.playInfo=null;
+	
+
+
+	this.isHtmlPlayer=undefined;
+	this.isMobile=undefined;
+	this.isIos=undefined;
+	this.isMac=undefined;
+	this.isPhone=undefined;
+	this.isAndroid=undefined;
+	this.androidVS="";
+	this.androidSdkVS=0;
+
+	this.isInit=false;
+}
+
+
+
+
+
+jarvis.RadioInfo.prototype = 
+{
+    init:function()
+	{
+		 if(this.isInit==true){
+		    return;
+		 }
+		 this.isInit=true;
+		 this.isMobile=jarvis.lib.isMobile();
+		 
+		 if(this.isMobile==true){
+           
+		    this.isPhone=jarvis.lib.isPhone();
+            this.isAndroid=jarvis.lib.isAndroid();
+			this.isIos=jarvis.lib.isIos();
+            if(this.isAndroid==true){
+			   this.androidVS= jarvis.lib.getADVersion();
+			   this.androidSdkVS=jarvis.lib.getADSdkVersion(this.androidVS);
+			}
+		 }else{
+	        this.isPhone=false;
+			this.isAndroid=false;
+		 }
+         if(jarvis.lib.getOSInfoStr()=="Macintosh"){
+		     this.isMac=true;
+		 }
+		 
+		 if(this.isMobile==true){
+		     
+	          this.isHtmlPlayer=true;
+			  
+		 }else
+	     {
+			 this.isHtmlPlayer=false;				 
+		 }
+	    
+	    
+		//this.userInfo=new jarvis.miniInfo.UserInfo();
+		
+    },
+    
+    resetInfo:function()
+    {
+	    //this.userInfo.resetInfo();
+	  
+	}
+ 
+//userInfo interface
+    //loginCheck:function(){return this.userInfo.loginCheck();},
+	
+}
+
+jarvis.radioInfo = new jarvis.RadioInfo();
+

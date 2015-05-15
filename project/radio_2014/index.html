@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta name="keywords" content="MBC, 미니, 라디오, 엠비씨, mini, 실시간, FM4U, 91.9, FM, 95.9">
+	<meta name="description" content="언제 어디서나 MBC 라디오를 즐기세요.">
+
+	<meta property="og:url" content="http://mini.imbc.com/v2/index.html">
+	<meta property="og:title" content="MBC 미니">
+	<meta property="og:description" content="언제 어디서나 MBC 라디오를 즐기세요.">
+	<meta property="og:image" content="http://mini.imbc.com/v2/style/home_icon.png">
+
+	<title>MBC RADIO</title>
+
+	<link rel="shortcut icon" href="./style/home_icon.png" />	 
+	<link rel="apple-touch-icon" href="./style/home_icon.png" />   
+	
+	<script type='text/javascript' src="./lib/lib.js"></script>
+	<script type='text/javascript' src="./info/jarvisInfo.js"></script>	
+	<script type='text/javascript' src="./info/mini/miniInfo.js"></script>	
+	<script type='text/javascript' src="./ui/uiset.js"></script>
+	<script type='text/javascript' src="./ui/top.js"></script>
+	<script type='text/javascript' src="./ui/bottom.js"></script>
+	<script type='text/javascript' src="http://www.imbc.com/common/js/global_function.js"></script>
+	<script type="text/javascript" src="http://scr.nsmartad.com/admixer/admixer.js"></script>
+
+</head>
+
+<body id='radiobody' class='jarvis-ui jarvis-ui-scroll'>
+    
+
+	
+    <div id='top_banner'></div>
+    <div id='page-top'></div>
+	<div id='page-body'></div>
+	<div id='page-bottom'></div>
+   
+	<script>
+
+	    
+        var banner=document.getElementById("top_banner");
+		var page;
+        var topBar;
+        var uiset;
+        var bottom;
+		
+        var browserHeight=-1;
+		var browserWidth=-1;
+        
+		window.onload =initPage; 
+		
+		function addBanner()
+	    {
+            var checkNode=document.body.childNodes[0];
+			if(checkNode!=banner){
+			    document.body.removeChild(checkNode);
+			}
+			
+			banner.innerHTML="";
+
+			var r=Math.random();
+
+
+			 loadAdmixer();
+			
+			
+		}
+        
+
+
+        function loadMyAd()
+	    {
+			
+      
+
+			var myADImgA=new Array();
+			myADImgA[0]="http://mini.imbc.com/v2/img/quickbar_banner_ko_v1.jpg";
+          
+			
+			var myADLinkA=new Array();
+			myADLinkA[0]="https://play.google.com/store/apps/details?id=kr.co.two_khan.quickbar";
+            
+			var myDescA=new Array();
+			myDescA[0]="퀵바";
+           
+            var myADColorA=new Array();
+			myADColorA[0]="#c5c7d3";
+           
+
+            var idx=jarvis.lib.getRandomInt(myADImgA.length);
+            var imgPath=myADImgA[idx];
+			var link=myADLinkA[idx];
+			var desc=myDescA[idx];
+			var bgColor=myADColorA[idx];
+            
+			jarvis.lib.removeAttribute(banner,"screen-out");
+			banner.innerHTML="<a style='text-align:center; width:320px; height:50px; overflow:hidden; display:block'  href='"+link+"' target='_blank'><img style='width:100%; margin:0 auto' alt='"+desc+"' src='"+imgPath+"'/></a>";
+            banner.style.background=bgColor;
+
+		}
+		function loadAdam()
+	    {
+			
+            var js=document.createElement("script");
+            js.type='text/javascript';
+			js.innerHTML="var daum_adam_vars = {"+
+												"client : '9227Z3JT1464145f037',"+
+												"position : 'TOP', "+ 
+												"test : false"+         
+											    "};";
+			var loadJs=document.createElement("script");
+            loadJs.type='text/javascript';
+			
+			
+			banner.appendChild(js);
+            banner.appendChild(loadJs);
+            loadJs.src='http://m1.daumcdn.net/adtc/js/mobilead.js';
+		}
+
+		function loadAdmixer()
+	    {
+			 new admixer_ad({
+
+                                admixer_key:"b6anrxr6",
+
+                                display_id:"top_banner",
+
+                                adsense_publisher_key:"ca-mb-pub-0000000000000000", //AdSense 사용시에만 필요
+
+                                ad_change:true,//default : true
+
+                                test : false,  //default : false
+
+                                test_display_id : "log"
+
+                     });
+
+           
+           
+			
+		}
+		function initPage(e){
+			
+			
+			//alert(navigator.userAgent); 
+
+			jarvis.lib.removeEventListener(window,"load",initPage);
+			//jarvis.debuger.used=true;
+			jarvis.debuger.init();
+			jarvis.debuger.view(true);
+			
+			
+
+            var fontLoader= document.createElement('link');
+            fontLoader.rel='stylesheet';
+            var fontBody=document.getElementById('radiobody'); 
+		    fontBody.appendChild( fontLoader);
+		    fontLoader.href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css';
+		    jarvis.lib.addEventListener(fontLoader,"load",function (e){ fontLoadComplete(e);});
+
+			//startPage();
+
+		}
+		function handleAPILoaded(){
+		    startPage();
+		
+		}
+        function fontLoadComplete(e){	
+		}
+
+		function startPage(e){	
+			var mgX;
+			var mgY;
+			var isMoblile=jarvis.lib.isMobile();
+			var isPhone=jarvis.lib.isPhone();
+
+			if(isMoblile==true){
+			    //addBanner();
+				
+				if(isPhone==true){
+					mgX=15;
+					mgY=30;
+					
+				}else{
+					mgX=30;
+					mgY=60;
+				}
+			}else{
+                jarvis.lib.addAttribute(banner,"screen-out");
+                
+				mgX=50;
+				mgY=60;
+			}
+            var delegate=function(){}; 
+			delegate.prototype = {
+				listBtnClick : function()
+				{
+					uiset.openList();
+				}
+			}
+			
+			topOption=new jarvis.TopOption();
+			topOption.marginX=mgX;
+			topBar=new jarvis.Top("page-top",topOption,new delegate());
+			topBar.init();
+
+
+			var setOption=new jarvis.UiSetOption();
+			setOption.marginX=mgX;
+			setOption.marginY=mgY;
+            uiset = new jarvis.UiSet("page-body",null,setOption);
+			uiset.init();
+
+			bottomOption=new jarvis.BottomOption();
+			bottomOption.marginX=mgX;
+			bottom=new jarvis.Bottom('page-bottom',bottomOption);
+
+			//resizeFn(null,false);
+
+			var vs=jarvis.lib.getIEVersion();
+			
+			jarvis.lib.addEventListener(window,"resize",resizeFn);
+			jarvis.lib.addEventListener(window,"orientationchange",orientationChange);
+                     
+			resizeFn(null,false);
+            
+            var page="";
+			var seq="";
+		    var qurry=jarvis.lib.getUrlParam(window.location.href);
+            if(qurry.param!=null){
+			    if(qurry.param.page!=null){
+				   page=qurry.param.page;
+				}
+                if(qurry.param.seq!=null){
+				   seq=qurry.param.seq;
+				}
+				
+				
+			}
+			
+            if(qurry.hash!=null){
+			    if(qurry.hash!=""){
+				   page=qurry.hash;
+				}
+			}
+          // alert(page);
+           
+            
+			uiset.openPopupSeq=seq;
+           
+            if(qurry.hash==page && qurry.hash!=null && qurry.hash!=""){
+			    uiset.changePageStart(page,qurry.param);
+			}else if(page==""){
+				uiset.changeHome(qurry.param);
+			}else{
+			    uiset.changePage(page,qurry.param);
+			}
+
+			
+		}
+	   
+		function orientationChange(){
+		    
+			resizeFn();
+
+			if( uiset!=null){
+				uiset.orientationChange();
+			}
+		}
+
+		function resizeFn(e,isCheck){
+			if(isCheck===undefined){
+				isCheck=true;
+			}
+			
+			var h=Math.floor(jarvis.lib.getBrowserHeight());
+			var w=Math.floor(jarvis.lib.getAbsoluteBounce(document.body).width);
+
+			if(browserWidth==w && browserHeight==h && isCheck==true){
+				return;
+			}
+			
+			
+			browserWidth=w;
+			browserHeight=h;
+            
+           
+			if(uiset!=null){
+				bottom.resize(browserHeight);
+				topBar.resize(browserHeight);
+				uiset.resize(browserHeight);
+			}
+			
+		}
+
+		function  resizeIframe(height){
+			alert(height);
+		}
+
+		
+	</script>
+	<script src="./opensorceapi/auth.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+	<script>
+		/*
+		setTimeout(function(){var a=document.createElement("script");
+		var b=document.getElementsByTagName("script")[0];
+		a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0014/3158.js?"+Math.floor(new Date().getTime()/3600000);
+		a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+		*/
+	</script>
+
+    
+	
+	
+</body>
+</html>

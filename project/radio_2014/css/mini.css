@@ -1,0 +1,118 @@
+@charset "utf-8";
+
+
+.jarvis-ui .mini {position:relative; overflow:hidden; width:100%;}
+
+.jarvis-ui .mini .grid{position:relative; overflow:hidden;}
+
+.jarvis-ui .mini .btn-mini { width:35px; height:21px;   background:url("../style/mini/logo.png") no-repeat}
+
+.jarvis-ui .mini .btn-close { width:17px; height:17px;   background:url("../style/mini/btn_close.png") no-repeat}
+
+.jarvis-ui .mini .notice {display:none; z-index:9800};
+
+.jarvis-ui .mini .top-box {position:relative;  overflow:hidden; display:block; width:100%; height:60px;}
+
+.jarvis-ui .mini .top-box .top-navi {position:relative; width:100%; height:20px; overflow:hidden;}
+.jarvis-ui .mini .top-box .top-navi .pagecontrol {position:absolute; margin-top:7px;}
+.jarvis-ui .mini .top-box .top-navi .btn-mini {padding-top:3px}
+.jarvis-ui .mini .top-box .top-navi .equalizer { width:24px; height:13px; margin-top:7px}
+
+
+.jarvis-ui .mini .top-box .channel-box {position:relative; width:100%; height:35px; margin-top:5px; overflow:hidden}
+
+.jarvis-ui .mini .top-box .channel-box .bg { position:absolute;  left:0px; top:0px; width:100%; height:100%; background:url("../style/mini/channel_bg.png") repeat-x}
+.jarvis-ui .mini .top-box .channel-box .navi { position:absolute; left:0px; top:0px;height:100%;}
+
+
+.jarvis-ui .mini .top-box .channel-box .navi .btn{position:absolute; text-align: center;  margin-top:5px;}
+.jarvis-ui .mini .top-box .channel-box .navi .btn-mobile{ margin-top:7px;}
+
+.jarvis-ui .mini .top-box .channel-box .overlay { position:absolute;  left:0px; top:0px; width:100%; height:100%;}
+.jarvis-ui .mini .top-box .channel-box .point {position:absolute; margin-top:27px; width:14px; height:8px;  background:url("../style/mini/channel_point.png") no-repeat}
+
+.jarvis-ui .mini .player-box{position:relative; overflow:hidden;}
+.jarvis-ui .mini .audio-player{}
+.jarvis-ui .mini .video-player{ }
+.jarvis-ui .mini .video-player .player-box{ background: #000000}
+
+.jarvis-ui .mini .message-box {position:relative;  width:100%; height:1px; margin-top:10px}
+
+
+
+.jarvis-ui .mini .message-box .msg-list-body {display:block; width:100%; height:1px; overflow:hidden}
+.jarvis-ui .mini .message-box .msg-list-body .info-text { padding:10px}
+.jarvis-ui .mini .message-box .msg-list-body .cell{position: relative; overflow-x: hidden; overflow-y: auto; width: 100%; margin-right:20px; height:100%}
+.jarvis-ui .mini .message-box .msg-list-body .cell .user-nm{margin-top:10px; margin-left:10px; font-weight: bold;}
+.jarvis-ui .mini .message-box .msg-list-body .cell .reg-date{margin-top:10px; margin-right:10px;}
+.jarvis-ui .mini .message-box .msg-list-body .cell .comment{clear:both; width:auto; *width:95%; margin-top:2px; margin-left:10px; margin-right:10px; margin-bottom:5px;text-align:left;}
+
+.jarvis-ui .mini .message-box .msg-write-body {display:block; width:100%; height:32px; margin-top:10px;}
+.jarvis-ui .mini .message-box .msg-write-body .input{padding-left:5px; margin-left:10px; height:19px; color:#fff;}
+.jarvis-ui .mini .message-box .msg-write-body .btn-write {margin-right:2px; width:36px; height:19px; background:url("../style/mini/btn_write.png") no-repeat; background-position-x: 2px;}
+.jarvis-ui .mini .message-box .msg-write-body .btn-reflash {margin-right:2px; width:20px; height:19px; background:url("../style/mini/btn_reflash.png") no-repeat}
+.jarvis-ui .mini .message-box .msg-write-body .btn-reflash-stop {margin-right:10px; width:20px; height:19px; background:url("../style/mini/btn_reflash_stop.png") no-repeat}
+
+.jarvis-ui .mini .message-box .msg-write-body .btn-reflash-off {background:url("../style/mini/btn_reflash_off.png") no-repeat}
+.jarvis-ui .mini .message-box .msg-write-body .btn-reflash-stop-off {background:url("../style/mini/btn_reflash_stop_off.png") no-repeat}
+
+
+
+.jarvis-ui .mini .popup-box {position:absolute; display:none; z-index:9700;  overflow:hidden; top:0px; left:0px;  width:100%; height:1px; background:#ffffff;}
+.jarvis-ui .mini .popup-box .border-top {border-top:1px solid #c4c4c4; border-left:1px solid #c4c4c4; border-right:1px solid #c4c4c4;}
+.jarvis-ui .mini .popup-box .border-side {border-left:1px solid #c4c4c4; border-right:1px solid #c4c4c4;}
+.jarvis-ui .mini .popup-box .border {border:1px solid #c4c4c4;}
+
+.jarvis-ui .mini .popup-box .bin{width:0; height:0; overflow:hidden;}
+.jarvis-ui .mini .popup-box .header {position:relative; width:100%; height:35px}
+.jarvis-ui .mini .popup-box .header .overlay{top:0px; left:0px; position:absolute;  width:100%; height:100%; }
+.jarvis-ui .mini .popup-box .header .title{margin-left:10px; margin-top:8px; }
+.jarvis-ui .mini .popup-box .header .btn-close{margin-right:10px; margin-top:8px;}
+.jarvis-ui .mini .popup-box .header .btn-rss {display:none; margin-right:5px; margin-top:8px; width:17px; height:17px;   background:url("../style/mini/btn_rss.png") no-repeat}
+.jarvis-ui .mini .popup-box .list-box {position:relative; overflow:hidden; width:100%; background:#ffffff}
+
+.jarvis-ui .mini .popup-box .list-box .info-text {color:#636363; padding:10px}
+
+.jarvis-ui .mini .popup-box .list-box .select-song{width:100%}
+.jarvis-ui .mini .popup-box .list-box .line{border-bottom:1px solid #c4c4c4}
+.jarvis-ui .mini .popup-box .list-box .select-song .img {position:absolute; left:8px; top:8px; width:34px; height:34px; pointer-events:none}
+.jarvis-ui .mini .popup-box .list-box .select-song .title {margin-left:42px; margin-right:30px; color:#636363; padding:10px}
+.jarvis-ui .mini .popup-box .list-box .select-song .btn-aod {position:absolute; right:8px; top:8px; width:22px; height:22px; background:url(../style/radio/btn_aod.gif) no-repeat;}
+
+
+.jarvis-ui .mini .popup-box .list-box .replay-song{}
+.jarvis-ui .mini .popup-box .list-box .replay-song .content {padding:10px 10px 0px; pointer-events:none}
+.jarvis-ui .mini .popup-box .list-box .replay-song .content .img {width:60px; height:34px; pointer-events:none}
+.jarvis-ui .mini .popup-box .list-box .replay-song .content .textBox {pointer-events:none}
+.jarvis-ui .mini .popup-box .list-box .replay-song .content .title {text-align:left; color:#636363; margin-left:10px; pointer-events:none}
+
+.jarvis-ui .mini .popup-box .bottom {position:relative; height:30px; width:100%; background:#ffffff}
+.jarvis-ui .mini .popup-box .bottom .pagecontrol-gray {position:absolute; margin-top:5px;}
+
+
+
+.jarvis-ui .mini .popup-list {position:absolute; display:none;  overflow:hidden; top:0px; left:0px;  width:100%; height:1px; background:#ffffff;}
+.jarvis-ui .mini .popup-list .border-side {border-left:1px solid #c4c4c4; border-right:1px solid #c4c4c4;}
+.jarvis-ui .mini .popup-list .border {border:1px solid #c4c4c4;}
+
+.jarvis-ui .mini .popup-list .info-box {position:relative; color:#636363; padding:10px; background:#e0eaf9}
+.jarvis-ui .mini .popup-list .list-box {position:relative; overflow:hidden; width:100%; background:#ffffff}
+.jarvis-ui .mini .popup-list .list-box .info-text {color:#636363; padding:10px}
+
+.jarvis-ui .mini .popup-list .list-box .cell {position: relative; overflow-x: hidden; overflow-y: auto; width: 100%; margin-right:20px; height:100%}
+.jarvis-ui .mini .popup-list .list-box .cell .content {border-bottom:1px solid #c4c4c4; color:#636363; padding:10px; pointer-events:none}
+.jarvis-ui .mini .popup-list .list-box .cell .content .title{text-align:left;pointer-events:none}
+.jarvis-ui .mini .popup-list .list-box .cell .content .sub-title {text-align:left;pointer-events:none}
+
+.jarvis-ui .mini .popup-list .bottom {position:relative; height:30px; width:100%; background:#ffffff}
+.jarvis-ui .mini .popup-list .bottom .pagecontrol-number {position:absolute; margin-top:5px;}
+
+
+
+
+@media screen and (-webkit-min-device-pixel-ratio:2) { 
+   .jarvis-ui .mini .btn-mini {    background:url("../style/mini/logo_r.png") no-repeat; background-size:35px 21px;}
+
+}
+
+

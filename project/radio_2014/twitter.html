@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+   
+
+
+
+	<title>MBC RADIO</title>
+	
+</head>
+
+<body class='jarvis-ui'>
+    <script>
+	function getBrowserHeight()
+	{
+		var userAgent = navigator.userAgent.toLowerCase();
+		var browser = {   
+			               msie    : /msie/.test( userAgent ) && !/opera/.test( userAgent ),    
+			               safari  : /webkit/.test( userAgent ),    
+			               firefox : /mozilla/.test( userAgent ) && !/(compatible|webkit)/.test( userAgent ),    
+			               opera   : /opera/.test( userAgent )
+		};  
+		var totalHeight=0;  
+		if( browser.msie ){ //IE     
+			 var scrollHeight = document.documentElement.scrollHeight;     
+			 var browserHeight = document.documentElement.clientHeight;       
+			 totalHeight = scrollHeight < browserHeight ? browserHeight : scrollHeight;   
+		} else if ( browser.safari ){ //Chrome || Safari     
+			 totalHeight = document.body.scrollHeight;    
+		} else if ( browser.firefox ){ // Firefox || NS     
+			var bodyHeight = document.body.clientHeight;      
+			totalHeight = window.innerHeight < bodyHeight ? bodyHeight : window.innerHeight;    } 
+		else if ( browser.opera ){ // Opera     
+			var bodyHeight = document.body.clientHeight;      
+			totalHeight = window.innerHeight < bodyHeight ? bodyHeight : window.innerHeight;    
+		} else {      
+			   
+		}
+		//alert(totalHeight);
+		return totalHeight-30;
+    }
+    document.body.innerHTML='<a class="twitter-timeline" height="'+getBrowserHeight()+'" href="https://twitter.com/radiombc" data-widget-id="362137987775082497">@radiombc 님의 트윗</a>';
+	</script>
+    
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+/**
+ * miniInfo v1.0: AudioPlayer 
+ * by aeddang
+ */
+/*
+interfaces
+
+*/
+
+if(typeof jarvis == "undefined") var jarvis = new Object();
+
+
+if(jarvis.dirPath===undefined){
+	jarvis.dirPath="./";
+	if(window.location.href.indexOf("http")==-1 || window.location.href.indexOf("imbctc")!=-1){
+		jarvis.dirPath="./";
+	}else{
+    }
+	document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"/css/global.css'>");
+	document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"/css/base.css'>");
+	document.write("<link rel='stylesheet' href='"+jarvis.dirPath+"/css/ui.css'>");
+
+}
+
+
+
+
+
+jarvis.TopOption=function(){
+   
+   this.cssKey="top";
+   this.marginX=50;
+   
+}
+
+
+
+jarvis.Top= function(pageID,option) 
+{
+	
+	
+	this.body;
+	if(pageID===undefined){
+		this.body=document.body;
+	}else{
+		if(typeof pageID=="string" || typeof pageID=="String"){
+			this.body=document.getElementById(pageID);
+	    }else{
+			this.body=pageID;
+		} 
+	}
+	
+    this.option=option;
+	if(this.option===undefined){
+	   this.option=new jarvis.TopOption();
+	}
+    this.isMinMode=false;
+	jarvis.lib.addAttribute(this.body,this.option.cssKey);
+    
+    this.navi=document.createElement("div");
+    jarvis.lib.addAttribute(this.navi,"navi body-size");
+	this.body.appendChild(this.navi);
+
+	this.listBtn=document.createElement("button");
+    this.tvBtn=document.createElement("button");
+	this.loginBtn=document.createElement("button");
+	this.joinBtn=document.createElement("button");
+    this.homeBtn=document.createElement("button");
+    this.twBtn=document.createElement("button");
+	this.fbBtn=document.createElement("button");
+	this.fbLikeBtn=document.createElement("button");
+	
+    jarvis.lib.addAttribute(this.listBtn,"btn align-left btn-image btn-list");
+    jarvis.lib.addAttribute(this.tvBtn,"btn align-left btn-text");
+	jarvis.lib.addAttribute(this.loginBtn,"btn align-left btn-text");
+	jarvis.lib.addAttribute(this.joinBtn,"btn align-left btn-text");
+   
+	jarvis.lib.addAttribute(this.homeBtn,"btn btn-image btn-home");
+
+	jarvis.lib.addAttribute(this.twBtn,"btn align-right btn-image btn-tw");
+	jarvis.lib.addAttribute(this.fbBtn,"btn align-right btn-image btn-fb");
+	jarvis.lib.addAttribute(this.fbLikeBtn,"btn align-right btn-image btn-fb-like");
+   
+    
+	this.tvBtn.innerHTML='TV';
+	this.loginBtn.innerHTML='Log-in';
+	this.joinBtn.innerHTML='Join-us';
+
+	
+
+   
+	this.navi.appendChild(this.listBtn);
+	this.navi.appendChild(this.tvBtn);
+	this.navi.appendChild(this.loginBtn);
+	this.navi.appendChild(this.joinBtn);
+	
+	this.fbLikeBox=document.createElement("div");
+	this.fbLikeText=document.createElement("div");
+    this.fbLikeBg=document.createElement("div");
+	
+    
+	jarvis.lib.addAttribute(this.fbLikeBox,"btn align-right fb-like-box");
+	jarvis.lib.addAttribute(this.fbLikeText,"font-small fb-like-text");
+    jarvis.lib.addAttribute(this.fbLikeBg,"fb-like-bg");
+
+    this.navi.appendChild(this.fbLikeBox);
+	this.fbLikeBox.appendChild(this.fbLikeBg);
+	this.fbLikeBox.appendChild(this.fbLikeText);
+	
+	
+	this.fbLikeText.innerHTML='320640';  
+
+    var bgA=new Array();
+    bgA[0]=jarvis.dirPath+'style/slice_fb_like_0.png';
+	bgA[1]=jarvis.dirPath+'style/slice_fb_like_1.png';
+	bgA[2]=jarvis.dirPath+'style/slice_fb_like_2.png';
+    this.fbLikeSliceBg=new SliceRect(this.fbLikeBg,bgA,8);
+     
+
+   
+
+    this.navi.appendChild(this.fbLikeBtn);
+    this.navi.appendChild(this.fbBtn);
+	this.navi.appendChild(this.twBtn);
+	this.navi.appendChild(this.homeBtn);
+	
+}
+
+jarvis.Top.prototype = 
+{
+    
+	init : function()
+	{
+		var that=this;
+	 
+    },
+		
+    orientationChange : function(){
+	},
+
+	resize : function(browserHeight)
+	{
+	    var bounceP=jarvis.lib.getAbsoluteBounce(this.body);
+		this.navi.style.width=Math.floor(bounceP.width-(this.option.marginX*2))+"px";
+		
+		var bounce=jarvis.lib.getAbsoluteBounce(this.navi);
+		//jarvis.debuger.log("top : "+bounce.width);
+		if(bounce.width<410 &&  this.isMinMode==false){
+			this.isMinMode=true;
+			this.fbLikeBox.style.display='none';
+			this.joinBtn.style.display='none';
+		    
+		}else if(bounce.width>410 && this.isMinMode==true){
+			this.isMinMode=false;
+		    this.fbLikeBox.style.display='block';
+			this.joinBtn.style.display='block';
+		}
+		jarvis.lib.setCenterPosition(this.homeBtn,bounce);
+		
+
+	}
+}
+
+
+

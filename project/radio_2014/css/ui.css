@@ -1,0 +1,329 @@
+@charset "utf-8";
+
+.jarvis-ui{width:100%; min-width:320px; height:100%;overflow:auto; -webkit-overflow-scrolling:touch; }
+
+
+
+.jarvis-ui .body-size {min-width:300px; max-width:1350px;  width:94%;  margin:0 auto;}
+.jarvis-ui .body-size-mobile {min-width:300px;  width:100%;  margin:0 auto;}
+
+.jarvis-ui .body-size-f {min-width:300px; max-width:1280px;  width:100%; margin:0 auto;}
+
+.jarvis-ui .font-class {font-family:'나눔고딕',Nanum Gothic,ng,'돋움',dotum,Helvetica,sans-serif}
+.jarvis-ui .font-big {font-family:'나눔고딕',Nanum Gothic,ng,'돋움',dotum,Helvetica,sans-serif; font-size: 13px; font-weight:700; letter-spacing:-0.5px; line-height:1.8}
+.jarvis-ui .font-middle {font-family:'dotum'; font-size: 12px; letter-spacing:-0.5px; line-height:1.6}
+.jarvis-ui .font-small {font-family:'dotum'; font-size: 11px; letter-spacing:-0.5px}
+
+.jarvis-ui .font-big-mobile {font-family:'나눔고딕',Nanum Gothic,ng,'돋움',dotum,Helvetica,sans-serif; font-weight:700; font-size:14px; letter-spacing:-0.5px}
+.jarvis-ui .font-middle-mobile {font-family:'dotum'; font-size: 13px; letter-spacing:-0.5px}
+.jarvis-ui .font-small-mobile {font-family:'dotum'; font-size: 12px; letter-spacing:-0.5px}
+
+
+.jarvis-ui .align-left {position:relative; display:block; float:left}
+.jarvis-ui .align-center {position:relative; display:block; margin:0 auto}
+.jarvis-ui .align-right {position:relative;display:block; float:right}
+
+.jarvis-ui .text-auto-resize {overflow:hidden; text-overflow:ellipsis; white-space:nowrap; word-wrap:normal;}
+.jarvis-ui .screen-out{overflow:hidden;position:absolute;height:0;padding:1px 0 0 0}
+.jarvis-ui .blind {display:block; overflow:hidden; position:absolute; left:-9999px; width:1px; height:1px; font-size:0; line-height:0; text-indent:-9999px}
+
+
+.jarvis-ui .btn { border:0; padding: 0;  background:none; cursor:pointer}
+.jarvis-ui .btn-image {font-size:0; line-height:300px; overflow:hidden;}
+
+.jarvis-ui .btn-home {width:48px; height:14px; background:url("../style/logo_top.png") no-repeat}
+.jarvis-ui .btn-fb-like {width:61px; height:20px; background:url("../style/btn_fb_like.png") no-repeat}
+
+.jarvis-ui .btn-kakao{width:32px; height:32px; background:url("../style/ico_kakao.png") no-repeat;}
+.jarvis-ui .btn-fb{width:32px; height:32px; background:url("../style/ico_fb.png") no-repeat;}
+.jarvis-ui .btn-tw{width:32px; height:32px; background:url("../style/ico_tw.png") no-repeat;}
+
+.jarvis-ui .btn-play-c {position:absolute; top:50%; left:50%; width:40px; height:40px; margin:-20px 0 0 -20px; background:url(../style/btn_play_c.png) no-repeat; font-size:0; line-height:50px;}
+
+
+
+
+.jarvis-ui .btn-left {width:20px; height:19px; background:url("../style/btn-left.png") no-repeat}
+.jarvis-ui .btn-right {width:20px; height:19px; background:url("../style/btn-right.png") no-repeat}
+
+
+
+
+
+
+.jarvis-ui .uiset {position:relative; width:100%; overflow:hidden}
+.jarvis-ui .uiset .bg {position:absolute;  width:100%; height:0px}
+.jarvis-ui .uiset .loading-bar{z-index:3500; pointer-events:none}
+
+.jarvis-ui .uiset .ui-box {position:relative}
+
+.jarvis-ui .uiset .event-box{
+	background: none;
+	font-family: Androgyne;
+	background-image: url('http://www.wearewebstars.dk/codepen/img/s1.png'), url('http://www.wearewebstars.dk/codepen/img//s2.png'), url('http://www.wearewebstars.dk/codepen/img//s3.png');
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index:1;
+	-webkit-animation: snow 7s linear infinite;
+	-moz-animation: snow 7s linear infinite;
+	-ms-animation: snow 7s linear infinite;
+	animation: snow 7s linear infinite;
+}
+@keyframes snow { 
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;} 
+  50% {background-position: 500px 500px, 0px 400px, -150px 300px;} 
+  100% {background-position: 1000px 1000px, 0px 800px, -300px 600px;} 
+} 
+@-moz-keyframes snow { 
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;} 
+  50% {background-position: 500px 500px, 0px 400px, -150px 300px;} 
+  100% {background-position: 1000px 1000px, 0px 800px, -300px 600px;} 
+} 
+@-webkit-keyframes snow { 
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;} 
+  50% {background-position: 500px 500px, 0px 400px, -150px 300px;} 
+  100% {background-position: 1000px 1000px, 0px 800px, -300px 600px;} 
+} 
+@-ms-keyframes snow { 
+  0% {background-position: 0px 0px, 0px 0px, 0px 0px;} 
+  50% {background-position: 500px 500px, 0px 400px, -150px 300px;} 
+  100% {background-position: 1000px 1000px, 0px 800px, -300px 600px;}  
+} 	
+
+
+.jarvis-ui .uiset .ui-box .ui {position:absolute; overflow:hidden}
+.jarvis-ui .uiset .ui-box .ui-shadow {position:absolute; height:24px; background:url("../style/uiset/shadow.png") repeat-x}
+
+
+
+.jarvis-ui .top {position:relative;  width:100%; height:40px; overflow:hidden; background: #151a1d}
+.jarvis-ui .top .navi {position:relative; display:block; }
+.jarvis-ui .top .navi .btn {margin-top:10px;}
+.jarvis-ui .top .navi .align-left {margin-right:10px; }
+.jarvis-ui .top .navi .align-right {margin-left:5px; }
+.jarvis-ui .top .navi .btn-list {width:20px;  height:18px; background:url("../style/top/btn_list.png") no-repeat}
+.jarvis-ui .top .navi .btn-text {font-family:'Trebuchet MS';  height:18px;  text-align: center; color: #ababab}
+.jarvis-ui .top .navi .btn-home {position:absolute; margin-top:12px;}
+.jarvis-ui .top .navi .fb-like-box {height:20px; width:100px; margin-top:10px; overflow:hidden}
+
+
+.jarvis-ui .menu-list {position:absolute; z-index:4000; top:0px; width:0px; display:none; overflow:hidden; background-color:#32373c;}
+.jarvis-ui .menu-list .menu-body {position:relative;}
+
+
+.jarvis-ui .menu-list .menu-body .btn-close {display:block; position:absolute; top:15px; right:0; width:25px; height:25px; 
+                                  background:url(../style/menulist/btn_close.gif) no-repeat; border:1px solid #868d93; 
+								  border-radius:2px; -webkit-border-radius:2px; -moz-border-radius:2px; 
+								  border-right:none; font-size:0; line-height:50px;}
+
+.jarvis-ui .menu-list .menu-body .btn-menu-home{color:#ffffff; margin:15px 0 0 15px;}
+.jarvis-ui .menu-list .menu-body .menu {width:84%; color:#ffffff; margin:15px 0 0 15px;}
+
+.jarvis-ui .menu-list .menu-body .menu button {display:block; float:left; width:32%; height:25px; margin-right:1%; 
+                                    border:1px solid #868d93; border-radius:2px; -webkit-border-radius:2px; -moz-border-radius:2px; color:#868d93; 
+									line-height:24px; font-weight:bold;}
+
+.jarvis-ui .menu-list .menu-body .menu button.on {background:#868d93; color:#32373c;}
+.jarvis-ui .menu-list .menu-body .list-box { position:relative; clear:both; border-bottom:1px solid #262a2e;}
+.jarvis-ui .menu-list .menu-body .list-box ul li { width: 100%; }
+
+.jarvis-ui .menu-list .menu-body .etc-box li {width: 100%;}
+.jarvis-ui .menu-list .menu-body .list-box ul li .cell {text-align:left; height:25px; display:block; color:#868d93; font-weight: 700;} 
+.jarvis-ui .menu-list .menu-body .list-box ul li .first {padding-top:20px; height:45px;}
+.jarvis-ui .menu-list .etc-box li a {height:25px; display:block; color:#868d93;}
+.jarvis-ui .menu-list .menu-body .etc-box {padding:15px; border-top:1px solid #454a4f;}
+
+.jarvis-ui .viewer-pop {position:absolute; z-index:6000;}
+
+
+.jarvis-ui .bottom {position:relative;  width:100%; height:110px; overflow:hidden; background: #7e7e7e}
+.jarvis-ui .bottom .navi {position:relative;}
+.jarvis-ui .bottom .navi .bottom { width:100%;}
+.jarvis-ui .bottom .navi .bar {font-size: 9px; text-align: center; color: #999999; margin-top:15px;}
+.jarvis-ui .bottom .navi .btn {margin-top:15px;}
+.jarvis-ui .bottom .navi .align-left {margin-right:10px;}
+.jarvis-ui .bottom .navi .align-right {margin-left:10px;}
+.jarvis-ui .bottom .navi .btn-text {text-align: left auto; color: #ffffff}
+
+
+
+.jarvis-ui .notice {position: absolute; left: 0; top: 0; width: 100%; height: 28px; background: #646069;}
+.jarvis-ui .notice .title{width:25px; height:18px; margin-top:5px; margin-left:5px; text-align:center; color: #ffffff;  padding-top:2px;background:url("../style/notice/notice_bg.png") no-repeat}
+.jarvis-ui .notice .text{text-indent: 5px; width:1px; height:18px; margin-top:6px;  text-align:left; color: #ffffff;}
+.jarvis-ui .notice .btn-close-notice{width:24px; height:28px; background:url("../style/notice/notice_close.png") no-repeat}
+
+
+
+
+
+.jarvis-ui .uicomponent .pagecontrol{width:100%;}
+.jarvis-ui .uicomponent .pagecontrol-bottom {position:absolute; bottom:0px; height:27px;}
+
+
+.jarvis-ui .uicomponent .pagecontrol .view {clear:both; width:100%; text-align:center; font-size:0;}
+
+.jarvis-ui .uicomponent .pagecontrol .view button {overflow:hidden; cursor:pointer; border:none; font-size:0; line-height:40px; vertical-align:top;}
+.jarvis-ui .uicomponent .pagecontrol .view .btn-prev {width:20px; height:19px; margin-right:5px; background:url("../style/btn_left.png") no-repeat;}
+.jarvis-ui .uicomponent .pagecontrol .view .btn-next {width:20px; height:19px; margin-left:5px; background:url("../style/btn_right.png") no-repeat;}
+.jarvis-ui .uicomponent .pagecontrol .view button.default {width:7px; height:7px; margin:6px 2px 0 2px; background: url("../style/page_point_default.png") no-repeat}
+.jarvis-ui .uicomponent .pagecontrol .view button.on { background:url("../style/page_point_white.png") no-repeat}
+
+
+
+
+.jarvis-ui .uicomponent .pagecontrol-gray{}
+.jarvis-ui .uicomponent .pagecontrol-gray .view button.default{background: url("../style/page_point_default_gray.png") no-repeat}
+.jarvis-ui .uicomponent .pagecontrol-gray .view button.on {background: url("../style/page_point_gray.png") no-repeat}
+
+
+.jarvis-ui .uicomponent .pagecontrol-number{}
+.jarvis-ui .uicomponent .pagecontrol-number .view button.default{width:12px; height:20px; font-size:11px; margin:0px 2px 0 2px; line-height:1.428571429;color:#898989; background:none; border:0;}
+.jarvis-ui .uicomponent .pagecontrol-number .view button.on{font-weight:bold; font-size:11px; text-decoration: underline;}
+
+
+
+
+.jarvis-ui .uicomponent .uiscrollview {}
+.jarvis-ui .uicomponent .uiscrollview .body {}
+.jarvis-ui .uicomponent .uiscrollview .content {}
+.jarvis-ui .uicomponent .uiscrollview .bar {background:url("../style/trensparent.png") repeat}
+.jarvis-ui .uicomponent .uiscrollview .point {background:url("../style/trensparent30.png") repeat}
+.jarvis-ui .uicomponent .uiscrollview .btn-top {width:0px;height:0px;}
+.jarvis-ui .uicomponent .uiscrollview .btn-bottom {width:0px;height:0px}
+
+
+.jarvis-ui .dimed {display:none; position:absolute; z-index:3000;top:0px;left:0px; width:100%; height:100%; background:url("../style/trensparent70.png") repeat  }
+.jarvis-ui .dimed-mobile {display:none; position:absolute; z-index:3000; top:0px;left:0px; width:100%; height:100%; background:url("../style/trensparent70.png") no-repeat; background-size:cover; }
+
+.jarvis-ui .bg-black5-mobile {
+	background:url(../style/bg5.png) no-repeat;
+    background-size:cover;
+}
+					
+.jarvis-ui .bg-black5 {background:rgba(0, 0, 0, 0.05); 
+							box-shadow: 2px 2px 50px 10px rgba(0, 0, 8, 0.05) inset, -2px -2px 50px 10px rgba(0, 0, 8, 0.05) inset; 
+							-moz-box-shadow: 2px 2px 50px 10px rgba(0, 0, 8, 0.05) inset, -2px -2px 50px 10px rgba(0, 0, 8, 0.05) inset; 
+							-webkit-box-shadow: 2px 2px 50px 10px rgba(0, 0, 8, 0.05) inset, -2px -2px 50px 10px rgba(0, 0, 8, 0.05) inset;
+							filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#10000000,endColorstr=#10000000); zoom: 1;
+					    }
+
+.jarvis-ui .bg-black30-mobile {
+	background:url(../style/bg30.png) no-repeat;
+    background-size:cover;
+}
+
+.jarvis-ui .bg-black30 {background:rgba(0, 0, 0, 0.1); 
+							filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#30000000,endColorstr=#30000000); zoom: 1;
+							box-shadow: 2px 2px 50px 10px rgba(0, 0, 8, 0.1) inset, -2px -2px 50px 10px rgba(0, 0, 8, 0.1) inset; 
+							-moz-box-shadow: 2px 2px 50px 10px rgba(0, 0, 8, 0.1) inset, -2px -2px 50px 10px rgba(0, 0, 8, 0.1) inset; 
+							-webkit-box-shadow: 2px 2px 50px 10px rgba(0, 0, 8, 0.1) inset, -2px -2px 50px 10px rgba(0, 0, 8, 0.1) inset;
+					    }
+
+.jarvis-ui .bg-white-border {background:#fafafa; border:1px solid #cdcdcd; box-sizing:border-box;}
+
+
+.jarvis-ui .bg-input {
+						background:transparent;
+						background:rgba(0,0,0,0.2);
+						filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#20000000,endColorstr=#20000000); zoom: 1; /* ie */
+						border:none;
+						border-radius:3px;
+						-webkit-border-radius:3px;
+						-moz-border-radius:3px;
+				     }
+
+
+
+/* @ Loading */
+.jarvis-ui .animated {
+  
+  -webkit-animation-duration: 0.8s;
+  -moz-animation-duration: 0.8s;
+  -o-animation-duration: 0.8s;
+  animation-duration: 0.8s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.jarvis-ui .data-loading {
+ 
+  background: url("../style/loading.png") no-repeat;
+  -webkit-animation-name: loading;
+  -moz-animation-name: loading;
+  -o-animation-name: loading;
+  animation-name: loading;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  -ms-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+.jarvis-ui .loading {
+  pointer-events:none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  text-indent: -9999px;
+}
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: rotate(0);
+  }
+  100% {
+    -webkit-transform-origin: center center;
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes loading {
+  0% {
+    -moz-transform-origin: center center;
+    -moz-transform: rotate(0);
+  }
+  100% {
+    -moz-transform-origin: center center;
+    -moz-transform: rotate(360deg);
+  }
+}
+@-o-keyframes loading {
+  0% {
+    -o-transform-origin: center center;
+    -o-transform: rotate(0);
+  }
+  100% {
+    -o-transform-origin: center center;
+    -o-transform: rotate(360deg);
+  }
+}
+@keyframes loading {
+  0% {
+    transform-origin: center center;
+    transform: rotate(0);
+  }
+  100% {
+    transform-origin: center center;
+    transform: rotate(360deg);
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:2) { 
+   .jarvis-ui .mini .btn-mini {background:url("../style/mini/logo_r.png") no-repeat; background-size:35px 21px;}
+   .jarvis-ui .btn-home { background:url("../style/logo_top_r.png") no-repeat; background-size:48px 14px;}
+   .jarvis-ui .top .navi .btn-list {background:url("../style/top/btn_list_r.png") no-repeat; background-size:21px 17px;}
+   .jarvis-ui .notice .btn-close-notice {background:url("../style/notice/notice_close_r.png") no-repeat; background-size:24px 28px;}
+
+   .jarvis-ui .btn-kakao{background:url("../style/ico_kakao_r.png") no-repeat; background-size:32px 32px;}
+   .jarvis-ui .btn-fb{background:url("../style/ico_fb_r.png") no-repeat; background-size:32px 32px;}
+   .jarvis-ui .btn-tw{background:url("../style/ico_tw_r.png") no-repeat; background-size:32px 32px;}
+}
