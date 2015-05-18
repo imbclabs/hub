@@ -1,0 +1,697 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+
+
+<html>
+   <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content=" initial-scale=1.0, user-scalable=no">
+	<link rel='stylesheet' href="http://www.imbc.com/commons/css/base-v1.css">
+	<link rel='stylesheet' href="./css/testPlayer.css">
+	<script src="http://www.imbc.com/common/js/global_function.js"></script>
+    <script src="./lib/lib.js"></script>
+	<script src="./ui/mbcplayer.js"></script>
+    
+  </head>
+      
+    	
+<body>
+        
+		<div> 
+		     
+             <p> broID : <input type="text" id="broID" value="1003010100000100000">
+			 itemID : <input type="text" id="itemID" value="887435">
+			 <button type="button" onClick="changeItem()" >load</button></p> 
+			 <p><button type="button" onClick="changeOnAirPre()" >ONAIR</button>
+				<button type="button" onClick="changeOnAirSMR()" >ONAIR_SMR</button>
+                <button type="button" onClick="changeOnAirTest()" >ONAIR_TEST</button>
+				<button type="button" onClick="changeOnAir0()" >ONAIR_500K</button>
+				<button type="button" onClick="changeOnAir1()" >ONAIR1000</button>
+				<button type="button" onClick="changeOnAir2()" >ONAIR2000</button>
+			    <button type="button" onClick="changeMusicOnAir()" >ONAIR_MUSIC_PLUS</button>
+				<button type="button" onClick="changeEventOnAir()" >ONAIR_EVENT</button>
+				<button type="button" onClick="changeEventOnAirSMR()" >ONAIR_EVENT_SMR</button> 
+                <button type="button" onClick="changeAnotherEventOnAir()" >ONAIR_ANOTHER_EVENT</button>
+
+			    <button type="button" onClick="changeMCast()" >MCAST</button>
+				<button type="button" onClick="changeMCastSMR()" >MCAST_SMR</button>
+				<button type="button" onClick="changeOnAirTV()" >ONAIR_TV</button>
+				<button type="button" onClick="changeBoraOnAir()" >BORA</button>
+				</p>
+             <p><button type="button" onClick="changeDrama()" >드라마</button>
+			  <p><button type="button" onClick="changeDramaPriceChange()" >드라마 가격변경</button>
+			    <button type="button" onClick="changePrev()" >예고</button>
+			    <button type="button" onClick="changeClip()" >클립</button>
+				<button type="button" onClick="changeBora()" >보이는라디오</button>
+			    <button type="button" onClick="changeCommerce()" >상품</button>
+				
+                <button type="button" onClick="changeLive()" >라이브</button></p> 
+				<button type="button" onClick="changeM3U8()" >M3U8</button></p> 
+				<button type="button" onClick="changeM3U8OPEN()" >M3U8_OPEN</button></p> 
+
+			 <p><button type="button" onClick="iMbc_Minilogin()" >로그인</button><button type="button" onClick="onTop()" >항상위</button></p>
+
+		</div>
+	    
+        <div id="page-wrap">
+        </div> 
+		<div id="state-wrap">state
+        </div> 
+		<div id="info-wrap">info
+        </div>
+		<div id="turn-wrap">turn
+        </div> 
+        <div id="list-wrap">list
+        </div> 
+		<div id="on-top"></div>
+        <script type="text/javascript">
+		window.onload = init;
+        //$(document).ready(init);
+
+      
+        var player;
+        var broadcastInfo;
+       
+		var stateViewer;
+		var infoViewer;
+		var turnViewer;
+		var listViewer;
+        var isMCast="N";
+		var isOnAirEvent="N";
+        var isOnAir="N";
+		var isBora="N";
+		var isMusic="N";
+        var isOnTop=false;
+        function onTop()
+        {
+             if(isOnTop==true){
+			    isOnTop=false;
+			 }else{
+			    isOnTop=true;
+			 }
+			 jarvis.lib.onTop(isOnTop);
+		}
+		function init()
+        {
+		     jarvis.debuger.used=true;
+			 jarvis.debuger.init();
+			 jarvis.debuger.view(true);
+			 
+			 
+			 stateViewer=document.getElementById("state-wrap");
+			 infoViewer=document.getElementById("info-wrap");
+		     turnViewer=document.getElementById("turn-wrap");
+		     listViewer=document.getElementById("list-wrap");
+             initPlayer("page-wrap");
+
+        }
+		function changeLive()
+        {
+		     
+			 
+			 var path;
+			 if(jarvis.lib.isMobile()==true){
+				path="http://eventlive.imbc.com/event/_definst_/event.stream/playlist.m3u8";
+			 }else{
+				path="rtmp://eventlive.imbc.com/event/_definst_/event.stream";
+			 }
+		     var vodObject=new Object();
+             vodObject.vodUrl=path;
+			 vodObject.initImage="";
+	         vodObject.isLive=true;
+	
+			 player.changeVod(vodObject);
+
+
+        }
+		function changeM3U8OPEN()
+        {
+		     var path="http://184.72.239.149/vod/smil:BigBuckBunny.smil/playlist.m3u8";
+			 
+		     var vodObject=new Object();
+             vodObject.vodUrl=path;
+			 vodObject.initImage="";
+	       
+	
+			 player.changeVod(vodObject);
+
+
+        }
+		
+        function changeM3U8()
+        {
+		     var path="http://mediacontentvideo.fwc14.cdn.c-cast.tv/CFE/123/D76/CFE123D76BE77E750CDDB62987D627AE/ANDROID-CLIPS.m3u8";
+			 
+		     var vodObject=new Object();
+             vodObject.vodUrl=path;
+			 vodObject.initImage="";
+	       
+	
+			 player.changeVod(vodObject);
+
+
+        }
+		
+		function changeItem()
+        {
+            isOnAirEvent="N"
+			isMCast="N";
+            isOnAir="N";
+			isBora="N";
+			isMusic="N";
+			player.checkPosition(broID,2,null);
+			var  broID =  document.getElementById("broID").value;
+            var itemID  =  document.getElementById("itemID").value;
+            changeVod(broID,itemID);
+            
+        }
+		function changeDrama()
+        {
+            isOnAirEvent="N"
+			isMCast="N";
+            isOnAir="N";
+		    isBora="N";
+			isMusic="N";
+            changeVod("1002867100004100000","1019168");
+            
+        }
+		function changeDramaPriceChange()
+        {
+            isOnAirEvent="N"
+			isMCast="N";
+            isOnAir="N";
+		    isBora="N";
+			isMusic="N";
+            changeVod("1003171100024100000","1019275");
+            
+        }
+		
+        function changeBora()
+        {
+            isOnAirEvent="N"
+			isMCast="N";
+            isOnAir="N";
+		    isBora="N";
+			isMusic="N";
+            changeVod("1000751100509100000","925271");
+            
+        }
+	
+		function changePrev()
+        {
+            isOnAirEvent="N"
+			isMCast="N";
+            isOnAir="N";
+		    isBora="N";
+			isMusic="N";
+            changeVod("1002912100057100000","-1");
+            
+        }
+		function changeClip()
+        {
+            isMCast="N";
+            isOnAir="N";
+		    isBora="N";
+			isMusic="N";
+			isOnAirEvent="N"
+            changeVod("1002920100027100003","-99");
+            
+        }
+		function changeCommerce()
+        {
+            isMCast="N";
+            isOnAir="N";
+		    isBora="N";
+			isOnAirEvent="N";
+			isMusic="N";
+            changeVod("1002843100010100000","869086");
+            
+        }
+		function changeCommerceClip()
+        {
+            isMCast="N";
+            isOnAir="N";
+		    isBora="N";
+			isOnAirEvent="N";
+			isMusic="N";
+            player.changeCommerceClip("1003080100039100012","-99",false,false);
+            
+        }
+		function  changeOnAirPre()
+        {
+           player.info.isSMR=false;
+		   player.info.onAirType="";
+           changeOnAir();
+			
+        }
+		function  changeOnAirSMR()
+        {
+             player.info.onAirType="";
+		    isMCast="N";
+            isOnAir="Y";
+			isBora="N";
+			isOnAirEvent="N";
+			isMusic="N";
+            player.changeOnAir(true,false,"",true);
+			
+           
+			
+        }
+		function  changeOnAirTest()
+        {
+            player.info.onAirPlayXmlPath="http://vodmall.imbc.com/util/player/onairurlutilasian.ashx";
+		   //player.info.onAirPlayXmlPath="http://vodmall.imbc.com/util/player/onairurlutil_test.ashx";
+           player.info.onAirPlayXml= player.info.onAirPlayXmlPath;
+		   changeOnAir();
+			
+        }
+		function  changeOnAir0()
+        {
+           player.info.onAirType="500";
+           changeOnAir();
+			
+        }
+		function  changeOnAir1()
+        {
+           player.info.onAirType="1000";
+            changeOnAir();
+			
+        }
+		function  changeOnAir2()
+        {
+           player.info.onAirType="2000"; 
+           changeOnAir();
+			
+        }
+		function  changeOnAir()
+        {
+            isMCast="N";
+            isOnAir="Y";
+			isBora="N";
+			isOnAirEvent="N";
+			isMusic="N";
+            player.changeOnAir(true,false,player.info.onAirType,false);
+			
+        }
+		function  changeOnAirTV()
+        {
+            
+			isMCast="N";
+            isOnAir="N";
+		    isBora="N";
+			isOnAirEvent="N";
+			isMusic="N";
+			var path="rtmp://smr_onair.imbc.com/pc_smr_onair/_definst_/live3.stream";
+			 
+		     var vodObject=new Object();
+             vodObject.vodUrl=path;
+			 vodObject.initImage="";
+	        vodObject.isLive=true;
+	
+			 player.changeVod(vodObject);
+			
+        }
+        function  changeMusicOnAir()
+        {
+            isMCast="N";
+            isOnAir="N";
+			isOnAirEvent="N";
+			isBora="N";
+			isMusic="Y";
+            player.changeMusicPlusOnAir(true,false);
+			
+        }
+		function  changeAnotherEventOnAir()
+        {
+            isMCast="N";
+            isOnAir="N";
+			isOnAirEvent="Y";
+			isBora="N";
+			isMusic="N";
+            player.changeEventOnAir(true,false,true,"newEvent");
+			
+        }
+		
+        function  changeEventOnAir()
+        {
+            isMCast="N";
+            isOnAir="N";
+			isOnAirEvent="Y";
+			isBora="N";
+			isMusic="N";
+            player.changeEventOnAir(true,false);
+			
+        }
+		function  changeEventOnAirSMR()
+        {
+            isMCast="N";
+            isOnAir="N";
+			isOnAirEvent="Y";
+			isBora="N";
+            player.changeEventOnAir(true,false,true);
+			
+        }
+		function  changeMCast()
+        {
+            isMCast="Y";
+            isOnAir="N";
+			isOnAirEvent="N";
+			isBora="N";
+			isMusic="N";
+            player.changeMCastOnAir(true,false);
+			
+        }
+		function  changeMCastSMR()
+        {
+            isMCast="Y";
+            isOnAir="N";
+			isBora="N";
+			isOnAirEvent="N";
+			isMusic="N";
+            player.changeMCastOnAir(true,false,true);
+			
+        }
+		function changeBoraOnAir()
+        {
+            isMCast="N";
+            isOnAir="N";
+			isOnAirEvent="N";
+			isBora="Y";
+			isMusic="N";
+			player.changeBoraOnAir(true,true);
+		    
+            
+        }
+        function  checkPosition()
+        {
+			var playerDelegate=function(){}; 
+	        playerDelegate.prototype = {
+		                      excute : function(pos)
+                              {
+								 var bro=player.getCurrentOnAir();
+								 if(bro==null){
+									 alert(null);
+								     return;
+								 }else{
+									 alert("position : "+pos+" bro : "+bro.title);
+								 }
+								 
+							  }
+			 }
+			 
+            player.checkPosition("1002748100069100000",30,new playerDelegate());
+		}
+
+//player util*************************************************************************************************************************************************
+        
+		/*
+		 *플레이어 시작
+        */
+        function initPlayer(div)
+        {
+		     
+			 var playerDelegate=function(){}; 
+	         playerDelegate.prototype = {
+		                      init : function()
+                              {
+								  playerReady();  
+							  },
+							  change : function()
+                              {
+							      vodChange();
+                              },
+							  start : function()
+                              {
+							     // payedCheck();
+                              },
+							  openPopup : function()
+                              {
+		                          openPopup();
+	                              
+                              },
+							  complete : function()
+                              {
+							      vodComplete();
+                              },
+							  hdChange : function(hd)
+                              {    
+								 player.changeHD(hd);
+								 
+							  },
+							  vodStart :function()
+                              {    
+								 player.addCommerce();
+								 
+							  }
+			 }
+			 
+			 player=jarvis.mbcPlayer;
+			 //player.playerPath="lib/player/FlashPlayer.swf";
+			// player.apiPath="http://vodmall.imbc.com/player/clonelink.ashx";
+             player.init("f_Player",true,true);
+             /* 
+			 //온에어
+			 player.info.customADA[0]="WCAM000000270";  //(pc)
+			 player.info.customADA[1]="WCAM000000270H";  //(모바일pc)
+			 player.info.customADA[2]="WCAM000000270M";  //(m.imbc)
+			
+			 //다시보기
+			 player.info.customADA[3]="100000100000A" //전광고 pc
+			 player.info.customADA[4]="100000100000H" //전광고 m
+                                       
+			 player.info.customADA[5]="100000100000F" //후광고 pc
+			 player.info.customADA[6]="100000100000R" //후광고 m
+             */
+
+
+			// player.info.isMSite=true;
+			 player.writePlayerWithUI(div,new playerDelegate(),false);
+			 
+           
+        }
+		function payedCheck()
+        {
+            var playVod=player.info.getPlayVodObject();
+			//alert("playVod : "+playVod.isDemo);
+			
+			if(playVod.isDemo==true){
+			    if(player.userInfo.userType==player.userInfo.LOGOUT)
+				{
+					player.stopVod("N");
+					alert("로그인페이지로");
+					iMbc_Minilogin();
+				}else{
+					player.stopVod("N");
+					alert("결재페이지로");
+				    iMbc_Minilogin();
+				}
+			}
+
+        }
+		/*
+		 *방송정보변경
+        */
+        function changeVod(broID,itemID)
+        {
+            var broadcastDelegate=function(){}; 
+	        broadcastDelegate.prototype = {
+		                      complete : function()
+                              {
+							      broadcastInfoChange();
+                              }
+			}
+
+			player.changeBroadcast (broID,itemID,true,false,new broadcastDelegate());
+        }
+
+		
+        function  broadcastInfoChange()
+        {
+		    var broadcastDelegate=function(){}; 
+	        broadcastDelegate.prototype = {
+		                      complete : function()
+                              {
+							      broadcastInfoChangeComplete();
+                              },
+							  error : function()
+                              {
+							      broadcastInfoChangeComplete();
+                              }
+			}
+
+			player.loadBroadcastTurn (new broadcastDelegate());
+        }
+        
+		
+
+
+//used*************************************************************************************************************************************************      
+		
+		/*
+		 *플레이어 준비완료
+		 *이함수 실행후 플레이어 컨트롤
+        */
+		function playerReady()
+        {
+		   stateViewer.innerHTML ="PLAYER READY";
+        }
+		/*
+		 *방송정보 변경 완료
+        */
+		function  broadcastInfoChangeComplete()
+        {
+		     
+			broadcastInfo=player.info.broadcastInfo;
+			//alert(player.info.type + " : " +player.userInfo.userType);
+            if(broadcastInfo==null){
+				stateViewer.innerHTML ="BroadcastInfo null"; 
+			    return;
+			}else{
+			    stateViewer.innerHTML ="BroadcastInfo Change"; 
+			}
+			/*
+            [방송정보]
+			broadcastInfo.prevBroadcast
+			broadcastInfo.nextBroadcast
+
+			broadcastInfo.currentBroadcast
+           
+			broadcastInfo.currentBroadcast.itemA=new Array();
+            broadcastInfo.currentBroadcast.contentNumber="";
+	        broadcastInfo.currentBroadcast.image="";
+	        broadcastInfo.currentBroadcast.title="";
+	        broadcastInfo.currentBroadcast.programTitle="";
+	        broadcastInfo.currentBroadcast.preview="";
+	        broadcastInfo.currentBroadcast.broadDate="";
+	        broadcastInfo.currentBroadcast.programBroadcastID="";
+	        broadcastInfo.currentBroadcast.age="";
+	        broadcastInfo.currentBroadcast.homeUrl="";
+	        broadcastInfo.currentBroadcast.boardUrl="";
+     		*/
+
+			var currentBroadcast=broadcastInfo.currentBroadcast;
+			infoViewer.innerHTML= currentBroadcast.programTitle+" "+currentBroadcast.contentNumber+" "+currentBroadcast.preview;
+            
+            /*
+			[회차]
+            broadcastInfo.turnA
+             
+            turnObject=broadcastInfo.turnA[0];
+            turnObject.broadcastID="";
+	        turnObject.contentNumber="";
+	        turnObject.broadDate="";
+	        turnObject.title="";
+			*/
+            if(broadcastInfo.turnA.length>0){
+			   var turnObject=broadcastInfo.turnA[0]
+			   turnViewer.innerHTML=broadcastInfo.turnA.length+" "+turnObject.title+" "+turnObject.contentNumber+" "+turnObject.broadDate;
+			}else{
+			   turnViewer.innerHTML="no data";
+			}
+
+			
+			/*
+			[관련영상]
+			broadcastInfo.currentBroadcast
+            currentBroadcast=broadcastInfo.currentBroadcast;
+            
+			broadcastInfo.getAllItemA(currentBroadcast);
+			broadcastInfo.getPrevItem(currentBroadcast);
+	        broadcastInfo.getHighlightItem(currentBroadcast);
+            broadcastInfo.getSketchItem(currentBroadcast);
+            broadcastInfo.getClipItemA(currentBroadcast);
+	        broadcastInfo.getCornerItemA(currentBroadcast);
+
+			listA=broadcastInfo.getClipItemA(currentBroadcast);
+            list=listA[0];
+			list.broadcastID="";
+	        list.title="";
+	        list.itemID="";
+	        list.itemPrice=0;
+	        list.itemTypeID="";
+	        list.itemTypeName="";
+	        list.iconType="";
+	        list.iconTypeName="";
+	        list.speed=0;
+	        list.image="";
+			*/
+
+            var listA=broadcastInfo.getClipItemA(currentBroadcast);
+         
+
+            if(listA.length>0){
+			   var itemObject=listA[0]
+			   listViewer.innerHTML=listA.length+" "+itemObject.title+" "+itemObject.iconTypeName+" "+itemObject.image;
+			}else{
+			   listViewer.innerHTML="no data";
+			}
+			
+        }
+        
+		/*
+		 *POPUP 
+        */
+        function openPopup()
+        { 
+            var smr="N";
+			if(player.info.isSMR==true){
+			    smr="Y";
+			}else{
+			    smr="N";
+			}
+
+			var popPath="popupPlayer.html?broID="+player.info.broID+"&itemID="+player.info.itemID
+			                              +"&isOnAirEvent="+isOnAirEvent+"&isMCast="+isMCast+"&isOnAir="+isOnAir+"&isBora="+isBora+"&isOnAirMusic="+isMusic
+										  +"&customADCode="+player.info.getCustomADCode()
+										  +"&isSMR="+smr
+										  +"&eventType="+player.info.eventType;
+          
+			window.open(popPath,'다시보기팝업','scrollbars=no,toolbar=no,resizable=yes,width=720,height=480,left=0,top=0'); 
+                           
+
+
+	    }
+		function  vodStart()
+        { 
+           //alert("start");
+		}
+		/*
+		 *VOD 변경
+        */
+        function  vodChange()
+        { 
+		    var  itmeObj=player.info.getCurrentItem(); 
+			if(itmeObj==null){
+			     return;
+			}
+			
+			stateViewer.innerHTML ="VOD Change : "+itmeObj.iconTypeName; 
+
+			broadcastInfo=player.info.broadcastInfo;
+            if(player.info.type=="SPON_VOD" && player.userInfo.userType!=2){
+			    btnFree();
+			}
+            
+			//alert(player.info.type + " : " +player.userInfo.userType);
+            
+        }
+
+		/*
+		 *VOD 재생 완료
+        */
+		function  vodComplete()
+        { 
+		    stateViewer.innerHTML ="VOD Complete";   
+        }
+		
+		
+        </script>
+	</body>
+</html>
+
+
+
+         
+          
+
+
