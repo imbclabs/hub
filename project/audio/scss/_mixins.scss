@@ -1,0 +1,22 @@
+// image-set (http://cloudfour.com/examples/image-set/)
+@mixin image-set($image-path) {
+    background-image:-webkit-image-set(url(#{$image-path}) 2x);
+    background-image:-moz-image-set(url(#{$image-path}) 2x);
+    background-image:-o-image-set(url(#{$image-path}) 2x);
+    background-image:-ms-image-set(url(#{$image-path}) 2x);
+}
+@mixin box-sizing($value) {
+	-webkit-box-sizing:#{$value};
+	-ms-box-sizing:#{$value};
+	box-sizing:#{$value};
+}
+@mixin border-radius($value) {
+	border-radius:#{$value};
+}
+@mixin box-shadow($value) {
+	box-shadow:#{$value};
+}
+@mixin transition($value) {
+	-webkit-transition:#{$value}; /* Android Brower 4.1 ~ 4.3 Supported */
+	transition:#{$value};
+}

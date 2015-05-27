@@ -1,0 +1,32 @@
+/*******************************
+   Aligned
+*******************************/
+.aligned.left {
+  text-align: left; }
+
+.aligned.right {
+  text-align: right; }
+
+.aligned.center {
+  text-align: center; }
+
+.aligned.justify {
+  text-align: justify; }
+
+/*******************************
+   Block
+*******************************/
+.blocked {
+  display: block !important; }
+
+.blocked.inline {
+  display: inline-block !important; }
+
+/*******************************
+   Floated
+*******************************/
+.floated.left {
+  float: left; }
+
+.floated.right {
+  float: right; }

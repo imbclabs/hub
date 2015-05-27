@@ -1,0 +1,53 @@
+/*******************************
+   Path
+*******************************/
+
+$image-path:'../img';
+$font-path:'../font';
+
+/*******************************
+   Fonts
+*******************************/
+
+$primary-font:'Nanum Gothic';
+
+/*******************************
+   Color
+*******************************/
+
+$primary-color:rgba(0,0,0,.6);
+
+/*******************************
+   Border Radius
+*******************************/
+
+$primary-borderradius:.2857rem;
+
+/*******************************
+   Border
+*******************************/
+
+$primary-boxshadow:0 0 0 2px rgba(0,0,0,.15) inset;
+
+/*******************************
+   Adaptive
+*******************************/
+
+$adaptive-mobile:"screen and (max-width:320px)";
+$adaptive-tablet-small:"screen and (max-width:640px)";
+$adaptive-tablet-large:"screen and (max-width:800px)";
+
+/*******************************
+   Responsive Slider Width
+*******************************/
+
+
+
+/*******************************
+   Browser Prefixes
+*******************************/
+
+$webkit:true;
+$moz:true;
+$ms:true;
+$o:true;

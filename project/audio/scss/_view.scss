@@ -1,0 +1,94 @@
+/*******************************
+   Comments
+*******************************/
+
+.ui.comments {
+	overflow:hidden;
+	position:relative;
+	.comment {
+		.item {
+			overflow:hidden;
+			position:relative;
+			padding-top:.75em;
+			.avatar {
+				position:absolute;
+				left:0;
+				top:.75em;
+				width:35px;
+				margin-right:1em;
+				img {
+					width:100%;
+					border-radius:$border-radius;
+				}
+			}
+			.content {
+				padding-left:45px;
+				line-height:1.33;
+				letter-spacing:-1px;
+				font:{
+					size:0;
+				}
+			}
+			.author {
+				display:inline-block;
+				font:{
+					weight:700;
+					size:14px;
+				}
+			}
+			.metadata {
+				display:inline-block;
+				margin-left:.5em;
+				color:$font-color;
+				letter-spacing:0;
+				font:{
+					size:12px;
+				}
+			}
+			.text {
+				padding:.25em 0;
+				word-wrap:break-word;
+				font:{
+					size:14px;
+				}
+			}
+			.date {
+			
+			}
+		}
+	}
+	.form {
+		overflow:hidden;
+		position:relative;
+		padding-right:5.5em;
+		textarea {
+			display:block;
+			width:100%;
+			padding:.8em 1.1em;
+			height:3em;
+			box-shadow:$boxshadow;
+			color:$font-color;
+			border:0;
+			vertical-align:top;
+			-webkit-appearance:none;
+			line-height:1.2857;
+			@include border-radius($border-radius);
+			@include box-sizing(border-box);
+			font:{
+				size:12px;
+			}
+			resize:vertical;
+		}
+		.ui.button.write {
+			position:absolute;
+			right:0;
+			top:0;
+			width:4em;
+			height:100%;
+			padding:0 1em;
+			font:{
+				size:14px;
+			}
+		}
+	}
+}

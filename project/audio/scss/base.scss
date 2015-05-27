@@ -1,0 +1,105 @@
+html,
+body {
+	max-height:100%;
+}
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1, h2, h3, h4, h5, h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl, dt, dd,
+ol, ul, li,
+fieldset,
+form,
+label,
+legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+input,
+textarea,
+button,
+select {
+	margin:0;
+	padding:0;
+	border:0;
+	line-height:1.42857;
+	font:inherit;
+	color:$font-color;
+	font:{
+		family:$font-gothic;
+		size:12px;
+	}
+}
+dl,
+ul,
+ol,
+menu,
+li {
+	list-style:none
+}
+header,
+footer,
+main {
+	display:block;
+}
+table {
+	border-collapse:collapse;
+}
+a {
+	text-decoration:none;
+}
+fieldset,
+img {
+	border:0 none;
+}
+button {
+	border:0 none;
+	background-color:transparent;
+	cursor:pointer;
+}
+em {
+	font-style:normal;
+}
+input,
+select,
+textarea,
+button {
+	vertical-align:middle;
+}
+blockquote,
+q {
+	quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content:'';
+	content:none;
+}
