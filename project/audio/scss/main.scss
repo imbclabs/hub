@@ -1,57 +1,16 @@
-/*******************************
-   Import
-*******************************/
+// *************************************
+//
+//   Template
+//
+// *************************************
+
+// ----- Import ----- //
 
 @import "_variables";
-
-@import "base";
-@import "global";
-
-//@import "icon";
-@import "button";
-//@import "form";
-//@import "table";
-//@import "other";
-//@import "modules";
-
+@import "_base";
+@import "_icon";
+@import "_form";
+@import "_button";
 @import "_mixins";
-@import "_view";
 
-/*******************************
-   Accessibility
-*******************************/
-
-.accessibility {
-	position:absolute;
-	top:0;
-	left:0;
-	z-index:9999; 
-	width:100%;
-	text-align:left;
-	a {
-		display:block;
-		position:absolute;
-		top:-1000px;
-		left:0;
-		z-index:500;
-		width:100%;
-		text-align:center;
-		&:focus,
-		&:active {
-			position:absolute;
-			top:0;
-			z-index:1000;
-			height:40px;
-			background-color:#000;
-			font:bold 12px dotum;
-			color:#fff;
-			line-height:40px;
-		}
-	}
-}
-
-.container {
-	overflow:hidden;
-	position:relative;
-	padding:.75em;
-}
+@import "customize";

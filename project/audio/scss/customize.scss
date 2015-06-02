@@ -1,0 +1,44 @@
+// *************************************
+//
+//   Customize
+//
+// *************************************
+
+// ----- Accessibility ----- //
+
+.accessibility {
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:9999; 
+	width:100%;
+	text-align:left;
+	a {
+		display:block;
+		position:absolute;
+		top:-1000px;
+		left:0;
+		z-index:500;
+		width:100%;
+		text-align:center;
+		&:focus,
+		&:active {
+			position:absolute;
+			top:0;
+			z-index:1000;
+			height:40px;
+			background-color:#000;
+			font:bold 12px dotum;
+			color:#fff;
+			line-height:40px;
+		}
+	}
+}
+
+// ----- Layout ----- //
+
+.container {
+	overflow:hidden;
+	position:relative;
+	padding:.75em;
+}
