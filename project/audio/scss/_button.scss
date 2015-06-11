@@ -1,26 +1,15 @@
-// *************************************
-//
-//   Button
-//
-// *************************************
-
-// ----- Import ----- //
-
 @import "_mixins";
-
-// ----- Base ----- //
 
 .ui.button {
 	display:inline-block;
 	width:auto;
 	position:relative;
-	padding:.8em 1.1em;
-	font-size:0.75rem;
+	//padding:.8em 1.1em;
+	font-size:0.75em;
 	vertical-align:middle;
 	text-align:center;
 	color:$font-color;
-	@include box-shadow($boxshadow);
-	@include border-radius($border-radius);
+	//@include box-shadow($boxshadow);
 	@include box-sizing(border-box);
 	&::-moz-focus-inner { 
 		border:0;

@@ -1,23 +1,13 @@
-// ----- Path ----- //
-
 $image-path:'../img';
-$font-path:'../font';
-
-// ----- Font ----- //
+$font-path:'../fonts';
 
 $font-gothic:'Nanum Gothic';
 $font-color:#333;
 $line-height:1.42857;
 
-// ----- Border Radius ----- //
-
 $border-radius:.2857rem;
 
-// ----- Border Style ----- //
-
 $boxshadow:0 0 0 1px rgba(0,0,0,.15) inset;
-
-// ----- Browser Prefixes ----- //
 
 $webkit:true;
 $moz:true;
