@@ -48,7 +48,7 @@ select {
 	font:inherit;
 	color:$font-color;
 	font:{
-		family:$font-gothic;
+		family:$font-family;
 		size:12px;
 	}
 }
@@ -98,4 +98,9 @@ q:before,
 q:after {
 	content:'';
 	content:none;
+}
+svg * {
+    fill: inherit;
+    stroke: inherit;
+    all: inherit;
 }
