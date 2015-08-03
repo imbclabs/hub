@@ -1,0 +1,57 @@
+.ui.table {
+	width:100%;
+	background-color:#fff;
+	border:$border;
+	text-align:left;
+	color:$font-color;
+	border-collapse:separate;
+	border-spacing:0;
+	font:{
+		size:$font-size;
+	}
+	@include border-radius($border-radius);
+	caption {
+		padding:0.833em; // 10px
+		font:{
+			weight:700;
+			size:1.333em;
+		}
+	}
+	thead {
+		th {
+			padding:0.833em; // 10px
+			background-color:rgb(249,250,251);
+			font:{
+				size:1.167em;
+				weight:700;
+			}
+			border:{
+				bottom:$border;
+			}
+			&:first-child {
+				@include border-radius($border-radius 0 0);
+			}
+			&:last-child {
+				@include border-radius(0 $border-radius 0 0);
+			}
+		}
+	}
+	tbody {
+		tr {
+			td {
+				padding:0.833em; // 10px
+				border:{
+					bottom:$border;
+				}
+			}	
+			&:last-child {
+				td {
+					border:{
+						bottom:0;
+					}	
+				}
+			}
+		}
+		
+	}
+}

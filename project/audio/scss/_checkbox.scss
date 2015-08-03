@@ -1,0 +1,21 @@
+.ui.checkbox {
+	position:relative;
+	display:inline-block;
+	zoom:1;
+	*display:inline;
+	padding:0 0 0 1.667em;
+	font:{
+		size:$font-size;
+	}
+	input[type="checkbox"],
+	input[type="radio"] {
+		position:absolute;
+		left:0;
+		top:0;
+		width:17px;
+		height:17px;
+		cursor:pointer;
+		padding:0;
+		@include box-sizing(border-box);
+	}
+}

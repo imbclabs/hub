@@ -1,3 +1,7 @@
+html {
+	-webkit-text-size-adjuct:none;
+	-ms-text-size-adjuct:none;
+}
 html,
 body,
 div,
@@ -44,12 +48,12 @@ select {
 	margin:0;
 	padding:0;
 	border:0;
-	line-height:1.42857;
+	line-height:$line-height;
 	font:inherit;
 	color:$font-color;
 	font:{
 		family:$font-family;
-		size:12px;
+		size:$font-size;
 	}
 }
 dl,
@@ -103,4 +107,15 @@ svg * {
     fill: inherit;
     stroke: inherit;
     all: inherit;
+}
+.screen-out {
+	position:absolute;
+	left:0;
+	top:0;
+	visibility:hidden;
+	width:0;
+	height:0;
+	line-height:0;
+	font-size:0;
+	color:transparent;
 }

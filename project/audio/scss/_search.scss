@@ -1,0 +1,13 @@
+.ui.search {
+	width:100%;
+	font:{
+		size:0;
+	}
+	.ui.input {
+		@include border-radius($border-radius 0 0 $border-radius);
+	}
+	.ui.button {
+		margin-left:-1px;
+		@include border-radius(0 $border-radius $border-radius 0);
+	}
+}

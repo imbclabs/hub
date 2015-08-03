@@ -1,0 +1,44 @@
+.ui.paginations {
+	width:100%;
+	text-align:center;
+	font:{
+		size:0;
+	}
+	.item {
+		display:inline-block;
+		zoom:1;
+		*display:inline;
+		position:relative;
+		padding:.5em .5em 0.333em; // 4px 6px 6px 6px;
+		text-align:center;
+		vertical-align:top;
+		color:$font-color;
+		@include box-sizing(border-box);
+		//@include box-shadow($box-shadow);
+		@include border-radius($border-radius);
+		font:{
+			size:14px;
+		}
+		&:before {
+			position:absolute;
+			content:'';
+			top:0%;
+			left:0px;
+			width:1px;
+			height:100%;
+		}
+	}
+	.item.active {
+		@include box-shadow($box-shadow);
+	}
+	.item.previous {
+		position:absolute;
+		left:0;
+		top:0;
+	}
+	.item.next {
+		position:absolute;
+		right:0;
+		top:0;
+	}
+}

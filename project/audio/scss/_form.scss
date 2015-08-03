@@ -1,0 +1,20 @@
+.ui.form {
+	position:relative;
+	width:100%;
+	.field {
+		clear:both;
+		margin:0 0 0.833em;
+		&> label {
+			display:block;
+			margin-bottom:0.417em;
+			font:{
+				weight:700;
+				size:1em;
+			}
+		}
+	}
+	.ui.input {
+		width:100%;
+		vertical-align:top;
+	}
+}

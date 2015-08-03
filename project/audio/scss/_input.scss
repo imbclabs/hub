@@ -1,11 +1,13 @@
-.ui.button {
+.ui.input {
 	display:inline-block;
+	zoom:1;
+	*display:inline;
 	width:auto;
 	position:relative;
 	padding:.8em 1.1em;
 	font-size:12px;
 	vertical-align:middle;
-	text-align:center;
+	text-align:left;
 	color:$font-color;
 	@include box-shadow($box-shadow);
 	@include border-radius($border-radius);
@@ -15,6 +17,6 @@
 		padding:0;
 	}
 }
-.ui.buttons {
+.ui.inputs {
 	font-size:0;
 }

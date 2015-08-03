@@ -1,0 +1,47 @@
+$ui_header_margin : 0.833em 0;
+
+.ui.header {
+	margin:$ui_header_margin;
+	font:{
+		size:1.167em; // 14px
+		weight:700;
+	}
+}
+h1.ui.header {
+	margin:$ui_header_margin;
+	font:{
+		size:2em; // 24px
+		weight:700;
+	}
+}
+h2.ui.header {
+	margin:$ui_header_margin;
+	font:{
+		size:1.833em; // 22px
+		weight:700;
+	}
+}
+h3.ui.header {
+	margin:$ui_header_margin;
+	font:{
+		size:1.667em; // 20px
+		weight:700;
+	}
+}
+h4.ui.header {
+	margin:$ui_header_margin;
+	font:{
+		size:1.5em; // 18x
+		weight:700;
+	}
+}
+h5.ui.header {
+	margin:$ui_header_margin;
+	font:{
+		size:1.333em; // 16px
+		weight:700;
+	}
+}
+h6.ui.header {
+	@extend .ui.header;
+}
