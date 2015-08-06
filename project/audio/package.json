@@ -1,0 +1,20 @@
+{
+  "name": "gulp",
+  "version": "1.0.0",
+  "description": "gulp 1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "meraseudev <meraseudev@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+  	"gulp":"latest",
+  	"gulp-watch":"latest",
+  	"gulp-sass":"latest",
+  	"gulp-strip-debug":"latest",
+  	"gulp-svgmin":"latest",
+    "gulp-imagemin":"latest"
+    "css-browser-selector":"https://github.com/crucifyer/css-browser-selector"
+  }
+}
