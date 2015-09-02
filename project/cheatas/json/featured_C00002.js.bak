@@ -1,0 +1,133 @@
+voyage.info.loadSailorsCompleteVoyageFeed_FEATURED_C00002
+([
+	{
+		type : "FEED_FEATURED",
+		id : "F00000",
+		api : "",
+
+		title : "전반 9분 레버쿠젠 손흥민 믿기지 않는 감각적인 골",
+		image : "http://img.tf.co.kr/article/home/2013/12/08/20138751386473016.jpg",
+		description : "",
+		date : "2015-03-25",
+		url : "",
+
+		playerId : "P00001",
+		playerApi: "",
+		playerTitle : "손흥민",
+		playerImage : "http://upload.inven.co.kr/upload/2014/07/21/bbs/i3016657623.png",
+
+		teamId : "T00001",
+		teamApi: "",
+		teamTitle : "레버쿠젠",
+		teamImage : "",
+
+		nationId : "N00001",
+		nationApi: "",
+		nationTitle : "한국",
+		nationImage : ""
+	},
+	{
+		type : "FEED_FEATURED",
+		id : "F00001",
+		api : "",
+
+		title : "전반 9분 레버쿠젠 손흥민 믿기지 않는 감각적인 골",
+		image : "http://img.tf.co.kr/article/home/2013/12/08/20138751386473016.jpg",
+		description : "",
+		date : "2015-03-25",
+		url : "",
+
+		playerId : "P00001",
+		playerApi: "",
+		playerTitle : "손흥민",
+		playerImage : "http://upload.inven.co.kr/upload/2014/07/21/bbs/i3016657623.png",
+
+		teamId : "T00001",
+		teamApi: "",
+		teamTitle : "레버쿠젠",
+		teamImage : "",
+
+		nationId : "N00001",
+		nationApi: "",
+		nationTitle : "한국",
+		nationImage : ""
+	},
+	{
+		type : "FEED_FEATURED",
+		id : "F00002",
+		api : "",
+
+		title : "전반 9분 레버쿠젠 손흥민 믿기지 않는 감각적인 골",
+		image : "http://img.tf.co.kr/article/home/2013/12/08/20138751386473016.jpg",
+		description : "",
+		date : "2015-03-25",
+		url : "",
+
+		playerId : "P00001",
+		playerApi: "",
+		playerTitle : "손흥민",
+		playerImage : "http://upload.inven.co.kr/upload/2014/07/21/bbs/i3016657623.png",
+
+		teamId : "T00001",
+		teamApi: "",
+		teamTitle : "레버쿠젠",
+		teamImage : "",
+
+		nationId : "N00001",
+		nationApi: "",
+		nationTitle : "한국",
+		nationImage : ""
+	},
+	{
+		type : "FEED_FEATURED",
+		id : "F00003",
+		api : "",
+
+		title : "전반 9분 레버쿠젠 손흥민 믿기지 않는 감각적인 골",
+		image : "http://img.tf.co.kr/article/home/2013/12/08/20138751386473016.jpg",
+		description : "",
+		date : "2015-03-25",
+		url : "",
+
+		playerId : "P00001",
+		playerApi: "",
+		playerTitle : "손흥민",
+		playerImage : "http://upload.inven.co.kr/upload/2014/07/21/bbs/i3016657623.png",
+
+		teamId : "T00001",
+		teamApi: "",
+		teamTitle : "레버쿠젠",
+		teamImage : "",
+
+		nationId : "N00001",
+		nationApi: "",
+		nationTitle : "한국",
+		nationImage : ""
+	},
+	{
+		type : "FEED_FEATURED",
+		id : "F00004",
+		api : "",
+
+		title : "전반 9분 레버쿠젠 손흥민 믿기지 않는 감각적인 골",
+		image : "http://img.tf.co.kr/article/home/2013/12/08/20138751386473016.jpg",
+		description : "",
+		date : "2015-03-25",
+		url : "",
+
+		playerId : "P00001",
+		playerApi: "",
+		playerTitle : "손흥민",
+		playerImage : "http://upload.inven.co.kr/upload/2014/07/21/bbs/i3016657623.png",
+
+		teamId : "T00001",
+		teamApi: "",
+		teamTitle : "레버쿠젠",
+		teamImage : "",
+
+		nationId : "N00001",
+		nationApi: "",
+		nationTitle : "한국",
+		nationImage : ""
+	}
+]);

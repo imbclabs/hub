@@ -1,0 +1,368 @@
+@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css"); 
+
+.cheatas {margin: 0px; padding: 0px; font-family: '나눔고딕', 'Nanum Gothic', 'ng';}
+
+.wrap {position: relative; top: 0px; background: rgba(0,0,0,0.05);}
+
+.wrap .header {position: absolute; z-index: 500; width: 100%; height: 56px; background: #ffffff; border-bottom: 1px solid rgba(0,0,0,0.1); box-shadow: 0 1px 2px rgba(0,0,0,0.05);}
+
+.wrap .header-down
+{
+	position: fixed;
+
+	animation-name: header-down;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.3s;
+	animation-fill-mode: forwards;
+
+	-webkit-animation-name: header-down;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: ease-in;
+	-webkit-animation-duration: 0.3s;
+	-webkit-animation-fill-mode: forwards;
+}
+
+@keyframes header-down
+{
+    0%
+	{
+		top: -60px;
+	}
+
+	100%
+	{
+		top: 0px;
+	}
+}
+
+@-webkit-keyframes header-down
+{
+    0%
+	{
+		top: -60px;
+	}
+
+	100%
+	{
+		top: 0px;
+	}
+}
+
+.wrap .container {position: relative; top: 58px; margin: 0px auto; padding: 0px; width: 1004px;}
+
+.wrap .footer {position:relative; top: 58px; padding: 20px 0px 20px 0px; text-align: center; background: #ffffff; border-top: 1px solid rgba(0,0,0,0.1);}
+
+.header .left {position: relative; float: left; z-index: 500;}
+.header .left .logo {padding: 16px 0px 18px 20px;}
+
+.header .center {position: absolute; left: 0; right: 0; text-align: center;}
+.header .center .nav-tab-list {}
+.header .center .nav-tab-list .is-active {height: 16px;}
+.header .right {position: relative; float: right; z-index: 500;}
+.header .right .more-button {padding: 20px 20px 0px 0px;}
+
+.container .left {display:inline-block; position: fixed; top: 76px; width: 172px; vertical-align: top;}
+.container .center {display: inline-block; margin: 0px 0px 0px 172px; padding: 20px; width: 522px;}
+.container .center .channel {}
+.container .center .channel .card-list {margin: 0px 0px 0px 10px;}
+.container .center .channel .card-list .card {width: 134px; text-align: left; vertical-align: top;}
+.container .center .channel .card-list .card .thumbnail {width: 100%;}
+.container .right {display:inline-block; position: relative; margin: 20px 0px 0px 0px; width: 248px; vertical-align: top;}
+
+.footer .copyright {display: inline-block; vertical-align: top;}
+
+.logo {color: #167ac6; font-size: 18px; font-weight: bold;}
+
+.nav-tab-list {margin: 0px; padding: 0px; list-style: none;}
+.nav-tab-list .nav-tab-item {display: inline-block; padding: 20px;}
+.nav-tab-list .is-active {border-bottom: 2px #167ac6 solid;}
+
+.tags-list {margin: 0px; padding: 0px; list-style: none;}
+.tags-list .tags-item {padding: 10px;}
+
+.dashboard {position: relative; margin: 0px 0px 20px 0px; width: 100%;}
+.dashboard .notice {}
+
+.timeline {position: relative; width: 100%;}
+.timeline .card {margin: 0px 0px 10px 0px;}
+.timeline .rect {padding: 20px 20px 10px 20px;}
+.timeline .btn-more {padding: 20px 20px 20px 20px; text-align: center;}
+
+.channel {margin: 0px auto; width: 100%; text-align: center;}
+.channel .card-list {width: 100%; text-align: left;}
+.channel .card-list .rect {padding: 10px;}
+.channel .card-list .card {display: inline-block; margin: 0px 5px 10px 5px;}
+.channel .card-list .card .thumbnail {margin: 5px 0px 5px 0px;}
+.channel .card-list .card .info .name {margin: 5px 0px 5px 0px;}
+.channel .btn-more {padding: 20px 20px 20px 20px; text-align: center;}
+
+.card {}
+.card .lookup {margin: 0px 0px 20px 0px; width: 100%;}
+.card .date {display: inline-block; position: absolute; right: 0px; margin: 0px 0px 0px 5px;}
+.card .player {margin: 0px 0px 20px 0px;}
+.card .thumbnail {position: relative;}
+.card .add-ons {position: relative; padding: 10px 0px 0px 0px; border-top: 1px solid rgba(0,0,0,0.1);}
+.card .add-ons .tags-list {display: inline-block; margin: 0px 0px 10px 0px;}
+.card .add-ons .tags-list .tags-item {display: inline-block; padding: 0px 10px 0px 0px;}
+.card .add-ons .facebook-like-button {width: 100%; height: 62px;}
+
+.lookup {display: inline-block; position: relative;}
+.lookup .name {display: inline-block; vertical-align: top;}
+.lookup .thumbnail {display: inline-block; margin-right: 5px; width: 24px; height: 24px;}
+.lookup .info {display: inline-block; margin: 0px 0px 0px 5px;}
+
+.player {position: relative; width: 100%;}
+.player .embed {position: relative; margin: 0px 0px 0px 0px; width: 100%; height: 270px; background: #ffffff; border: none; box-shadow: none;}
+.player .info {}
+.player .info .name {margin: 5px 0px 5px 0px;}
+.player .info .description {margin: 0px 0px 5px 0px;}
+
+.page-list {position: relative; width: 100%; height: 480px; overflow: hidden;}
+.page-list .view {}
+.page-list .view .cell {}
+.page-list .view .cell .embed {margin: 0px 0px 0px 0px; width: 100%; height: 100%; border: none; box-shadow: none; border-radius: 4px;}
+.page-list .view .cell .embed .info {position: absolute; bottom: 0px; padding: 20px; width: 440px; background: rgba(0,0,0,0.5); color: #cccccc; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px;}
+.page-list .view .cell .embed .info .name {margin: 0px 0px 5px 0px; color: #ffffff;}
+.page-list .view .cell .embed .info .description {}
+.page-list .view .cell .embed .info .url {margin: 0px 0px 5px 0px; color: #999999;}
+
+.pagecontrol-bottom {bottom: 0px; height: 30px;}
+.pagecontrol-bottom .pagecontrol {width: 100%;}
+.pagecontrol-bottom .pagecontrol .view {width: 100%; text-align: center;}
+
+.pagecontrol-bottom .pagecontrol .view button {padding: 0px; overflow: hidden; cursor: pointer; border: none; font-size: 0; line-height: 40px; vertical-align: top;}
+
+.pagecontrol-bottom .pagecontrol .view button.default {margin: 12px 4px 0px 4px; width: 8px; height: 8px; background: url("http://img.imbc.com/labs/cheatas/img/page_point_default.png") no-repeat;}
+
+.pagecontrol-bottom .pagecontrol .view button.on {background: url("http://img.imbc.com/labs/cheatas/img/page_point_white.png") no-repeat;}
+
+.pagecontrol-bottom .pagecontrol .view .btn-scr-prev {position: absolute; top: 0px; left: 0px; width: 60px; height: 480px; background: transparent; cursor: url("http://img.imbc.com/labs/cheatas/img/pointer_left_v4.png"), pointer;}
+
+.pagecontrol-bottom .pagecontrol .view .btn-prev {margin: 5px 5px 0px 0px; width: 20px; height: 20px; background: url("http://img.imbc.com/labs/cheatas/img/btn_left.png") no-repeat;}
+
+.pagecontrol-bottom .pagecontrol .view .btn-scr-next {position: absolute; top: 0px; right: 0px; width: 60px; height: 480px; background: transparent; cursor: url("http://img.imbc.com/labs/cheatas/img/pointer_right_v4.png"), pointer;}
+
+.pagecontrol-bottom .pagecontrol .view .btn-next {margin: 5px 0px 0px 5px; width: 20px; height: 20px; background: url("http://img.imbc.com/labs/cheatas/img/btn_right.png") no-repeat;}
+
+.ad-250 {margin: 0px 0px 20px 0px; width: 250px; height: 250px; overflow: hidden;}
+.ad-250 .embed {height: 250px;}
+
+.featured {width: 208px;}
+.featured .top {position: relative; padding: 0px 0px 10px 0px; border-bottom: 1px solid rgba(0,0,0,0.1);}
+.featured .top .name {}
+.featured .top .btn-more {position: absolute; right: 0px;}
+.featured .channel {margin: 10px 0px 0px -5px; width: 208px;}
+.featured .channel .card-list {}
+.featured .channel .card-list .card {position: relative; width: 100%;}
+.featured .channel .card-list .card .embed {display: inline-block; width: 54px; height: 54px;}
+.featured .channel .card-list .card .info {position: absolute; top: 0px; left: 60px; margin: 0px; padding: 0px;}
+.featured .channel .card-list .card .info .name {margin: 0px; padding: 0px; border: none; top: 0px; left: 60px; font-size: 12px; width: 148px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.featured .channel .card-list .rect {padding: 0px; border: none; box-shadow: none;}
+
+.name {vertical-align: bottom; line-height: 1.5;}
+.info {vertical-align: bottom; line-height: 1.5;}
+.date {vertical-align: bottom; line-height: 1.5;}
+.txt {vertical-align: bottom; line-height: 1.5;}
+.url {text-decoration: none; line-height: 1.5;}
+
+.thumbnail {overflow: hidden; vertical-align: middle;}
+.embed {overflow: hidden;}
+.image {width: 100%;}
+.iframe {margin: 0px; padding: 0px; width: 100%; height: 100%; border: 0px;}
+
+.btn {cursor: pointer;}
+.btn:focus {outline: 0;}
+.rect {padding: 20px; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px; background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05);}
+
+.delimiter-bullet::before {content: "\002022"; color: rgba(0,0,0,0.5); font-weight: 400; font-size: 12px;}
+.is-active {color: #167ac6; font-weight: bold;}
+.is-hidden {display: none;}
+
+.font-x-large {font-size: 24px;}
+.font-large {font-size: 18px;}
+.font-medium {font-size: 14px;}
+.font-small {font-size: 12px;}
+.font-bold {font-weight: bold;}
+.font-tint {color: rgba(0,0,0,0.5);}
+.font-blue {color: #167ac6;}
+
+.animated
+{
+	-webkit-animation-duration: 1s;
+	-moz-animation-duration: 1s;
+	-o-animation-duration: 1s;
+	animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-fill-mode: both;
+	-o-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+.data-loading
+{
+	background: url("http://img.imbc.com/labs/cheatas/img/loading.png") no-repeat;
+	-webkit-animation-name: loading;
+	-moz-animation-name: loading;
+	-o-animation-name: loading;
+	animation-name: loading;
+	-webkit-animation-iteration-count: infinite;
+	-moz-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	-moz-animation-timing-function: linear;
+	-o-animation-timing-function: linear;
+	-ms-animation-timing-function: linear;
+	animation-timing-function: linear;
+}
+
+.loading
+{
+	pointer-events:none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 30px;
+	height: 30px;
+	margin: -15px 0 0 -15px;
+	text-indent: -9999px;
+}
+
+@-webkit-keyframes loading
+{
+	0%
+	{
+		-webkit-transform-origin: center center;
+		-webkit-transform: rotate(0);
+	}
+
+	100%
+	{
+		-webkit-transform-origin: center center;
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@-moz-keyframes loading
+{
+	0%
+	{
+		-moz-transform-origin: center center;
+		-moz-transform: rotate(0);
+	}
+
+	100%
+	{
+		-moz-transform-origin: center center;
+		-moz-transform: rotate(360deg);
+	}
+}
+
+@-o-keyframes loading
+{
+	0%
+	{
+		-o-transform-origin: center center;
+		-o-transform: rotate(0);
+	}
+
+	100%
+	{
+		-o-transform-origin: center center;
+		-o-transform: rotate(360deg);
+	}
+}
+
+@keyframes loading
+{
+	0%
+	{
+		transform-origin: center center;
+		transform: rotate(0);
+	}
+
+	100%
+	{
+		transform-origin: center center;
+		transform: rotate(360deg);
+	}
+}
+
+/* Google Nexus 7 */
+@media (max-width: 960px)
+{
+	.header .center {text-align: right; padding: 0px 20px 0px 0px;}
+	.container .right {display: none;}
+
+}
+
+/* Apple iPhone 6 Plus */
+@media (max-width: 414px)
+{
+	.wrap .container {width: 374px;}
+	.header .center {padding: 0px 10px 0px 0px;}
+	.header .left .logo {padding: 20px 0px 18px 10px;}
+	.container .left {display: none;}
+	.container .center {margin: 20px 0px 20px 0px; padding:0px; width: 100%;}
+	.container .center .channel .card-list {margin: 0px; padding: 0px; text-align: center;}
+
+	.card .player {margin: 0px 0px 20px -30px; width: 394px;}
+	.player .embed {height: 221px;}
+	.player .info {padding: 0px 30px 0px 30px;}
+
+	.page-list {height: 394px;}
+	.page-list .view .cell .embed {border-radius: 0px;}
+	.page-list .view .cell .embed .info {width: 354px; border-radius: 0px;}
+
+	.pagecontrol-bottom {padding: 0px 0px 0px 20px; width: 354px;}
+}
+
+/* Apple iPhone 6 */
+@media (max-width: 375px)
+{
+	.wrap .container {width: 335px;}
+
+	.card .player {margin: 0px 0px 20px -30px; width: 355px;}
+	.player .embed {height: 199px;}
+	.player .info {padding: 0px 30px 0px 30px;}
+
+	.page-list {height: 355px;}
+	.page-list .view .cell .embed {border-radius: 0px;}
+	.page-list .view .cell .embed .info {width: 315px; border-radius: 0px;}
+
+	.pagecontrol-bottom {padding: 0px 0px 0px 20px; width: 315px;}
+}
+
+/* Samsung Galaxy S 3 ~ 4, Note 2 ~ 3, Google Nexus 5 */
+@media (max-width: 360px)
+{
+	.wrap .container {width: 320px;}
+	.container .center .channel .card-list .card {width: 126px;}
+
+	.card .player {margin: 0px 0px 20px -30px; width: 340px;}
+	.player .embed {height: 191px;}
+	.player .info {padding: 0px 30px 0px 30px;}
+
+	.page-list {height: 340px;}
+	.page-list .view .cell .embed {border-radius: 0px;}
+	.page-list .view .cell .embed .info {width: 300px; border-radius: 0px;}
+
+	.pagecontrol-bottom {padding: 0px 0px 0px 20px; width: 300px;}
+}
+
+/* Apple iPhone 4 ~ 5 */
+@media (max-width: 320px)
+{
+	.wrap .container {width: 280px;}
+	.container .center .channel .card-list .card {width: 102px;}
+
+	.card .player {margin: 0px 0px 20px -30px; width: 300px;}
+	.player .embed {height: 168px;}
+	.player .info {padding: 0px 30px 0px 30px;}
+
+	.page-list {height: 300px;}
+	.page-list .view .cell .embed {border-radius: 0px;}
+	.page-list .view .cell .embed .info {width: 260px; border-radius: 0px;}
+
+	.pagecontrol-bottom {padding: 0px 0px 0px 20px; width: 260px;}
+}
